@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Vinicius Oliveira - Software Engineer especializado em JavaScript, TypeScript, React, Node.js e Cloud Computing">
+    <meta name="keywords" content="vinicius oliveira, software engineer, desenvolvedor, programador, javascript, typescript, react, nodejs, aws, oracle cloud">
+    <meta name="author" content="Vinicius Oliveira">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Vinicius Oliveira - Software Engineer">
+    <meta property="og:description" content="Software Engineer apaixonado por tecnologia, transformando café em código e ideias em soluções digitais">
+    <meta property="og:url" content="https://viniciuslks7.github.io">
+    
+    <title>Vinicius Oliveira - Software Engineer</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- IcoFont Icons -->
+    <link rel="stylesheet" href="https://icofont.com/icofont.min.css">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70" class="position-relative">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="fas fa-code me-2"></i>
+                Vinicius Oliveira
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experiência</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Projetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section d-flex align-items-center min-vh-100">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="hero-content">
+                        <h1 class="hero-title mb-3">
+                            Olá, eu sou <span class="text-primary">Vinicius Oliveira</span>
+                        </h1>
+                        <h2 class="hero-subtitle mb-4">Software Engineer</h2>
+                        <p class="hero-description mb-4">
+                            Programador/Desenvolvedor Full Stack apaixonado por tecnologia, arquitetura de sistemas e resolver problemas complexos. 
+                            Especializado em criar interfaces web responsivas e interativas com expertise em JavaScript, TypeScript e Cloud Computing.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#portfolio" class="btn btn-primary btn-lg me-3">Ver Projetos</a>
+                            <a href="#contact" class="btn btn-outline-primary btn-lg">Entre em Contato</a>
+                        </div>
+                        <div class="social-links mt-4">
+                            <a href="https://github.com/viniciuslks7" target="_blank" class="social-link" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/vinicius-oliveira-72698a1ab/" target="_blank" class="social-link" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:vinicius.oliveiratwt@gmail.com" class="social-link" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.instagram.com/vinibeckermann/" target="_blank" class="social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="hero-image">
+                        <div class="profile-image-wrapper">
+                            <img src="assets/profile.jpg" alt="Profile Picture" class="profile-image">
+                            <div class="floating-elements">
+                                <div class="floating-icon" style="--delay: 0s">
+                                    <i class="fab fa-js-square"></i>
+                                </div>
+                                <div class="floating-icon" style="--delay: 1s">
+                                    <i class="fab fa-react"></i>
+                                </div>
+                                <div class="floating-icon" style="--delay: 2s">
+                                    <i class="fab fa-node-js"></i>
+                                </div>
+                                <div class="floating-icon" style="--delay: 3s">
+                                    <i class="fab fa-python"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-elements">
+            <div class="bg-element bg-element-1"></div>
+            <div class="bg-element bg-element-2"></div>
+            <div class="bg-element bg-element-3"></div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#about" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Sobre Mim</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                        Conheça um pouco da minha jornada
+                    </p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="about-image">
+                        <img src="assets/about-me.png" alt="Sobre mim" class="img-fluid rounded">
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <h3>2+</h3>
+                                <p>Anos de Experiência</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3>20+</h3>
+                                <p>Projetos Concluídos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="about-content">
+                        <h3 class="mb-3">Software Engineer Apaixonado por Tecnologia</h3>
+                        <p class="mb-4">
+                            Olá! 👋 Sou o Vinicius, um Software Engineer que adora transformar café em código e ideias em soluções digitais. 
+                            Quando não estou programando em JavaScript, TypeScript ou explorando as últimas tecnologias de cloud, 
+                            você pode me encontrar jogando, assistindo séries de ficção científica ou planejando minha próxima viagem. 
+                            Acredito que a melhor tecnologia é aquela que torna a vida das pessoas mais fácil e conectada.
+                        </p>
+                        <div class="about-info">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Nome:</strong> Vinicius Oliveira</li>
+                                        <li><strong>Especialidade:</strong> Full Stack</li>
+                                        <li><strong>Localização:</strong> Brasil</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Email:</strong> vinicius.oliveiratwt@gmail.com</li>
+                                        <li><strong>GitHub:</strong> viniciuslks7</li>
+                                        <li><strong>Status:</strong> Disponível</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a href="assets/resume.pdf" class="btn btn-primary" download>
+                                <i class="fas fa-download me-2"></i>
+                                Download CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Habilidades</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                        Tecnologias e ferramentas que domino
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Technical Skills -->
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <h3 class="mb-4">Habilidades Técnicas</h3>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>JavaScript</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 95%" data-skill="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>TypeScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 90%" data-skill="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>React / React Native</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 88%" data-skill="88"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Node.js / Express</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%" data-skill="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%" data-skill="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>AWS / Oracle Cloud</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 75%" data-skill="75"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Skills -->
+                <div class="col-lg-6 mb-4" data-aos="fade-left">
+                    <h3 class="mb-4">Habilidades Profissionais</h3>
+                    <svg width="0" height="0">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="skill-circle-wrapper">
+                        <div class="row text-center">
+                            <div class="col-6 mb-4">
+                                <div class="skill-circle" data-percentage="95">
+                                    <svg viewBox="0 0 160 160">
+                                        <circle cx="80" cy="80" r="70" class="circle-progress"></circle>
+                                    </svg>
+                                    <div class="skill-circle-inner">
+                                        <span class="percentage">95%</span>
+                                        <p>Resolução de Problemas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="skill-circle" data-percentage="90">
+                                    <svg viewBox="0 0 160 160">
+                                        <circle cx="80" cy="80" r="70" class="circle-progress"></circle>
+                                    </svg>
+                                    <div class="skill-circle-inner">
+                                        <span class="percentage">90%</span>
+                                        <p>Metodologias Ágeis</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="skill-circle" data-percentage="85">
+                                    <svg viewBox="0 0 160 160">
+                                        <circle cx="80" cy="80" r="70" class="circle-progress"></circle>
+                                    </svg>
+                                    <div class="skill-circle-inner">
+                                        <span class="percentage">85%</span>
+                                        <p>Arquitetura de Sistemas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="skill-circle" data-percentage="88">
+                                    <svg viewBox="0 0 160 160">
+                                        <circle cx="80" cy="80" r="70" class="circle-progress"></circle>
+                                    </svg>
+                                    <div class="skill-circle-inner">
+                                        <span class="percentage">88%</span>
+                                        <p>Cloud Computing</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technology Icons -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-4" data-aos="fade-up">Tecnologias</h3>
+                    <div class="tech-icons" data-aos="fade-up" data-aos-delay="200">
+                        <div class="tech-icon">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-js-square" style="color: #3178c6;"></i>
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-react"></i>
+                            <span>React Native</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-vuejs"></i>
+                            <span>Vue.js</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-angular"></i>
+                            <span>Angular</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-node-js"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-microsoft"></i>
+                            <span>C# .NET</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fas fa-database"></i>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fas fa-leaf"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-aws"></i>
+                            <span>AWS</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fas fa-cloud"></i>
+                            <span>Oracle Cloud</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Experiência</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                        Minha jornada profissional
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-5" data-aos="fade-right">
+                    <h3 class="mb-4">
+                        <i class="fas fa-briefcase me-2"></i>
+                        Experiência Profissional
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jun 2024 - Presente</div>
+                            <div class="timeline-content">
+                                <h4>Estagiário em TI</h4>
+                                <p class="company">SESI Fernandópolis - CE405</p>
+                                <p>Meio período · Fernandópolis, São Paulo, Brasil · Presencial<br>
+                                   Suporte técnico, manutenção de sistemas, desenvolvimento de soluções internas e 
+                                   colaboração em projetos de infraestrutura de TI e redes.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023 - Presente</div>
+                            <div class="timeline-content">
+                                <h4>Desenvolvedor Web Freelancer</h4>
+                                <p class="company">Autônomo</p>
+                                <p>Desenvolvimento de sites e aplicações web para diversos clientes. 
+                                   Criação de soluções personalizadas com foco em design responsivo, performance e experiência do usuário, 
+                                   utilizando tecnologias modernas como React, Vue.js, Node.js e integração com APIs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-5" data-aos="fade-left">
+                    <h3 class="mb-4">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Educação
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jul 2023 - Jul 2026</div>
+                            <div class="timeline-content">
+                                <h4>Tecnólogo em Sistemas para Internet</h4>
+                                <p class="company">Fatec Jales - Faculdade de Tecnologia Prof. José Camargo</p>
+                                <p>Formação focada em desenvolvimento web full stack, redes, servidores e tecnologias modernas. 
+                                   Competências em Linux, JavaScript, Vue.js, Spring Boot, HTML5, CSS, Java, Figma, redes LAN-WAN e administração de sistemas.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Fev 2022 - Jun 2023</div>
+                            <div class="timeline-content">
+                                <h4>Ensino Técnico em Informática</h4>
+                                <p class="company">ETEC - Escola Técnica Estadual de São Paulo</p>
+                                <p>Base sólida em fundamentos de TI, incluindo redes de computadores, servidores, programação Java, 
+                                   desenvolvimento web (HTML5, CSS, JSP), AWS, PostgreSQL, Microsoft Office e práticas de TI verde.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024 - 2026</div>
+                            <div class="timeline-content">
+                                <h4>Certificações Profissionais</h4>
+                                <p class="company">AWS, Oracle Cloud & Microsoft</p>
+                                <p>AWS Cloud Quest, AWS Knowledge: Serverless, Oracle Cloud Infrastructure Foundations, 
+                                   Oracle AI & Data Management, Microsoft Innovative Educator Expert 2025-2026 e Especialista Scrum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Projetos</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                        Alguns dos meus trabalhos recentes
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Portfolio Filter -->
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <div class="portfolio-filter" data-aos="fade-up">
+                        <button class="filter-btn active" data-filter="*">Todos</button>
+                        <button class="filter-btn" data-filter=".web-app">Web App</button>
+                        <button class="filter-btn" data-filter=".mobile">Mobile</button>
+                        <button class="filter-btn" data-filter=".design">Design</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Portfolio Items -->
+            <div class="row portfolio-container">
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/analytics.png" alt="Analytics Dashboard" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Analytics-Dashboard" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Analytics Dashboard</h4>
+                            <p>Dashboard desenvolvido para teste técnico do grupo Nola com visualização de dados em tempo real</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Dashboard</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/trocalivros.png" alt="Troca de Livros" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Troca-de-Livros" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Sistema de Troca de Livros</h4>
+                            <p>Plataforma para facilitar a troca de livros entre usuários com sistema de matching inteligente</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/auxilium.png" alt="Auxilium" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Aulas-de-React" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Auxilium - Hackathon 5º</h4>
+                            <p>Projeto vencedor do 5º Hackathon Acadêmico Fatec - Plataforma de apoio social com React</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Hackathon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/meshdoctor.png" alt="MeshDoctor3D" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/MeshDoctor3D" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>MeshDoctor3D</h4>
+                            <p>Ferramenta avançada para análise, reparo e preparação de malhas 3D (STL/OBJ) para impressão</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">3D</span>
+                                <span class="tag">OpenGL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/certificados.png" alt="Gerador de Certificados" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Gerador-de-Certificados-em-PDF" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Gerador de Certificados em PDF</h4>
+                            <p>API e página web para geração automatizada de certificados profissionais com código de autenticação único</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Express</span>
+                                <span class="tag">PDFKit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/acessacidades.png" alt="AcessaCidades" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/AcessaCidades" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>AcessaCidades</h4>
+                            <p>Aplicativo web para promover inclusão e mapear locais acessíveis em diversas cidades</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Acessibilidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/spring.png" alt="Spring Boot CRUD" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Springboot-CRUD" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Spring Boot CRUD</h4>
+                            <p>Sistema completo de gerenciamento com operações CRUD usando Spring Boot e banco de dados relacional</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">HTML</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/calculadora.png" alt="Calculadora Estatística" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Calculadora-de-Glaucon-e-seu-amigos" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Calculadora Estatística</h4>
+                            <p>Calculadora para erro de média, proporção e tamanho de amostra - Projeto acadêmico Fatec</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Estatística</span>
+                                <span class="tag">Web App</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 portfolio-item web-app" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="assets/projects/rpg.png" alt="Gerador de Imagens RPG" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/viniciuslks7/Gerador-de-Imagens-para-RPG" class="portfolio-link" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Gerador de Imagens para RPG</h4>
+                            <p>Gerador de imagens com IA (Stability.ai) para criação de personagens e cenários de RPG</p>
+                            <div class="portfolio-tags">
+                                <span class="tag">CSS</span>
+                                <span class="tag">IA</span>
+                                <span class="tag">API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Entre em Contato</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                        Vamos trabalhar juntos no seu próximo projeto
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="fade-right">
+                    <div class="contact-info">
+                        <h3 class="mb-4">Informações de Contato</h3>
+                        <a href="mailto:vinicius.oliveiratwt@gmail.com" class="contact-item mb-3" style="text-decoration: none; color: inherit;">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h5>Email</h5>
+                                <p>vinicius.oliveiratwt@gmail.com</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/viniciuslks7" target="_blank" class="contact-item mb-3" style="text-decoration: none; color: inherit;">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h5>GitHub</h5>
+                                <p>github.com/viniciuslks7</p>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vinicius-oliveira-72698a1ab/" target="_blank" class="contact-item mb-3" style="text-decoration: none; color: inherit;">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h5>LinkedIn</h5>
+                                <p>linkedin.com/in/vinicius-oliveira-72698a1ab</p>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/vinibeckermann/" target="_blank" class="contact-item mb-3" style="text-decoration: none; color: inherit;">
+                            <div class="contact-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h5>Instagram</h5>
+                                <p>@vinibeckermann</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Telefone</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="subject" class="form-label">Assunto</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Mensagem</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Enviar Mensagem
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Vinicius Oliveira. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Desenvolvido com <i class="fas fa-heart text-primary"></i> e muito café</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
