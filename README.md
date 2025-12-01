@@ -1,53 +1,29 @@
-# Portfolio Profissional - GitHub Pages
+# Vinicius Oliveira - Portfolio
 
-Um portfólio moderno e responsivo desenvolvido para GitHub Pages, inspirado em designs contemporâneos com foco na experiência do usuário.
+Portfólio profissional desenvolvido com HTML, CSS e JavaScript.
 
-## 🚀 Características
+## 🚀 Sobre
 
-### ✨ Design e UX
-- **Design Moderno**: Interface clean e profissional
-- **Totalmente Responsivo**: Otimizado para desktop, tablet e mobile
-- **Animações Suaves**: Transições e efeitos visuais elegantes
-- **Scroll Spy**: Navegação que atualiza baseada na posição do scroll
-- **Dark Theme Support**: Suporte automático ao tema escuro do sistema
+Software Engineer com foco em desenvolvimento Full Stack. Este portfólio apresenta meus principais projetos e habilidades técnicas.
 
-### 🛠️ Tecnologias
-- **HTML5**: Estrutura semântica e acessível
-- **CSS3/SCSS**: Estilos modernos com variáveis CSS
-- **Bootstrap 5.3**: Framework responsivo
-- **JavaScript ES6+**: Funcionalidades interativas
-- **Google Fonts**: Tipografia profissional (Poppins, Inter)
-- **Font Awesome & IcoFont**: Ícones vetoriais
-- **AOS Library**: Animações on scroll
+## 🛠️ Tecnologias
 
-### 🎯 Funcionalidades
-- **Preloader Animado**: Carregamento elegante da página
-- **Navegação Fixa**: Menu que se adapta ao scroll
-- **Hero Section**: Seção principal com efeitos paralaxe
-- **Sobre Mim**: Informações pessoais e profissionais
-- **Habilidades**: Barras de progresso e gráficos circulares animados
-- **Experiência**: Timeline interativa
-- **Portfólio**: Galeria filtrada de projetos
-- **Formulário de Contato**: Validação completa e envio
-- **Botão Back to Top**: Navegação rápida
-- **Performance Otimizada**: Carregamento rápido e eficiente
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5.3
+- Font Awesome
 
-## 🎨 Seções do Portfólio
+## 📫 Contato
 
-### 1. **Hero/Home**
-- Apresentação pessoal com efeito de digitação
-- Botões de call-to-action
-- Links para redes sociais
-- Elementos flutuantes animados
+- **Email**: vinicius.oliveiratwt@gmail.com
+- **GitHub**: [@viniciuslks7](https://github.com/viniciuslks7)
+- **LinkedIn**: [Vinicius Oliveira](https://www.linkedin.com/in/vinicius-oliveira-72698a1ab/)
+- **Instagram**: [@vinibeckermann](https://www.instagram.com/vinibeckermann/)
 
-### 2. **Sobre Mim**
-- Descrição profissional
-- Informações pessoais
-- Estatísticas (anos de experiência, projetos)
-- Download do currículo
+## 🌐 Site
 
-### 3. **Habilidades**
-- Habilidades técnicas com barras de progresso
+Acesse o portfólio em: [viniciuslks7.github.io](https://viniciuslks7.github.io/)
 - Habilidades profissionais com gráficos circulares
 - Grid de tecnologias com ícones
 
