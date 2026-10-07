@@ -1,0 +1,18 @@
+Library — tentativa final V6 em 2026-10-07 UTC
+
+Foi invocado uma vez o helper oficial atual library_upload.py, com seus dois companheiros atuais, para um batch ordenado: substituir HTML V6, substituir ZIP fonte V6, substituir relatório/instruções V6, criar ZIP de capturas/evidências.
+Resultado: exit 1; 'library upload failed: Library prepare_uploads is not available'. Falha antes de preparar ou transferir uploads. Nenhuma criação, substituição ou finalização foi realizada; não há IDs/versionamento novos.
+As ferramentas de Library são expostas ao modelo, mas o helper oficial não reconheceu a preparação neste executor. Não se repetiu a materialização que falhou e não se trocou o fluxo iniciado por chamadas diretas; não se mudou de executor.
+
+Identidades V6 preservadas, sem nova versão localmente salva:
+HTML: libfile_2b2eccc934888191a68b7626190c381d, versão observada 0.
+Fonte: libfile_fa01ca6842fc8191b918c98de0191dbb, versão observada 0.
+Relatório/instruções: libfile_e6234b02c7e48191b42871f1c1a7458b, versão observada 0.
+ZIP compacto de entrada: libfile_4769c469c35c8191bef778f7372ae741, sem alteração.
+Capturas: criação não realizada, sem ID.
+V5 não foi alterada.
+
+Referência aplicada: skill Library references/prepared-uploads.md — 'Never switch a started helper write to a direct action.'
+
+GitHub: nenhuma escrita remota foi invocada nesta tarefa; nenhuma escrita remota foi efetivamente rejeitada por auto-review aqui. A negativa de escrita é histórico informado pelo pai. Clone/leitura pública foram autorizados e concluídos. Não se fez push, merge, settings, publicação ou mudança de identidade.
+GitGuardian do portfólio permanece pendente de execução oficial/credencial; a varredura local não substitui o check verde. O deploy depende do job GitGuardian oficial.
