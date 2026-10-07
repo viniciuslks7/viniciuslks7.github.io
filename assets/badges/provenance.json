@@ -1,0 +1,226 @@
+{
+  "verified_at": "2026-10-06T13:52:50.829893+00:00",
+  "readme_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/README.md",
+  "readme_blob_sha1": "20e369cf8d25527e147d36f6e492fd2a22be53b3",
+  "directory_api_url": "https://api.github.com/repos/viniciuslks7/viniciuslks7/contents/assets?ref=main",
+  "verification": "Repository paths confirmed via GitHub connector directory API; each raw download has matching Git blob SHA-1 and byte size, passes Pillow PNG validation, and was individually inspected as rendered pixels. Original colors, text and geometry are preserved. Credential links were transcribed from the profile README and not independently verified.",
+  "assets": [
+    {
+      "local_filename": "oracle-data-management.png",
+      "title": "Oracle Cloud Data Management 2023 Certified Foundations Associate",
+      "credential_type": "Oracle certification badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/Oracle Cloud Data Management 2023 Certified Foundations Associate.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/Oracle%20Cloud%20Data%20Management%202023%20Certified%20Foundations%20Associate.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/Oracle%20Cloud%20Data%20Management%202023%20Certified%20Foundations%20Associate.png",
+      "github_blob_sha1": "68c9cf8c1698115567055293be763530cb4b97fa",
+      "sha256": "8e8a55b00626a3e2333332ef395aac6d64d4123b0385900472f36d78d00b386f",
+      "size_bytes": 74100,
+      "dimensions": {
+        "width": 552,
+        "height": 276
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=2964B215E6919B906F493A29741D4E9C5D2D161A24352BC4995B9259EA760472",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        151,
+        5,
+        402,
+        272
+      ],
+      "has_transparency": true,
+      "visual_verification": "Oracle Certified Foundations Associate medallion for the stated specialization, visibly marked 2023. Wide transparent canvas retained unchanged."
+    },
+    {
+      "local_filename": "oracle-ai-foundations.png",
+      "title": "Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate",
+      "credential_type": "Oracle certification badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/Oracle%20Cloud%20Infrastructure%202023%20AI%20Certified%20Foundations%20Associate.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/Oracle%20Cloud%20Infrastructure%202023%20AI%20Certified%20Foundations%20Associate.png",
+      "github_blob_sha1": "c5b9081ddc1ccd66f568b7280249a893372712cd",
+      "sha256": "9f49779fb82b8c0647dfcc29ca590f5ce950736ab247808bee938f8917345a9b",
+      "size_bytes": 73788,
+      "dimensions": {
+        "width": 552,
+        "height": 276
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F1F8769652CBB65BCD646A65BB55F48E8F7041370A430B2AD03A43B36FEBB6AD",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        151,
+        5,
+        402,
+        272
+      ],
+      "has_transparency": true,
+      "visual_verification": "Oracle Certified Foundations Associate medallion for the stated specialization, visibly marked 2023. Wide transparent canvas retained unchanged."
+    },
+    {
+      "local_filename": "oracle-foundations.png",
+      "title": "Oracle Cloud Infrastructure 2023 Certified Foundations Associate",
+      "credential_type": "Oracle certification badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/Oracle Cloud Infrastructure 2023 Certified Foundations Associate.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/Oracle%20Cloud%20Infrastructure%202023%20Certified%20Foundations%20Associate.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/Oracle%20Cloud%20Infrastructure%202023%20Certified%20Foundations%20Associate.png",
+      "github_blob_sha1": "1956ee4f996eb9cff740254a093c510e623bf399",
+      "sha256": "3f3a834e40046b8a88c9580210f5c4617d0404916da7f5cbdf911b491ab5dece",
+      "size_bytes": 73673,
+      "dimensions": {
+        "width": 552,
+        "height": 276
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F85043432294C78FD1BE13EE826D50FB57D2B6F8434C5FEBDA0BA0E70744B530",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        151,
+        5,
+        402,
+        272
+      ],
+      "has_transparency": true,
+      "visual_verification": "Oracle Certified Foundations Associate medallion for the stated specialization, visibly marked 2023. Wide transparent canvas retained unchanged."
+    },
+    {
+      "local_filename": "aws-cloud-quest.png",
+      "title": "AWS Cloud Quest: Cloud Practitioner",
+      "credential_type": "AWS training badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/aws-cloud-quest-cloud-practitioner-training-badge.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/aws-cloud-quest-cloud-practitioner-training-badge.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/aws-cloud-quest-cloud-practitioner-training-badge.png",
+      "github_blob_sha1": "3a99b5a62c3f13da637f31e19854fbcaf18293cf",
+      "sha256": "bd59e55366ca7bcb9e93b50c4f43118ed6ea84638836d8cdaad07dcbab525ba0",
+      "size_bytes": 29239,
+      "dimensions": {
+        "width": 601,
+        "height": 601
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://www.credly.com/badges/921fdafd-06c5-4fa2-a63d-587eeabc2642/public_url",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        68,
+        41,
+        533,
+        554
+      ],
+      "has_transparency": true,
+      "visual_verification": "AWS brand and exact badge subject visible, with TRAINED status. A training badge, not an AWS Certified exam badge."
+    },
+    {
+      "local_filename": "aws-braket.png",
+      "title": "AWS Knowledge: Amazon Braket",
+      "credential_type": "AWS training badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/aws-knowledge-amazon-braket-training-badge.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/aws-knowledge-amazon-braket-training-badge.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/aws-knowledge-amazon-braket-training-badge.png",
+      "github_blob_sha1": "1baf4bb603d9524104e15705e96926b25011cffe",
+      "sha256": "aa6332524033fc3d845ed022fb9933cd5d4200229c2dcd713ce3390c449d4c59",
+      "size_bytes": 31085,
+      "dimensions": {
+        "width": 601,
+        "height": 601
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://www.credly.com/badges/c05f92e0-4dbe-48a8-a2b7-670df772e703/public_url",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        72,
+        58,
+        530,
+        542
+      ],
+      "has_transparency": true,
+      "visual_verification": "AWS brand and exact badge subject visible, with TRAINED status. A training badge, not an AWS Certified exam badge."
+    },
+    {
+      "local_filename": "aws-cloud-essentials.png",
+      "title": "AWS Knowledge: Cloud Essentials",
+      "credential_type": "AWS training badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/aws-knowledge-cloud-essentials-training-badge.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/aws-knowledge-cloud-essentials-training-badge.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/aws-knowledge-cloud-essentials-training-badge.png",
+      "github_blob_sha1": "26125a3c448897f6eda54a64adfff2ccf27f73ea",
+      "sha256": "bde831e20e281874e6d8dd0334b9d37ed6d1a55b7657cec90266de7ef89b5827",
+      "size_bytes": 30904,
+      "dimensions": {
+        "width": 601,
+        "height": 601
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://www.credly.com/badges/4106ffb6-2ac8-4dce-97a3-5369fa3981fd/public_url",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        72,
+        58,
+        530,
+        542
+      ],
+      "has_transparency": true,
+      "visual_verification": "AWS brand and exact badge subject visible, with TRAINED status. A training badge, not an AWS Certified exam badge."
+    },
+    {
+      "local_filename": "aws-serverless.png",
+      "title": "AWS Knowledge: Serverless",
+      "credential_type": "AWS training badge",
+      "source_repository": "viniciuslks7/viniciuslks7",
+      "source_ref": "main",
+      "source_commit": "61d1fc14f9d7d6c232977498be0993742f8d1f60",
+      "source_path": "assets/aws-knowledge-serverless-training-badge.png",
+      "source_url": "https://github.com/viniciuslks7/viniciuslks7/blob/main/assets/aws-knowledge-serverless-training-badge.png",
+      "download_url": "https://raw.githubusercontent.com/viniciuslks7/viniciuslks7/main/assets/aws-knowledge-serverless-training-badge.png",
+      "github_blob_sha1": "75b87eccb78c0d859439c21e2beef26e60566de7",
+      "sha256": "3ee15523d6b1ceb96996b62681bb25d39be1c78c740771b9c80fb0dd45460961",
+      "size_bytes": 29805,
+      "dimensions": {
+        "width": 601,
+        "height": 601
+      },
+      "format": "PNG",
+      "mode": "RGBA",
+      "mime_type": "image/png",
+      "credential_url_from_profile_readme": "https://www.credly.com/badges/db3f3724-9e29-435f-8859-d6d189e6cbdd/public_url",
+      "transformations": "None; unmodified downloaded PNG bytes",
+      "alpha_bounding_box": [
+        72,
+        58,
+        530,
+        542
+      ],
+      "has_transparency": true,
+      "visual_verification": "AWS brand and exact badge subject visible, with TRAINED status. A training badge, not an AWS Certified exam badge."
+    }
+  ]
+}

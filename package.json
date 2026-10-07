@@ -1,0 +1,22 @@
+{
+  "name": "vinicius-manga-portfolio",
+  "version": "2.5.0",
+  "private": true,
+  "description": "A dependency-free, accessible manga-inspired backend developer portfolio",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check js/main.js && node scripts/check.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node scripts/test.mjs",
+    "preview:standalone": "node scripts/standalone.mjs",
+    "test:standalone": "node scripts/test-standalone.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "playwright": "1.56.1",
+    "prettier": "^3.6.2"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "source": "https://github.com/viniciuslks7/Aulas-de-React/blob/main/assets/logo.png",
+  "usageEvidence": "Aulas-de-React README names AUXILIUM; SplashScreen.tsx uses assets/logo.png",
+  "originalBytes": 5179,
+  "originalSha256": "652ef5744221db3fbde62448c913760f15c13b52af92d0cddf4d4d301eae025a",
+  "representation": "Original PNG embedded unchanged inside an authored conceptual SVG illustration; not an app screenshot"
+}

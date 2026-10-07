@@ -54,3 +54,5 @@ coverage/
 # Arquivos de build (se usar um build process)
 dist/
 build/
+# Automated visual QA output
+test-results/

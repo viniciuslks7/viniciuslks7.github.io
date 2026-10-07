@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 430" role="img" aria-labelledby="auxilium-title auxilium-desc">
+  <title id="auxilium-title">Auxilium: a shared gesture of care</title>
+  <desc id="auxilium-desc">An original paper-and-ink illustration of two people supporting one care parcel, with red threads connecting their community. The original Auxilium heart-and-parcel logo appears unchanged on the dark parcel face.</desc>
+  <defs>
+    <pattern id="paper-dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#1c1d1a"/></pattern>
+    <pattern id="paper-hatch" width="7" height="7" patternTransform="rotate(32)" patternUnits="userSpaceOnUse"><path d="M0 0V7" stroke="#1c1d1a" stroke-width="1"/></pattern>
+    <clipPath id="halo"><circle cx="302" cy="201" r="126"/></clipPath>
+  </defs>
+  <rect width="600" height="430" fill="#f2efe6"/>
+  <!-- One quiet, irregular printed sheet rather than a simulated product screen. -->
+  <path d="M49 66 536 47 553 361 65 382Z" fill="#e8e4d8"/>
+  <path d="M45 59 528 39 545 351 62 374Z" fill="#faf8f1" stroke="#1c1d1a" stroke-width="1.6"/>
+  <path d="m506 40 22-1 2 36-24-16Z" fill="#e2dfd2" stroke="#1c1d1a" stroke-width="1.6"/>
+  <path d="m506 40 1 19 23 16" fill="none" stroke="#1c1d1a" stroke-width="1.3"/>
+  <path d="M72 93 130 90M75 100l33-2M471 325l43-2M475 332l24-1" stroke="#1c1d1a" stroke-width="1" opacity=".35"/>
+  <!-- A single red print impression gives the shared parcel its visual focus. -->
+  <circle cx="302" cy="201" r="126" fill="#cd3025"/>
+  <g clip-path="url(#halo)" opacity=".2"><path d="M322 70h127v279H322Z" fill="url(#paper-dots)"/></g>
+  <path d="M199 127c20-39 54-61 97-65" fill="none" stroke="#1c1d1a" stroke-width="1.5"/>
+  <path d="m302 49 1-13m14 17 9-10m-38 9-8-9" stroke="#cd3025" stroke-width="2" stroke-linecap="round"/>
+  <!-- Connection thread: the people are the story, the network stays in the margin. -->
+  <path d="M91 198C59 161 67 126 96 126c39 0 40 54 12 82M506 200c33-13 40-51 20-65-17-13-39-1-36 16M125 307c29 57 93 73 154 50m45-1c59 14 117-4 147-42" fill="none" stroke="#cd3025" stroke-width="2.3" stroke-linecap="round"/>
+  <g fill="#faf8f1" stroke="#cd3025" stroke-width="2"><circle cx="86" cy="136" r="5"/><circle cx="508" cy="129" r="5"/><circle cx="306" cy="359" r="5"/></g>
+  <path d="m551 117 9-3m-11 19 10 1M43 255l-10-1m11 14-8 5" fill="none" stroke="#1c1d1a" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Left person: an ink jacket and light forearm, angled into the shared gesture. -->
+  <g stroke="#1c1d1a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M107 335 102 225c2-19 14-32 34-38l25-1 21 12 24 39-17 90-34 11Z" fill="#1c1d1a" stroke-width="3"/>
+    <path d="m132 190 13-11 13-2 13 19-19 24Z" fill="#faf8f1" stroke-width="2.8"/>
+    <path d="M145 182v-20l21-4 2 28-9 14Z" fill="#e8e4d8" stroke-width="2.4"/>
+    <path d="M125 123c-1-28 11-42 32-39 18 3 26 16 25 36l-1 13 9 11-10 4-2 13c-3 12-16 17-29 9l-16-12Z" fill="#faf8f1" stroke-width="2.8"/>
+    <path d="M123 129c-8-11-9-23-3-34-8-14 11-29 29-23 13-10 37 0 38 18 3 10-1 17-8 23l-12-12c-5 12-15 18-28 18l-3 19Z" fill="#1c1d1a" stroke-width="2.5"/>
+    <path d="M143 137c-10-10-19-1-14 7 2 5 7 6 12 4" fill="#faf8f1" stroke-width="2.3"/>
+    <path d="m137 137-3 4 4 2m36-15 5 1m-3-9 7-1m-18 37 9 1" fill="none" stroke-width="1.5"/>
+    <path d="m147 170 8 3m-25 40-4 13m51-17 8 14" fill="none" stroke="#faf8f1" stroke-width="1.5"/>
+    <path d="M124 224c-2 14 1 24 11 38l19 23 28-21-20-26-8-22Z" fill="#1c1d1a" stroke-width="2.8"/>
+    <path d="m150 278 13 12c7 7 15 10 25 6l55-26 7-16-12-5-61 22-8-11Z" fill="#faf8f1" stroke-width="2.8"/>
+    <path d="m161 271 15 15m-2-3 62-26m-44 66 5-33" fill="none" stroke-width="1.5"/>
+    <path d="m116 284 3 43m10-29 3 29m9-22 3 22" fill="none" stroke="#faf8f1" stroke-width="1" opacity=".7"/>
+  </g>
+  <!-- Right person: a lighter work shirt balances the donor's dark silhouette. -->
+  <g stroke="#1c1d1a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M409 197c18-7 43-4 56 5l22 27 8 101-63 9-38-10-13-74Z" fill="#faf8f1" stroke-width="3"/>
+    <path d="m421 186-7 16 15 23 18-25-12-17Z" fill="#e8e4d8" stroke-width="2.5"/>
+    <path d="M423 169v23l10 8 8-11-1-23Z" fill="#faf8f1" stroke-width="2.5"/>
+    <path d="M445 118c4-25-7-42-28-41-18 1-27 18-27 34l2 20-8 10 10 4 1 12c3 14 15 20 28 14l15-13Z" fill="#faf8f1" stroke-width="2.8"/>
+    <path d="M387 108c-5-15 3-28 16-33 1-18 25-24 33-8 14-3 30 13 26 28l-8 24-15 17-4-24c-18 2-30-4-34-13l-8 10Z" fill="#1c1d1a" stroke-width="2.5"/>
+    <path d="M440 134c10-10 19-1 13 8-3 4-7 6-12 4" fill="#faf8f1" stroke-width="2.3"/>
+    <path d="m446 134 3 5-4 3m-50-15-5 1m5-12-7-1m22 39-9 1" fill="none" stroke-width="1.5"/>
+    <path d="m414 211 16 20 17-21m-17 21 3 60m-16-9 3 48m55-91 9 82m-32-11 27-2" fill="none" stroke-width="1.6"/>
+    <path d="M418 225c-8 2-16 9-23 20l-11 15 21 21 26-28 7-16" fill="#faf8f1" stroke-width="2.8"/>
+    <path d="m409 273-15 16c-8 8-16 10-26 5l-47-21-6-16 13-5 52 20 10-13Z" fill="#faf8f1" stroke-width="2.8"/>
+    <path d="m395 268-14 15m-1-2-53-21m59 38 3 27m9-24 2 24m9-18 1 17" fill="none" stroke-width="1.4"/>
+    <path d="m458 95-4 17m-21-40 7 3m-7-8 8 2" fill="none" stroke="#faf8f1" stroke-width="1.3"/>
+    <path d="m435 247 10-1m-9 15 9-1m-8 15 9-1" fill="none" stroke-width="1.3"/>
+  </g>
+  <!-- A folded parcel holds the authentic mark, with its original image bytes. -->
+  <g transform="rotate(-5 302 266)" stroke="#1c1d1a" stroke-linejoin="round">
+    <path d="m233 200 132 3 14 22-134-1Z" fill="#e8e4d8" stroke-width="2.8"/>
+    <path d="m233 200 9 18 131 6" fill="none" stroke-width="1.4"/>
+    <path d="m233 220 132 2v108l-130 1Z" fill="#1c1d1a" stroke-width="2.8"/>
+    <path d="m365 222 14-11v106l-14 13Z" fill="#e8e4d8" stroke-width="2.8"/>
+    <path d="m371 233 1 69m-136 34 131-1 13-14" fill="none" stroke-width="1.2"/>
+    <image x="248" y="225" width="105" height="105" xlink:href="data:image/png;base64,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"/>
+  </g>
+  <!-- Small fingers wrap the edges; no oversized hand icon. -->
+  <g fill="#faf8f1" stroke="#1c1d1a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m235 269 12-10c4-4 8-4 10-1 2 4-2 7-7 10l-7 8m-1 0 13-7c5-3 8 3 4 6l-13 8m-1 0 10-4c5-2 7 4 3 7l-13 6-10-9"/>
+    <path d="m335 265-12-8c-5-3-9-2-10 2-1 3 4 6 9 9l7 6m0 0-13-6c-5-2-8 3-3 6l13 8m0 0-10-3c-5-2-7 4-2 7l13 5 9-10"/>
+  </g>
+  <!-- Grounding paper ribbon, slight crease and restrained engraving detail. -->
+  <path d="M101 337c119-12 260-15 397-3l-6 11c-135-8-269-6-386 3Z" fill="#e8e4d8" stroke="#1c1d1a" stroke-width="1.5"/>
+  <path d="m105 348 3 8 47-3-9-8m341-4-1 11-38-3 8-7" fill="#faf8f1" stroke="#1c1d1a" stroke-width="1.4"/>
+  <path d="m107 341 43-3m297 1 43 2M177 349l17-1m225-2 17 1" fill="none" stroke="#1c1d1a" stroke-width="1.1"/>
+  <path d="M87 303h17v23H87ZM481 87h19v24h-19Z" fill="url(#paper-hatch)" opacity=".25"/>
+  <path d="m61 397 74-3m360-11 40-2" stroke="#1c1d1a" stroke-width="1.3" opacity=".5"/>
+</svg>

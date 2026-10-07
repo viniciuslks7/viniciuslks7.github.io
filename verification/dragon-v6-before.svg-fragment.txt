@@ -1,0 +1,415 @@
+                <g
+                  class="dragon-legs"
+                  stroke="#1c1d1a"
+                  stroke-width="2.5"
+                  stroke-linejoin="round"
+                >
+                  <g
+                    class="dragon-limb"
+                    data-leg="fore-far"
+                    data-phase="0.5"
+                    style="transform-origin: 333px 148px"
+                    opacity="0.72"
+                  >
+                    <path
+                      d="M320 141l27 6 -19 39-5 19L329 272l16 7-5 16-39 4-12-13 13-13L294 203l-10-24z"
+                      fill="url(#dragon-paper-plane)"
+                    />
+                    <path d="M321 141l18 0 11 15-12 18-18-13z" fill="#cd3025" />
+                    <path
+                      d="M326 149l9 3 3 10-7 8m-20 9l15 7"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path d="M297 186l23-2 7 18-18 9-17-9z" fill="#cd3025" />
+                    <path d="M303 190l14 1-6 12z" fill="#f2efe6" />
+                    <path
+                      d="M309 213L319 271"
+                      stroke="#b8a887"
+                      stroke-width="5"
+                    />
+                    <path
+                      d="M303 220l13 2m-14 12l13 2m-13 12l12 2m-12 12l12 2"
+                      fill="none"
+                      stroke-width="1.8"
+                    />
+                    <path
+                      d="M309 271l21 0 12 15-10 11-28-1-10-12z"
+                      fill="#cd3025"
+                    />
+                    <path
+                      d="M314 275l8 8 9-8m-9 8v11"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M308 285l-14 8 5 6 13-6zM319 289l-4 14 9-1 4-13zM330 286l15 7-3 7-17-8z"
+                      fill="#fff8e9"
+                      stroke-width="2.3"
+                    />
+                  </g>
+                  <g
+                    class="dragon-limb"
+                    data-leg="hind-far"
+                    data-phase="0"
+                    style="transform-origin: 819px 117px"
+                    opacity="0.72"
+                  >
+                    <path
+                      d="M806 110l27 6 19 39-5 19L847 272l16 7-5 16-39 4-12-13 13-13L828 172l-10-24z"
+                      fill="url(#dragon-paper-plane)"
+                    />
+                    <path d="M807 110l18 0 11 15-12 18-18-13z" fill="#cd3025" />
+                    <path
+                      d="M812 118l9 3 3 10-7 8m20 9l15 7"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path d="M831 155l23-2 7 18-18 9-17-9z" fill="#cd3025" />
+                    <path d="M837 159l14 1-6 12z" fill="#f2efe6" />
+                    <path
+                      d="M843 182L837 271"
+                      stroke="#b8a887"
+                      stroke-width="5"
+                    />
+                    <path
+                      d="M837 189l13 2m-14 12l13 2m-13 12l12 2m-12 12l12 2"
+                      fill="none"
+                      stroke-width="1.8"
+                    />
+                    <path
+                      d="M827 271l21 0 12 15-10 11-28-1-10-12z"
+                      fill="#cd3025"
+                    />
+                    <path
+                      d="M832 275l8 8 9-8m-9 8v11"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M826 285l-14 8 5 6 13-6zM837 289l-4 14 9-1 4-13zM848 286l15 7-3 7-17-8z"
+                      fill="#fff8e9"
+                      stroke-width="2.3"
+                    />
+                  </g>
+                  <g
+                    class="dragon-limb"
+                    data-leg="fore-near"
+                    data-phase="0"
+                    style="transform-origin: 354px 176px"
+                    opacity="1"
+                  >
+                    <path
+                      d="M341 169l27 6 19 39-5 19L382 279l16 7-5 16-39 4-12-13 13-13L363 231l-10-24z"
+                      fill="url(#dragon-paper-plane)"
+                    />
+                    <path d="M342 169l18 0 11 15-12 18-18-13z" fill="#cd3025" />
+                    <path
+                      d="M347 177l9 3 3 10-7 8m20 9l15 7"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path d="M366 214l23-2 7 18-18 9-17-9z" fill="#cd3025" />
+                    <path d="M372 218l14 1-6 12z" fill="#f2efe6" />
+                    <path
+                      d="M378 241L372 278"
+                      stroke="#b8a887"
+                      stroke-width="5"
+                    />
+                    <path
+                      d="M372 248l13 2m-14 12l13 2m-13 12l12 2m-12 12l12 2"
+                      fill="none"
+                      stroke-width="1.8"
+                    />
+                    <path
+                      d="M362 278l21 0 12 15-10 11-28-1-10-12z"
+                      fill="#cd3025"
+                    />
+                    <path
+                      d="M367 282l8 8 9-8m-9 8v11"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M361 292l-14 8 5 6 13-6zM372 296l-4 14 9-1 4-13zM383 293l15 7-3 7-17-8z"
+                      fill="#fff8e9"
+                      stroke-width="2.3"
+                    />
+                  </g>
+                  <g
+                    class="dragon-limb"
+                    data-leg="hind-near"
+                    data-phase="0.5"
+                    style="transform-origin: 788px 151px"
+                    opacity="1"
+                  >
+                    <path
+                      d="M775 144l27 6 -19 39-5 19L784 279l16 7-5 16-39 4-12-13 13-13L749 206l-10-24z"
+                      fill="url(#dragon-paper-plane)"
+                    />
+                    <path d="M776 144l18 0 11 15-12 18-18-13z" fill="#cd3025" />
+                    <path
+                      d="M781 152l9 3 3 10-7 8m-20 9l15 7"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path d="M752 189l23-2 7 18-18 9-17-9z" fill="#cd3025" />
+                    <path d="M758 193l14 1-6 12z" fill="#f2efe6" />
+                    <path
+                      d="M764 216L774 278"
+                      stroke="#b8a887"
+                      stroke-width="5"
+                    />
+                    <path
+                      d="M758 223l13 2m-14 12l13 2m-13 12l12 2m-12 12l12 2"
+                      fill="none"
+                      stroke-width="1.8"
+                    />
+                    <path
+                      d="M764 278l21 0 12 15-10 11-28-1-10-12z"
+                      fill="#cd3025"
+                    />
+                    <path
+                      d="M769 282l8 8 9-8m-9 8v11"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M763 292l-14 8 5 6 13-6zM774 296l-4 14 9-1 4-13zM785 293l15 7-3 7-17-8z"
+                      fill="#fff8e9"
+                      stroke-width="2.3"
+                    />
+                  </g>
+                </g>
+                <g
+                  class="dragon-head"
+                  stroke="#1c1d1a"
+                  stroke-width="2.8"
+                  stroke-linejoin="round"
+                  style="transform-origin: 230px 145px"
+                >
+                  <!-- Branching cut-paper antlers, not a generic crown. -->
+                  <path
+                    d="M179 103l-19-33-7-29-16-12-9-23 16 8 9 16 7-14 1-11 10 17-4 24 15 17 6-32 14-10-6 21 2 16-10 26 7 21z"
+                    fill="url(#dragon-paper-plane)"
+                  />
+                  <path
+                    d="M219 102l-6-29 15-27-3-17-14-7-7-21 18 11 13 12 7-16 9 6-8 24 7 10-9 19-2 19 12 21z"
+                    fill="url(#dragon-paper-plane)"
+                  />
+                  <path
+                    d="M167 50l13 27 4 19m50-64l-3 26-10 22 2 18"
+                    fill="none"
+                    stroke="#b59b6b"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M167 50l-8-9m23 37l12-24m37 4l12-10"
+                    fill="none"
+                    stroke-width="1.8"
+                  />
+                  <g class="dragon-mane" style="transform-origin: 231px 143px">
+                    <path
+                      d="M230 83l36 2-10 17 27 8-13 16 30 20-23 14 20 24-26 3 8 27-31-10-2 26-22-21-12 22-10-30-24 15 9-37z"
+                      fill="#9f251e"
+                    />
+                    <path
+                      d="M239 91l18 4-13 14 28 6-16 17 23 15-22 9 23 21-26-3 9 27-25-17-8 25-10-24-14 9-2-35z"
+                      fill="#cd3025"
+                    />
+                    <path
+                      d="M241 103l-7 21 24-5-19 22 25 9-23 13 16 21-24-8-9 22"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2.4"
+                    />
+                    <path
+                      d="M249 114l-10 27m18 9l-23 1m18 21l-19-9"
+                      fill="none"
+                      stroke-width="1.8"
+                    />
+                  </g>
+                  <!-- Brow, cheek and muzzle are separate folded planes. -->
+                  <path
+                    d="M256 127l-20-35-52 1-34 23-11 23-43 2-43 32 15 21 39 14 3 28 41 17 43-35 36-12 27-40z"
+                    fill="#cd3025"
+                    stroke-width="3.5"
+                  />
+                  <path
+                    d="M185 95l-35 24-10 28 38 14 37-18 23-46z"
+                    fill="url(#dragon-paper-plane)"
+                  />
+                  <path
+                    d="M184 95l-1 29 32 19 23-46-18 9z"
+                    fill="#ddd0b5"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="M232 143l25-16-3 42-23 28-34-12 11-32z"
+                    fill="#9f251e"
+                  />
+                  <path
+                    d="M230 145l-13 22 14 22 19-26z"
+                    fill="url(#dragon-scales)"
+                  />
+                  <path
+                    d="M95 142l-42 31 26 17 50-3 17-22-6-18z"
+                    fill="url(#dragon-paper-plane)"
+                  />
+                  <path
+                    d="M57 173l27-6 18-20 26 2-9 15-21 7 14 17-33 2z"
+                    fill="#f8f3e7"
+                  />
+                  <path
+                    d="M57 173l25 6 19-7 29 3"
+                    fill="none"
+                    stroke-width="2"
+                  />
+                  <path d="M86 158c10-6 17-2 22 4l-6 9-20-3z" fill="#1c1d1a" />
+                  <path d="M87 160l11 1" stroke="#f3d4ac" stroke-width="2" />
+                  <path d="M120 155l11-8 11 11-9 13z" fill="#cd3025" />
+                  <!-- Deep ink eyelid, iris slit and a deliberately readable highlight. -->
+                  <path
+                    d="M176 124l16-11 30 7-12 20-22 4-17-9z"
+                    fill="#1c1d1a"
+                  />
+                  <path
+                    d="M182 126l13-6 21 4-12 12-14 3z"
+                    fill="#c8a05f"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M198 121l3 15 4-2 1-11z"
+                    fill="#1c1d1a"
+                    stroke="none"
+                  />
+                  <path
+                    class="dragon-eye-glint"
+                    d="M187 124l8 0-4 5z"
+                    fill="#fffaf0"
+                    stroke="none"
+                  />
+                  <path
+                    d="M168 116l15-13 34 1 15 15-30-9-17 4-9 10z"
+                    fill="#cd3025"
+                    stroke-width="2.5"
+                  />
+                  <path
+                    d="M176 113l9-5 19-1"
+                    fill="none"
+                    stroke="#f3d4ac"
+                    stroke-width="2.2"
+                  />
+                  <path
+                    d="M178 145l13 4 21-4m-42 5l13 6 13-1"
+                    fill="none"
+                    stroke-width="2"
+                  />
+                  <!-- Layered jaw, gums and three distinct cut-paper fangs. -->
+                  <path
+                    d="M105 191l30-9 37 5 22 23-27 34-50-13z"
+                    fill="#1c1d1a"
+                  />
+                  <path
+                    d="M106 193l34-4 33 8 12 13-17 9-29-7-21-1z"
+                    fill="#9f251e"
+                  />
+                  <path
+                    d="M114 192l15 2-6 25-9-8zM140 192l13 3-7 21-7-9zM163 199l13 5-13 15-3-10z"
+                    fill="#fff8e9"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M112 220l20-4 16 13 22-9 14-3-19 25-39 4-14-11z"
+                    fill="url(#dragon-paper-plane)"
+                  />
+                  <path
+                    d="M126 226l7 10 28-1 12-10"
+                    fill="none"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M111 207l-1 28 17 13 31 7 34-31-14 2-14 17-34-2z"
+                    fill="#cd3025"
+                  />
+                  <path
+                    d="M130 247l24 0 20-15"
+                    fill="none"
+                    stroke="#f3d4ac"
+                    stroke-width="2.3"
+                  />
+                  <!-- Cheek plates and a folded ear. -->
+                  <path
+                    d="M150 145l-8 18 15 20 27 3 11-19-17-12z"
+                    fill="url(#dragon-scales)"
+                  />
+                  <path
+                    d="M150 145l15 16 13-6m-28 22l15 2 6 8"
+                    fill="none"
+                    stroke="#f3d4ac"
+                    stroke-width="2"
+                  />
+                  <path d="M238 115l25-19 10 28-20 23-17-9z" fill="#cd3025" />
+                  <path
+                    d="M243 117l15-9 6 14-14 13z"
+                    fill="url(#dragon-paper-plane)"
+                  />
+                  <path d="M248 121l9-4-7 18" fill="none" stroke-width="1.6" />
+                  <g class="dragon-beard" style="transform-origin: 171px 230px">
+                    <path
+                      d="M151 238l-16 17 7 25 17-15 0 31 19-22 10 20 10-30 17 7-6-33-15-20-17 22z"
+                      fill="#cd3025"
+                    />
+                    <path
+                      d="M151 245l-9 35 23-28-6 44 19-32 10 30 2-41 17 13-12-39"
+                      fill="none"
+                      stroke="#f3d4ac"
+                      stroke-width="2.3"
+                    />
+                    <path
+                      d="M163 252l9-10 10 2m-23 34l10-15"
+                      fill="none"
+                      stroke-width="1.6"
+                    />
+                  </g>
+                  <g
+                    class="dragon-whisker"
+                    style="transform-origin: 103px 175px"
+                    fill="none"
+                    stroke-linecap="round"
+                  >
+                    <path
+                      d="M104 175C77 150 76 115 52 108S20 120 32 132s27-2 15-10M111 189C81 193 87 230 55 246S21 246 18 233s10-18 17-9"
+                      stroke="#1c1d1a"
+                      stroke-width="5"
+                    />
+                    <path
+                      d="M104 175C77 150 76 115 52 108S20 120 32 132M111 189C81 193 87 230 55 246S21 246 18 233"
+                      stroke="#e7bd8a"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M98 185C76 174 57 162 37 175s-9 26 3 24"
+                      stroke="#1c1d1a"
+                      stroke-width="3"
+                    />
+                    <path
+                      d="M109 192c-6 37 6 60-13 84s-37 12-26 1"
+                      stroke="#cd3025"
+                      stroke-width="4"
+                    />
+                  </g>
+                  <path
+                    d="M149 134l4-7m-17 52l6-6m59 29l7-10m13-94l9 3"
+                    fill="none"
+                    stroke-width="1.8"
+                  />
+                </g>

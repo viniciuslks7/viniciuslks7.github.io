@@ -1,0 +1,28 @@
+{
+  "sourceZipSHA256": "953901fae35f03859278d3b7c6b9cd688c3b10c497e2cd453a0b72dd3a97ddf6",
+  "sourceZipBytes": 1995521,
+  "htmlBytes": 4806604,
+  "htmlSHA256": "9fa0360d6ba79e2a0f2db1b7f8fa0bce0d5adaa7c50fc11755974d1fb016b277",
+  "httpSuiteStatus": "passed",
+  "httpChecks": 93,
+  "axeAudits": 17,
+  "axeViolations": 0,
+  "standaloneStatus": "passed",
+  "standaloneChecks": 26,
+  "visualFrames": 12,
+  "visualPageErrors": [],
+  "visualConsoleErrors": [],
+  "preservation": {
+    "htmlBeforeDragonUnchanged": true,
+    "htmlAfterDragonUnchanged": true,
+    "motionJavaScriptByteIdentical": true,
+    "stylesheetByteIdentical": true
+  },
+  "localBrowser": "Official installed Google Chrome, headless Playwright, temporary profiles",
+  "gitMetadataPresent": true,
+  "published": false,
+  "libraryReplaced": false,
+  "gitGuardian": "pending official remote scan; Pages deploy depends on GitGuardian success",
+  "originalBase": "9030820",
+  "branch": "review/portfolio-v6-validated"
+}
