@@ -49,7 +49,11 @@ The automated suite starts its own local preview server, runs Chromium tests and
 
 ## GitHub Pages
 
-The existing repository and history are preserved. `.github/workflows/pages.yml` builds and tests the static site, and requires the official GitGuardian scan to succeed before publishing `dist/` from `main` or a manual run. Configure the repository secret `GITGUARDIAN_API_KEY` and set the Pages source to **GitHub Actions**. Pull requests run validation without deployment. A local build or feature branch does not publish by itself.
+The existing repository and history are preserved. `.github/workflows/pages.yml` builds and tests the static site, then requires the installed GitGuardian app's `GitGuardian Security Checks` check to be completed and successful for the exact tested commit (app ID `46505`, slug `gitguardian`). It reads the Checks API with the workflow's existing `GITHUB_TOKEN`; no separate GitGuardian API key is required. Missing/pending checks wait for at most ten minutes; failure, an API error, or timeout blocks publication. This verifies the installed app's result and does not claim the separate ggshield job's scanning coverage.
+
+Pull requests validate their actual head SHA, rather than borrowing an approval from GitHub's synthetic merge commit, and never deploy. A push to `main` or a manual run selecting `main` builds and verifies that event's exact SHA. The deployment rechecks GitGuardian, requires matching build/security/checkout SHAs and current `main`, and selects the artifact named for that SHA. A merge that creates a new SHA needs its own successful app check; the PR's older approval cannot authorize it. PR runs cannot cancel main publication runs. Set the Pages source to **GitHub Actions**; a local build or feature branch does not publish by itself.
+
+`npm run test:security` exercises the gate's trusted identity, exact commit selection, polling, API errors and main-only deployment restrictions without using credentials or making network requests. See [docs/SECURITY-GATE.md](docs/SECURITY-GATE.md) for operational limits.
 
 The build allowlists `profile.jpg`, the original vector illustrations, authentic public badge PNGs, and licensed local fonts. Historic resume PDFs and legacy project assets are preserved in the repository but are not copied into the deploy artifact.
 
