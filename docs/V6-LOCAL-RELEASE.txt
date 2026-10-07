@@ -1,0 +1,20 @@
+V6 preparada em checkout com histórico original — 2026-10-07 UTC
+Repositorio: https://github.com/viniciuslks7/viniciuslks7.github.io.git
+Base original: 9030820 (mais 76d46db e baab313); nenhum commit original foi reescrito.
+Branch local: review/portfolio-v6-validated.
+Identidade herdada e não alterada: viniciuslks7 / vinicius.oliveiratwt@gmail.com.
+
+Fonte validada incorporada ao checkout, mantendo todos os arquivos históricos ausentes no ZIP compacto. Nenhum arquivo original foi deletado. Assets históricos e resume.pdf continuam fora do build por allowlist.
+HTML gerado neste checkout: 4.806.604 bytes, SHA256 9fa0360d6ba79e2a0f2db1b7f8fa0bce0d5adaa7c50fc11755974d1fb016b277, idêntico ao arquivo testado com 93 verificações HTTP, 17 auditorias axe e 26 verificações file://. Não houve nova alteração do produto após esses testes.
+Cabeça/patas são SVG original mais amigável; corpo, JS de voo, CSS e Star Wars preservados. Educação ETEC/FATEC, capa/logo Auxilium, tecnologias e laboratório pessoal V6 aprovados no QA.
+
+Atualizacao autorizada do gate - 2026-10-07 UTC: o workflow Pages exige a checagem "GitGuardian Security Checks" do app instalado gitguardian (ID 46505), concluida com sucesso no SHA exato testado. O novo verificador usa somente GITHUB_TOKEN com checks:read; nao exige GITGUARDIAN_API_KEY. Falta/pendencia aguarda no maximo dez minutos; falha, erro de API, SHA incorreto ou timeout bloqueiam a publicacao. Build, checkout, resultado de seguranca e artefato devem apontar ao mesmo SHA, ainda atual em main. PRs nunca publicam e sua aprovacao nao autoriza um novo SHA de merge. A verificacao do app nao afirma cobertura equivalente ao ggshield separado.
+
+Evidencia anterior: no SHA 43299fead319e37230a297f7337bd91f05cb8abd os jobs remotos build/quality e o app GitGuardian passaram (check 112778231979); o ggshield separado falhou por chave indisponivel. O novo patch foi validado localmente com 52 testes offline do gate, validacao estrutural dos workflows, check e build. O novo commit e qualquer SHA de main precisam de nova aprovacao remota. Nao houve push, merge ou deploy deste patch. Detalhes: docs/SECURITY-GATE.md.
+
+Workflow validado pelo parser/formatador Prettier. Git diff --check aprovado nos arquivos de implementação; cinco espaços finais das licenças originais de fontes foram preservados.
+
+Links públicos existentes: nove respostas HTTP 200 por GET não autenticado. O pai confirmou depois a publicação/validação atual do Keel em https://viniciuslks7.github.io/Keel/ no merge b531b2d74224de33398c0facd9e8fab3bc234450, PR2 merged, GitGuardian/CI verdes, 100 testes (7 Postgres reais) e 40 verificações públicas desktop/mobile sem erros de console. O portfólio já aponta exatamente para esse endereço, código e documentação públicos; mantém a explicação de carteira simulada, sem pagamentos/dinheiro real e persistência em memória. Não foi necessário alterar o HTML validado. Auxilium novo continua pendente de destino público/GitGuardian; não há URL nova inventada nem link para fonte privada. Link histórico Aulas-de-React permanece identificado como protótipo.
+
+Operações remotas GitHub efetivamente executadas aqui: apenas leituras públicas e clone. A primeira leitura git clone no sandbox falhou por proxy local indisponível; nova execução autorizada concluiu. Não houve push, merge, criação de PR, alteração de settings, deploy ou outra escrita GitHub nesta tarefa. Não houve rejeição de auto-review para escrita GitHub nesta tarefa; a negativa de escrita é histórico recebido do pai e não foi retentada.
+Não houve desligamento do computador.

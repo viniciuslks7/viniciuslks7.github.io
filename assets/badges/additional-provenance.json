@@ -1,0 +1,224 @@
+{
+  "verified_at": "2026-10-06T14:37:27.513896+00:00",
+  "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+  "verification": "The credential source worker verified these earned records and official artwork URLs in the public issuer-rendered profile and each public badge page. This asset worker downloaded the exact official artwork URLs, validated byte formats using Pillow, individually inspected all seven as rendered pixels, and recorded SHA-256, byte sizes, dimensions, issue dates, and credential types. Related/recommended credentials were excluded. Files retain their original bytes, colors, text, transparency, and geometry.",
+  "assets": [
+    {
+      "local_filename": "microsoft-mie-expert.png",
+      "title": "Microsoft Innovative Educator Expert 2025-2026",
+      "issuer": "Microsoft Elevate",
+      "issue_date": "2025-10-09",
+      "credential_type": "professional recognition",
+      "credly_category": "Experience",
+      "credential_url": "https://www.credly.com/badges/324ea9a7-d58e-4c96-b3c8-6c54e4eb2e94",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/f2fcdaf4-c289-48f7-a5b6-e367fe64e29d/blob",
+      "download_url": "https://images.credly.com/images/f2fcdaf4-c289-48f7-a5b6-e367fe64e29d/blob",
+      "sha256": "83a33dc054cb6f96c77584e67798f46def02d28c4d760e3581d9dc584c3b21a3",
+      "size_bytes": 421800,
+      "dimensions": {
+        "width": 2000,
+        "height": 2000
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": true,
+      "alpha_bounding_box": [
+        69,
+        30,
+        1930,
+        1891
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "Blue circular Microsoft Innovative Educator Expert 2025–2026 medallion with a tree motif; title, Microsoft logo, and period are visible.",
+      "classification_note": "Professional educator recognition; not an exam certification."
+    },
+    {
+      "local_filename": "cisco-network-defense.png",
+      "title": "Network Defense",
+      "issuer": "Cisco",
+      "issue_date": "2026-09-04",
+      "credential_type": "learning / student-level course credential",
+      "credly_category": "Learning",
+      "credential_url": "https://www.credly.com/badges/d9a5a5e4-e0e9-43bb-9ac9-63b091f1b527",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/51526f76-711b-4caf-b04d-27f89512b112/NetworkDefense_v1_091721.png",
+      "download_url": "https://images.credly.com/images/51526f76-711b-4caf-b04d-27f89512b112/NetworkDefense_v1_091721.png",
+      "sha256": "9dfac1179602a0a4621ba1253012c55ba4ba51aa00e9bf34943fc146622d0255",
+      "size_bytes": 69274,
+      "dimensions": {
+        "width": 600,
+        "height": 600
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": true,
+      "alpha_bounding_box": [
+        0,
+        0,
+        600,
+        600
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "Blue Cisco Networking Academy Verified badge; Network Defense title is visible.",
+      "classification_note": "Cisco Networking Academy course/student credential; not a CCNA or CCST professional exam certification."
+    },
+    {
+      "local_filename": "cisco-endpoint-security.png",
+      "title": "Endpoint Security",
+      "issuer": "Cisco",
+      "issue_date": "2026-08-14",
+      "credential_type": "learning / student-level course credential",
+      "credly_category": "Learning",
+      "credential_url": "https://www.credly.com/badges/0793859e-4dbb-4af1-98cf-6b48c6507e4b",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/0ca5f542-fb5e-4a22-9b7a-c1a1ce4c3db7/EndpointSecurity.png",
+      "download_url": "https://images.credly.com/images/0ca5f542-fb5e-4a22-9b7a-c1a1ce4c3db7/EndpointSecurity.png",
+      "sha256": "6be8e0c1ebed6d6647f795268387a74f5a5422c722f5ee15ee0d1ff84c7d7e35",
+      "size_bytes": 266423,
+      "dimensions": {
+        "width": 2048,
+        "height": 2048
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": true,
+      "alpha_bounding_box": [
+        0,
+        0,
+        2048,
+        2048
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "Blue Cisco Networking Academy Verified badge; Endpoint Security title is visible.",
+      "classification_note": "Cisco Networking Academy course/student credential; not a CCNA or CCST professional exam certification."
+    },
+    {
+      "local_filename": "cisco-devices-config.png",
+      "title": "Networking Devices and Initial Configuration",
+      "issuer": "Cisco",
+      "issue_date": "2026-04-27",
+      "credential_type": "learning / student-level course credential",
+      "credly_category": "Learning",
+      "credential_url": "https://www.credly.com/badges/12da6274-ee79-4353-aaab-4efb01fd1644",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/88316fe8-5651-4e61-a6be-5be1558f049e/image.png",
+      "download_url": "https://images.credly.com/images/88316fe8-5651-4e61-a6be-5be1558f049e/image.png",
+      "sha256": "c3a23636c62833ad7323d8775c4a26d9a2fb9ad4c700b6ec4e87aba62977bc31",
+      "size_bytes": 96059,
+      "dimensions": {
+        "width": 650,
+        "height": 650
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": true,
+      "alpha_bounding_box": [
+        0,
+        0,
+        650,
+        650
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "Blue Cisco Networking Academy Verified badge; Networking Devices and Initial Configuration title is visible.",
+      "classification_note": "Cisco Networking Academy course/student credential; not a CCNA or CCST professional exam certification."
+    },
+    {
+      "local_filename": "cisco-networking-basics.png",
+      "title": "Networking Basics",
+      "issuer": "Cisco",
+      "issue_date": "2026-03-30",
+      "credential_type": "learning / student-level course credential",
+      "credly_category": "Learning",
+      "credential_url": "https://www.credly.com/badges/05dd8fba-799b-45c3-8dfd-a22c2349b2b7",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/5bdd6a39-3e03-4444-9510-ecff80c9ce79/image.png",
+      "download_url": "https://images.credly.com/images/5bdd6a39-3e03-4444-9510-ecff80c9ce79/image.png",
+      "sha256": "2da27669075b3977555e3df45f52bce5aa02b1f0c78c0b6b277285b98be99901",
+      "size_bytes": 90162,
+      "dimensions": {
+        "width": 650,
+        "height": 650
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": true,
+      "alpha_bounding_box": [
+        0,
+        0,
+        650,
+        650
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "Blue Cisco Networking Academy Verified badge; Networking Basics title is visible.",
+      "classification_note": "Cisco Networking Academy course/student credential; not a CCNA or CCST professional exam certification."
+    },
+    {
+      "local_filename": "cisco-learnathon-2026.png",
+      "title": "Cisco Networking Academy Learn-A-Thon 2026",
+      "issuer": "Cisco",
+      "issue_date": "2026-03-29",
+      "credential_type": "participation / event experience badge",
+      "credly_category": "Experience",
+      "credential_url": "https://www.credly.com/badges/f404418f-09d0-47e6-901c-e385462eb614",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/7bf55491-f0df-488f-84bf-4d51ada45316/blob",
+      "download_url": "https://images.credly.com/images/7bf55491-f0df-488f-84bf-4d51ada45316/blob",
+      "sha256": "490b5c58043b3ef1db0917a0d9330704e134bbf2ac3243dfcdd4ee3721f9775a",
+      "size_bytes": 78331,
+      "dimensions": {
+        "width": 600,
+        "height": 600
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": false,
+      "alpha_bounding_box": [
+        0,
+        0,
+        600,
+        600
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "White circular Cisco Learn-A-Thon Participant Networking Academy 2026 badge with a yellow star; participation status is visible.",
+      "classification_note": "Participation badge; not an exam certification."
+    },
+    {
+      "local_filename": "cisco-cybersecurity.png",
+      "title": "Introduction to Cybersecurity",
+      "issuer": "Cisco",
+      "issue_date": "2026-03-25",
+      "credential_type": "learning / student-level course credential",
+      "credly_category": null,
+      "credential_url": "https://www.credly.com/badges/d1c76def-0ef3-4488-b68f-20777a60a2ba",
+      "profile_url": "https://www.credly.com/users/vinicius-siqueira-de-oliveira/badges/credly",
+      "source_image_url": "https://images.credly.com/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png",
+      "download_url": "https://images.credly.com/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png",
+      "sha256": "ee470c1c8effcfb246216240f317ec1fae105cd8d1ebeec492a418fced0f3ee1",
+      "size_bytes": 38301,
+      "dimensions": {
+        "width": 600,
+        "height": 600
+      },
+      "format": "PNG",
+      "mime_type": "image/png",
+      "mode": "RGBA",
+      "has_transparency": true,
+      "alpha_bounding_box": [
+        0,
+        0,
+        600,
+        600
+      ],
+      "transformations": "None; downloaded image bytes retained unchanged",
+      "visual_verification": "Green Cisco Networking Academy Verified badge; Introduction to Cybersecurity title is visible.",
+      "classification_note": "Cisco Networking Academy course/student credential; not a CCNA or CCST professional exam certification."
+    }
+  ]
+}
