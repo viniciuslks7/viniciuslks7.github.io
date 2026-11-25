@@ -694,5 +694,18 @@
     "hours": null,
     "issuer": "Fatec Jales",
     "event": "VIII Jornada Acadêmica Científica e Tecnológica"
+  },
+  {
+    "id": "formation-059",
+    "title": "Claude 101",
+    "kind": "course",
+    "date": "2026-10-28",
+    "dateEnd": null,
+    "issued": "2026-10-28",
+    "period": null,
+    "hours": null,
+    "issuer": "Claude Academy (Anthropic)",
+    "verificationUrl": "https://academy.claude.com/verify/47a9e4b717bec962966d016edd85991c",
+    "event": null
   }
 ]

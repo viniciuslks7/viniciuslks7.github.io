@@ -27,7 +27,6 @@
   let requestTimer;
   let retryCount = 0;
   let activeProject;
-  let dialogOrigin;
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   let motionDisabled =
     storage.get("vo-motion") === "off" || prefersReduced.matches;
@@ -36,7 +35,28 @@
     if (!originals.has(node.dataset.i18n))
       originals.set(node.dataset.i18n, node.innerHTML);
   });
+  $$("[data-i18n-aria]").forEach((node) =>
+    originals.set(node.dataset.i18nAria, node.getAttribute("aria-label")),
+  );
+  $$("[data-i18n-placeholder]").forEach((node) =>
+    originals.set(node.dataset.i18nPlaceholder, node.placeholder),
+  );
   const english = {
+    appearanceLabel: "Customize appearance",
+    appearanceTitle: "Appearance",
+    appearanceButton: "Theme",
+    lightTheme: "Paper",
+    darkTheme: "Night",
+    systemTheme: "System",
+    accentTitle: "Accent color",
+    accentRed: "Red",
+    accentTeal: "Teal",
+    accentIndigo: "Indigo",
+    accentCustom: "Custom",
+    chooseColor: "Choose a color",
+    doneAppearance: "Done",
+    brandLabel: "Vinicius Oliveira, home",
+    mobileNavLabel: "Mobile navigation",
     skip: "Skip to content",
     brandSub: "BACKEND DEVELOPER",
     navStory: "Story",
@@ -45,35 +65,29 @@
     navContact: "Contact",
     navLabel: "Main navigation",
     commandLabel: "Open quick navigation",
-    issue: "PORTFOLIO / 2026 EDITION",
-    heroLocation: "BRAZIL · SOFTWARE & INTEGRATIONS",
-    prologue: "PROLOGUE — HI, I’M VINICIUS",
-    heroLine1: "CODE WITH",
-    heroLine2: 'PURPOSE<span class="word-dot">.</span>',
-    heroRole: "Software developer. Backend as a foundation.",
-    heroDescription:
-      "I turn real problems into APIs, automations, and systems that make sense. Every project is a chapter. The next one could be with you.",
-    exploreProjects: "Explore projects",
-    quickView: "Quick view",
-    coverLabel: "Manga-inspired panel composition with a portrait of Vinicius",
-    coverTitle: "ONE DEV. MANY POSSIBILITIES.",
-    speech: "WHAT IF WE<br>BUILT SOMETHING<br>BETTER?",
-    portraitNote: "THE PROTAGONIST",
-    coverCaption: "FROM IDEA TO THE REAL WORLD.",
-    coverBottom: "THE STORY IS JUST BEGINNING",
-    scrollStory: "Scroll to discover the story",
-    builtWith: "BUILT WITH INTENT. NO SHORTCUTS.",
-    storyKicker: "CHAPTER ONE — THE ORIGIN",
-    storyTitle: "CURIOSITY<br>BECAME A PATH.",
+    introRole: "Software developer",
+    introDescription:
+      "At Ciplafe Móveis, I build internal applications, integrate TOTVS Protheus with other systems, and migrate ERP databases. I built the system the reception team uses to log visitors and fleet vehicle movements in place of paper logs and spreadsheets.",
+    exploreProjects: "View projects",
+    quickView: "Professional summary",
+    portraitLocation: "Brazil",
+    highlightsLabel: "Portfolio highlights",
+    highlightExperience: "Current role",
+    highlightEducation: "Education",
+    highlightCourse: "Completion badge",
+    highlightCollection: "Interactive collection",
+    highlightDragon: "Dragon flight",
+    storyKicker: "Background",
+    storyTitle: "From ETEC<br>to backend.",
     storyIntro:
-      "Between code, people, and real problems, I found where I want to build: behind the scenes that make everything work.",
-    originTitle: "The first page was at ETEC.",
+      "I began studying chemistry at technical school in 2017. By the time I earned my degree in Internet Systems in 2026, I had worked on the Auxilium prototype and built backend applications for SESI’s education programs.",
+    originTitle: "From chemistry to Auxilium",
     originBody:
       "At ETEC Professor Armando José Farinazzo, I studied Chemistry from 2017 to 2019. In 2019, I joined the CROWS Formula Drone team in administration and operations. Observing assembly and programming sparked my curiosity about technology.",
     award: "AUXILIUM",
     awardPlace: "2ND PLACE",
     awardEvent: "ACADEMIC HACKATHON · ROBOTICS · 2022",
-    journeyLabel: "EDUCATION · ONE CHAPTER AT A TIME",
+    journeyLabel: "EDUCATION",
     ciplafeDate: "JUL 2026 — PRESENT",
     ciplafeRole: "Junior Software Developer",
     ciplafeBody:
@@ -82,59 +96,75 @@
     sesiBody:
       "Python and PostgreSQL applications, process automation, and infrastructure support.",
     education: "Technology degree in Internet Systems.",
-    philosophyTitle: "AI as a tool.<br>Judgment as a foundation.",
+    philosophyTitle: "How I work<br>with AI",
     philosophyBody:
-      "I use AI-assisted development, MCP, and Spec-Driven Development to explore and implement. Decisions, review, and understanding the code remain part of the work.",
+      "Before delegating, I define the problem and what a successful result looks like. I give agents clear responsibilities for investigation, implementation, and review. I then integrate their changes and test the result end to end.",
+    agentMotto: "Whatever the problem, I’ll find a way to solve it.",
+    agentOrchestration: "Agent orchestration",
+    agentInstructionsTitle: "Instructions, skills, and MCP",
+    agentInstructions: "I write <code>AGENTS.md</code> and <code>CLAUDE.md</code> files that set the project scope, repository conventions, and verification commands. I turn recurring procedures into skills and use MCP to connect agents to the tools and data each task needs.",
+    agentToolsTitle: "Development environments",
+    agentTools: "I use Antigravity, Codex, and Claude Code to run agent tasks from investigation through review. In Cursor and GitHub Copilot, I use editor context to trace code, compare implementations, and review changes. The same project acceptance criteria apply in every environment.",
+    resumeDownload: "Download résumé (PDF)",
     philosophyFooter: "LEARNING IS PART OF THE PROCESS.",
-    projectsKicker: "CHAPTER TWO — IN ACTION",
-    projectsTitle: "LESS TALK.<br>MORE BUILDING.",
+    projectsKicker: "CASE STUDIES",
+    projectsTitle: "Selected projects",
     projectsIntro:
-      "Projects to open, explore, and understand. Step into the code and discover the decisions behind each solution.",
+      "Choose a skill to explore. Try the interfaces for Keel and Auxilium, or start with a test or component in Star Wars API and Analytics Dashboard.",
     filterLabel: "Filter projects",
     filterAll: "All",
-    keelArtLabel: "SYSTEMS IN BALANCE",
-    keelKind: "INTERACTIVE DEMO",
+    filterMobile: "Mobile",
+    filterData: "Data",
+    dataCategory: "DATA",
+    projectTechnologies: "Technologies",
+    ledgerDebit: "DEBIT",
+    ledgerCredit: "CREDIT",
+    keelKind: "TRANSACTION CONSISTENCY",
     keelSummary:
-      "A digital wallet where every cent has a story. Double-entry ledger, idempotency, and hexagonal architecture.",
-    readCase: "Explore the project",
-    demo: "Demo",
-    starwarsArtLabel: "DATA FROM ANOTHER GALAXY",
+      "This TypeScript wallet records both sides of every transfer. Try sending the same amount twice with one idempotency key, then check the statements for both accounts.",
+    readCase: "Read case study",
+    keelDemo: "Test a transfer",
+    starwarsKind: "EXTERNAL API CACHING",
+    starwarsTest: "Read the cache tests",
     starwarsSummary:
-      "Python, data, and a galaxy to explore. An API with asynchronous HTTPX, caching, pagination, and serverless deployment.",
-    auxiliumArtLabel: "TECHNOLOGY THAT CONNECTS",
-    auxiliumKind: "TEAM PROJECT · PROTOTYPE",
+      "This Python API turns SWAPI data into search results and rankings. The cache tests show when the API can reuse an earlier response and when it needs to fetch fresh data.",
+    auxiliumKind: "NAVIGATION & FORMS",
+    auxiliumDemo: "Explore the web demo",
     auxiliumSummary:
-      "Connecting people who want to help with people who need it. A donations app built at MigrateDev, aligned with SDG 10.",
-    auxiliumTag1: "React Native / Expo",
-    auxiliumTag2: "Interface & navigation",
-    auxiliumTag3: "Social impact",
-    auxiliumYears: "ORIGIN 2022 · MIGRATEDEV 2023–2025",
-    moreProjects: "The code continues beyond these panels.",
+      "The mobile prototype guides people offering or requesting donations. In the separate web demo, filter the fictional listings by city and save a favorite to find it again under Minha atividade.",
+    analyticsKind: "DATA VISUALIZATION",
+    analyticsSummary:
+      "The dashboard compares order volume and average delivery time by neighborhood. Read the chart component to see how each area’s order count affects the average for the group labeled “Outros” (other neighborhoods).",
+    analyticsDecision: "Which neighborhoods appear in the chart?",
+    analyticsInline:
+      "The query returns up to 50 neighborhoods ranked by sales volume. The chart shows the first ten individually and groups the rest of the results into a single bar to keep the comparison readable.",
+    analyticsSource: "Read the component",
+    browseSource: "Browse the repository index",
     allRepositories: "All repositories",
-    sandboxKicker: "INTERLUDE — HANDS ON CODE",
+    sandboxKicker: "LOCAL LAB",
     sandboxTitle: "Make a request.<br>See the reasoning.",
     sandboxIntro:
-      "Vinicius Oliveira’s lab, in developer mode. Explore profile, contact, and backend concepts through illustrative local responses: no server, account, or data transmission.",
+      "This portfolio simulator generates sample API responses in your browser. Pick an endpoint to inspect the JSON.",
     sandboxNote:
       "Anime missions and amounts are fictional. The name and links are mine; this experiment does not represent a deployed backend or professional availability.",
     endpointLabel: "Choose an experiment",
     run: "Run →",
     healthExplanation:
       "A health check tells you whether the service is available.",
-    skillsKicker: "CHAPTER THREE — THE TOOLKIT",
-    skillsTitle: "THE TOOLS<br>BEHIND THE STORY.",
+    skillsKicker: "Technologies",
+    skillsTitle: "Tools I<br>work with.",
     skillsIntro:
-      "Technologies I use at work and in projects. The context changes. The drive to understand doesn’t.",
-    skillBackend: "CLEAR RULES. RELIABLE INTERFACES.",
+      "In my ERP work, I use ADVPL, TLPP and SQL Server. In my public projects, I use TypeScript to model a digital wallet’s transaction rules and Python to cache responses from an external API by resource.",
+    skillBackend: "INPUT VALIDATION AND BUSINESS RULES",
     skillDataTitle: "Data & ERP",
-    skillData: "CONNECTING SYSTEMS TO THE REAL WORLD.",
-    skillCloud: "FROM LOCAL ENVIRONMENT TO DELIVERY.",
+    skillData: "PROTHEUS CUSTOMIZATION AND SQL QUERIES",
+    skillCloud: "SERVER AUTOMATION AND CLOUD TRAINING",
     skillPracticeTitle: "Engineering practice",
-    skillPractice: "AUTOMATION WITH REVIEW AND INTENT.",
-    credentialsKicker: "CHAPTER FOUR — KEEP LEARNING",
-    credentialsTitle: "KNOWLEDGE<br>UNDER CONSTRUCTION.",
+    skillPractice: "TESTING CACHE BEHAVIOR AND BUSINESS RULES",
+    credentialsKicker: "Continuing education",
+    credentialsTitle: "Courses and<br>credentials.",
     credentialsIntro:
-      "Courses and credentials are part of the journey. Each title includes its type and where to check it.",
+      "The first card shows my most recently issued badge. Check the issuer’s record, browse earlier badges, or choose one for the dragon to deliver.",
     courseCompletion: "COMPLETED COURSES",
     viewCertificates: "View certificates",
     cyberTitle: "Introduction to Cybersecurity",
@@ -142,22 +172,22 @@
     credentialNote:
       "Learning badges, issuer credentials, and completed courses are listed separately. Check each issuer for current status.",
     certificateCollection: "Courses & certificates",
-    contactKicker: "NEXT CHAPTER — THE CONVERSATION",
-    contactTitle: "GOOD STORIES<br>START WITH A <span>HELLO.</span>",
+    contactKicker: "Contact",
+    contactTitle: "Let’s <span>talk.</span>",
     contactDescription:
-      "An opportunity, an idea, or an interesting problem. Let’s talk about what we can build.",
+      "If you’d like to discuss a backend role or an integration project, get in touch by email or on LinkedIn. I’d like to hear about the problem your team is working on and the systems involved.",
     copyEmail: "Copy email",
     backTop: "Back to top",
     footer: "ONE CHAPTER AT A TIME.",
     keyboard: "Keyboard shortcuts",
     closeLabel: "Close",
-    quickKicker: "THE ESSENTIALS, STRAIGHT TO THE POINT.",
-    quickRole: "Junior Software Developer · Backend",
+    quickKicker: "PROFESSIONAL SUMMARY",
+    quickRole: "Software Engineering",
     quickSummary:
-      "Backend as a foundation, with experience in APIs, business systems, automation, interfaces, and infrastructure. Python, JavaScript/TypeScript, Node.js, SQL, and other languages depending on the project.",
+      "At Ciplafe, I build internal applications, migrate Protheus databases, and develop tools for IT updates. At SESI, I worked on Python and PostgreSQL backends, supported Linux servers, and used AI in teaching.",
     quickCurrent: "CURRENTLY",
     quickCurrentValue:
-      "Junior Developer at Ciplafe Móveis · Jul/2026 – present",
+      "Junior Software Developer at Ciplafe Móveis · Jul/2026 – present",
     quickEducation: "EDUCATION",
     quickEducationValue:
       "Technology degree in Internet Systems · FATEC · Jul/2026",
@@ -167,6 +197,7 @@
     commandSearchLabel: "Search destinations",
     commandPlaceholder: "Find a chapter or action…",
     commandHint: "↑ ↓ navigate · Enter open · Esc close · Ctrl/⌘ K search",
+    awsExamSummary: "I earned the <strong>AWS Certified Cloud Practitioner</strong> certification by examination. The AWS Cloud Quest: Cloud Practitioner badge records completion of the hands-on learning path.",
     awsLearningType: "LEARNING BADGES",
     awsBadgeTitle: "AWS learning paths",
     awsBadgeBody:
@@ -190,7 +221,7 @@
     dragonInspect: "Inspect the dragon ↗",
     dragonInspectTitle: "FOLD BY FOLD.",
     dragonInspectIntro:
-      "Branching antlers, overlapping scales, claws, and paper strands. Explore the guardian up close.",
+      "Look closely at the forked antlers above the brow, the curved fangs, and the rows of scales that narrow toward the tail.",
     dragonInspectViews: "Dragon illustration views",
     dragonInspectHead: "Face & antlers",
     dragonInspectBody: "Scales & claws",
@@ -200,46 +231,47 @@
       "A static illustration study. The flying sequence pauses while you look closer.",
     oct2025: "OCT 2025",
     openSourceLabel: "OPEN SOURCE",
-    insideProject: "Inside the project",
+    keelDecision: "Why use double-entry bookkeeping?",
+    starwarsDecision: "When does the API fetch fresh data?",
+    auxiliumDecision: "When can someone continue registration?",
     keelInline:
-      "Domain logic separated from HTTP and persistence. Integer money, balanced entries, and retries without duplicate operations. The demo runs the actual domain code with in-memory storage.",
+      "Each transfer creates a debit and a credit for the same amount. The entries preserve enough history to reconstruct each balance and trace a movement back to its transaction.",
     starwarsInline:
-      "Asynchronous external-data access, validated models, and per-resource caching. Search, rankings, and pagination organize exploration of characters, films, and planets.",
+      "The client keeps film responses for 24 hours and other resources for one hour. Repeat lookups during that window save a call to SWAPI, though a change upstream can take time to appear.",
     auxiliumInline:
-      "Originated at ETEC’s 2022 hackathon; my MigrateDev involvement was May 2023–January 2025. The public prototype implements interfaces, navigation, and form validation. Backend, chat, matching, and payment integrations remain planned in its README.",
-    workKicker: "PROFESSIONAL JOURNEY · EDUCATION IS A SEPARATE CHAPTER",
-    workTitle: "From software<br>to the operation.",
+      "In the React Native prototype, someone requesting help can advance once they enter their name, address and age and select at least one category of donation.",
+    workKicker: "WORK EXPERIENCE",
+    workTitle: "Software in<br>daily operations.",
     workSummary:
-      "Backend is my foundation: APIs, integrations, automation, and business systems. My toolkit also includes web/mobile interfaces, data, and infrastructure. Understanding the whole problem helps me build better solutions.",
+      "At SESI, I combined software development and server automation with the use of AI in teaching. At Ciplafe, I work on the company’s manufacturing ERP and build applications for its property management and IT teams.",
     workDirection:
       "I want to keep broadening this toolkit in software engineering, cloud, and useful products. Contact channels for project and opportunity discussions are in the final chapter.",
     workCurrent: "JUL 2026 — PRESENT",
     workCiplafe1:
-      "Customizing and maintaining TOTVS Protheus with ADVPL/TLPP: routines, fields, patches, and environment evolution.",
+      "I adapt TOTVS Protheus routines and fields using ADVPL and TLPP. I also apply patches and maintain the ERP environments.",
     workCiplafe2:
-      "SQL Server and TOTVS RM BI queries to structure information used in internal processes.",
+      "I migrate Protheus databases and refresh the data in ERP environments. I write SQL Server queries and use TOTVS RM BI to organize the information our teams use in their daily work.",
     workCiplafe3:
-      "Python automations and Node.js tools, including a reception entry/exit system that replaced spreadsheets.",
+      "I automate tasks with Python and build internal applications with Node.js for both business operations and the IT team.",
     workSesi1:
-      "Python and PostgreSQL backend applications for educational and internal systems.",
+      "I built backend services for educational applications and internal systems using Python and PostgreSQL.",
     workSesi2:
-      "Administrative process automation, programming mentorship, and Windows/Linux and infrastructure support.",
-    githubKicker: "BEHIND THE SCENES, IN OPEN SOURCE",
-    githubTitle: "OPEN THE REPOSITORY.<br>UNDERSTAND THE BUILD.",
+      "I wrote Python scripts for server tasks, automated administrative workflows, and supported physical servers and Linux and Windows environments.",
+    githubKicker: "GITHUB",
+    githubTitle: "Repository index",
     githubIntro:
-      "Readmes, architecture decisions, and implementations you can inspect. From the initial problem to the structure of the code, the work is here.",
+      "Three ways into my code. Open an architecture decision, read the API tests, or see how delivery times are plotted.",
     githubProfile: "Visit my profile",
     repoKeel:
-      "A financial ledger with an infrastructure-independent domain. Explore decisions about double-entry bookkeeping, idempotency, and locking.",
+      "The architecture records explain why balances come from ledger entries and how the system handles simultaneous transfers.",
     repoStarwars:
-      "A Python backend for Star Wars data with validation, caching, pagination, and different cloud execution options.",
+      "The tests show how the API validates SWAPI data and organizes characters, planets, and starships.",
     repoAnalytics:
-      "Restaurant analytics: a FastAPI API, React/TypeScript dashboard with ECharts, and PostgreSQL queries with materialized views.",
+      "A dashboard for restaurants to track sales and delivery times. Its React component turns delivery metrics into an ECharts visualization.",
     repoDecisions: "Architecture decisions ↗︎",
     repoDemo: "Browser demo ↗︎",
     repoTests: "Explore the tests ↗︎",
-    repoSource: "Explore the code ↗︎",
-    githubSnapshot: "DESCRIPTIONS BASED ON PUBLIC READMES · 06 OCT 2026",
+    repoChart: "Chart source ↗︎",
     architectureKicker: "FOLLOW THE REQUEST’S PATH",
     architectureTitle: "ONE SYSTEM.<br>FOUR PANELS.",
     architectureIntro:
@@ -277,7 +309,7 @@
     chapterDockLabel: "Turn the panels",
     previousPanel: "Previous panel",
     nextPanel: "Next panel",
-    dragonKicker: "GUARDIAN OF THE TOOLKIT",
+    dragonKicker: "The credential dragon",
     dragonPause: "Pause dragon Ⅱ",
     dragonGreetLabel: "Greet the paper dragon",
     dragonGreet: "Greet the dragon",
@@ -285,34 +317,6 @@
       "Folded paper. Real learning. The badges stay still for you to explore.",
   });
   Object.assign(english, {
-    "badgeSummary_aws-serverless":
-      "AWS serverless concepts and services, focusing on Lambda and API Gateway. A training badge with a learning-path assessment.",
-    "badgeSummary_aws-cloud-quest":
-      "Hands-on introductory solution building with AWS compute, networking, data, and security services. This is a training badge, not the AWS Certified Cloud Practitioner examination certification.",
-    "badgeSummary_aws-cloud-essentials":
-      "AWS cloud fundamentals: compute, storage, networking, databases, security, architecture, and pricing and support models.",
-    "badgeSummary_aws-braket":
-      "Introductory quantum-computing knowledge with a focus on Amazon Braket. A training badge with a learning-path knowledge check.",
-    "badgeSummary_oracle-foundations":
-      "A Foundations Associate credential, 2023 edition. Original artwork shared on the public profile. Oracle’s official page is the place to review the record and its current status.",
-    "badgeSummary_oracle-ai-foundations":
-      "Historical AI Foundations Associate credential, 2023 edition. The issuer’s notice reports inactivity since January 15, 2026. It is not presented as a currently valid credential.",
-    "badgeSummary_oracle-data-management":
-      "A Cloud Data Management foundations credential, 2023 edition. Original artwork and the official record let you inspect the title while keeping courses distinct from examination credentials.",
-    "badgeSummary_cisco-network-defense":
-      "Network protection, access control, firewalls, cloud security, and alert analysis. A Cisco Networking Academy student-level course credential.",
-    "badgeSummary_cisco-endpoint-security":
-      "Endpoint and operating-system security, common threats, and protection measures for Windows, Linux, and networks.",
-    "badgeSummary_cisco-devices-config":
-      "Initial Cisco device configuration, IPv4 addressing, protocols, and connectivity, with practical network exercises in Packet Tracer.",
-    "badgeSummary_cisco-networking-basics":
-      "Network fundamentals, devices, data transmission, IP addressing, protocols, and wireless access.",
-    "badgeSummary_cisco-learnathon-2026":
-      "Participation in the Cisco Networking Academy Learn-A-Thon and introductory technology activities. This is a participation recognition.",
-    "badgeSummary_cisco-cybersecurity":
-      "An introduction to threats, vulnerabilities, privacy, and protective practices through Cisco Networking Academy.",
-    "badgeSummary_microsoft-mie-expert":
-      "Recognition as a Microsoft Innovative Educator Expert in the 2025–2026 edition, connecting education technology, Microsoft tools, and AI in education.",
     studentCredential: "COURSE / STUDENT CREDENTIAL",
     participationCredential: "PARTICIPATION",
     professionalRecognition: "PROFESSIONAL RECOGNITION",
@@ -338,10 +342,10 @@
     dragonStart: "Fly & deliver",
     dragonReset: "Restart ↺",
     dragonScrubLabel: "Delivery route",
-    dragonWalkLabel: "PAPER, WAVES & CREDENTIALS IN FLIGHT",
-    dragonDeliveryLabel: "DELIVERY POINT",
+    dragonDeliveryLabel: "Collection · 15 badges",
+    galleryIssuers: "Credly and Oracle",
     dragonCaptionV3:
-      "The guardian flies in waves, delivers a credential, and returns with another. Hover or focus the delivery to read at your pace. The full collection remains below.",
+      "Each badge lands in its own slot. Open a slot to read the credential or ask the guardian to bring it.",
     verifiedProfile: "Verified Credly profile",
     courseShelfIntro:
       "Additional training in serverless, security, AI, and software engineering. Titles and dates were checked against the completion evidence.",
@@ -355,7 +359,15 @@
     recordKind_award: "Award",
     recordKind_academic: "Authorship / presentation",
     formationKicker: "LEARNING IS AN ONGOING STORY",
-    formationTitle: "58 RECORDS.<br>A GROWING TOOLKIT.",
+    formationTitle: "59 learning records",
+    claudeCompletion: "Completion badge",
+    verifyClaudeBadge: "Verify the Claude 101 badge",
+    verifyBadge: "Verify badge",
+    claudeIssued: "October 28, 2026",
+    claudeIssuedLabel: "ISSUED",
+    claudeCourseTopics:
+      "The course covers writing prompts for Claude, organizing context in projects, and creating artifacts.",
+    claudeCourseLink: "View the course syllabus",
     formationIntro:
       "Courses, events, projects, awards, and presentations, with checked titles and issuers. Some records also have a badge; counts are kept separate.",
     formationSearchLabel: "Search learning records",
@@ -387,17 +399,16 @@
     educationComputing:
       "Technical qualification in Information Technology, completed in July 2023. Programming, hardware, and Auxilium as a team project.",
     workMigrate:
-      "Cofounder and technical lead in a team initiative. Architecture, data modeling, and Auxilium development, with the project’s origin in ETEC’s 2022 hackathon.",
+      "I co-founded MigrateDev and served as technical lead for Auxilium. I worked with the team on the application architecture and the prototype’s data model.",
     independentTitle: "Independent projects",
     independentDate: "JAN 2023 — PRESENT",
     independentBody:
-      "APIs, automations, interfaces, and software experiments. Public projects show different languages and ways to solve problems.",
-    auxiliumConcept: "CONCEPT ILLUSTRATION · ORIGINAL LOGO",
-    prototypeSource: "Prototype source",
+      "I build APIs and web applications. In Keel, I document the architecture decisions behind a digital wallet. In Star Wars API, the tests show when the service should fetch fresh data.",
+    prototypeSource: "Mobile prototype source",
     skillWebTitle: "Web & interfaces",
-    skillWeb: "INTERFACES, NAVIGATION & PROTOTYPES.",
+    skillWeb: "REGISTRATION FORMS AND INTERACTIVE CHARTS",
     skillLanguagesTitle: "Other languages",
-    skillLanguages: "EDUCATION, PRACTICE & EXPERIMENTS.",
+    skillLanguages: "COURSEWORK AND PRACTICE PROJECTS",
     skillInfraTitle: "Infrastructure, cloud & workflow",
     sandboxOwner: "VINICIUS OLIVEIRA · DEVELOPER MODE",
     sandboxLocal: "LOCAL · ILLUSTRATIVE",
@@ -407,137 +418,168 @@
     missionWakanda: "WAKANDA Archive",
   });
   Object.assign(english, {
-    auxiliumSummary:
-      "A donations project that originated at ETEC in 2022 and continued as a team initiative. The public app is a historical interface prototype.",
-    auxiliumYears: "ORIGIN 2022 · MIGRATEDEV 2023–2025",
-    skillBackend: "APIS, BUSINESS RULES & AUTOMATION.",
-    skillData: "CONNECTING DATA TO THE OPERATION.",
-    skillCloud: "SUPPORT, PROJECTS & LEARNING.",
+    skillBackend: "INPUT VALIDATION AND BUSINESS RULES",
+    skillData: "PROTHEUS CUSTOMIZATION AND SQL QUERIES",
+    skillCloud: "SERVER AUTOMATION AND CLOUD TRAINING",
     healthExplanation:
       "An illustrative health check, without querying a real server.",
-    auxiliumCategory: "03 / APP PROTOTYPE",
+    workSesi3: "I mentored learners in programming, supported the use of AI in teaching, and worked on harness engineering for AI.",
+    ciplafeProjectsLink: "View Ciplafe’s internal projects",
+    ciplafeProjectsTitle: "Internal projects at Ciplafe",
+    ciplafeReceptionTitle: "Reception System",
+    ciplafeReceptionBody: "I built a modular Node.js monolith to log visitors and fleet vehicle movements. Staff can search the history, see who made each change, and export reports to Excel.",
+    ciplafeReceptionData: "The front desk writes to a local SQLite database. SQL Server receives a copy for reporting and auditing, so staff can keep logging activity when the mirror is unavailable.",
+    ciplafePropertyTitle: "Property Management System",
+    ciplafePropertyBody: "I built a web application with Node.js and SQLite to track urban and rural properties, along with their taxes, contracts, and documents. The data model keeps the property, its land registry record, and its tax registration distinct so each retains its own history.",
+    ciplafePropertyStatus: "Undergoing operational validation. The next step is to verify that the services start and stop correctly on the pilot server.",
+    ciplafeErpTitle: "Protheus Update Console",
+    ciplafeErpBody: "I built a console that compares ERP versions and checks packages before installation. An execution log ties each update to its environment, package, and operator, giving the team a record for checking backup steps, resuming work, and investigating failures.",
+    ciplafeErpStatus: "Assisted pilot. The rehearsal used a real package and simulated patch installation and service operations. The first live maintenance window is pending.",
+    ciplafeInfraTitle: "Workstation Update Console",
+    ciplafeInfraBody: "I built a console for remotely updating Claude, Node.js, and Python on networked workstations. From the same console, IT can check whether Claude and each workstation’s MCP connections are working.",
     workMigrateDate: "MAY 2023 — JAN 2025",
   });
   const projectData = {
     keel: {
       title: "Keel",
+      category: "Backend",
       number: "001",
       tags: ["TypeScript", "Fastify", "PostgreSQL", "Vitest"],
       repo: "https://github.com/viniciuslks7/Keel",
       demo: "https://viniciuslks7.github.io/Keel/",
       pt: {
         summary:
-          "O núcleo contábil de uma carteira digital: contas, depósitos, saques e transferências. O saldo vem de lançamentos, não de um número alterado sem contexto.",
+          "Carteira digital em TypeScript que registra débitos e créditos em PostgreSQL e calcula o saldo a partir desses lançamentos.",
         challenge:
-          "Como garantir que o dinheiro permaneça em equilíbrio, que novas tentativas não dupliquem transações e que operações concorrentes respeitem o saldo?",
+          "Uma transferência pode ser concluída mesmo quando o cliente perde a resposta. O serviço precisa reconhecer a nova tentativa e proteger o saldo quando chegam operações simultâneas.",
         decisions: [
-          "Ledger append-only de partidas dobradas",
-          "Valores monetários em unidades inteiras",
-          "Portas e adaptadores: domínio independente da infraestrutura",
-          "Idempotência e bloqueios ordenados no PostgreSQL",
+          "Armazenar valores em centavos usando números inteiros",
+          "Vincular a chave de idempotência ao conteúdo da operação",
+          "Bloquear as contas por ordem de identificador antes de verificar o saldo",
         ],
         implementation:
-          "Fastify recebe as requisições e valida os dados. Casos de uso coordenam o domínio. Adaptadores PostgreSQL e in-memory implementam as mesmas interfaces.",
+          "O Fastify valida o pedido e chama o caso de uso. No adaptador PostgreSQL, a verificação da chave e os lançamentos participam da mesma transação.",
         proof:
-          "O repositório inclui testes de domínio, casos de uso e HTTP com Vitest, além de documentação OpenAPI e registros de decisões de arquitetura.",
-        note: "A demo pública executa o domínio e os casos de uso reais no navegador com armazenamento em memória. Não há backend, pagamento ou dinheiro real.",
+          "A decisão de arquitetura ADR-0004 explica por que enviar os mesmos dados devolve a transação original e por que mudar o valor com a mesma chave gera um conflito HTTP 409.",
+        note: "A demo executa o mesmo domínio com contas fictícias em memória. Recarregar a página reinicia os saldos.",
       },
       en: {
         summary:
-          "The bookkeeping core of a digital wallet: accounts, deposits, withdrawals, and transfers. Balances come from entries, not a number changed without context.",
+          "A digital wallet service with a TypeScript ledger and PostgreSQL persistence.",
         challenge:
-          "How do you keep money balanced, prevent retries from duplicating transactions, and make concurrent operations respect account balances?",
+          "A transfer can succeed even if the client loses the response. The service must recognize a retry and protect the available balance when requests arrive at the same time.",
         decisions: [
-          "Append-only double-entry ledger",
-          "Money represented in integer minor units",
-          "Ports and adapters: infrastructure-independent domain",
-          "Idempotency and ordered PostgreSQL locks",
+          "Represent amounts in integer minor units",
+          "Bind the idempotency key to the request contents",
+          "Lock accounts in ID order before checking the balance",
         ],
         implementation:
-          "Fastify receives requests and validates data. Use cases coordinate the domain. PostgreSQL and in-memory adapters implement the same interfaces.",
+          "Fastify validates the request and invokes the use case. In PostgreSQL, the key check and the entries are part of the same transaction.",
         proof:
-          "The repository includes domain, use-case, and HTTP tests with Vitest, an OpenAPI specification, and architecture decision records.",
-        note: "The public demo runs the actual domain and use-case code in the browser with in-memory storage. No backend, payments, or real money.",
+          "Architecture decision ADR-0004 explains why resending identical data returns the original transaction and why changing the amount under the same key returns HTTP 409 Conflict.",
+        note: "The demo runs the same domain code with fictional accounts in memory. Reloading the page resets their balances.",
       },
     },
     starwars: {
       title: "Star Wars API",
+      category: "Backend",
       number: "002",
       tags: ["Python", "HTTPX", "Pydantic", "Google Cloud", "Pytest"],
       repo: "https://github.com/viniciuslks7/API-Starwars",
       pt: {
         summary:
-          "Uma plataforma REST para explorar personagens, filmes, planetas e naves. Projeto de backend com busca, rankings e linhas do tempo.",
+          "Serviço REST para pesquisar personagens, ordenar naves e consultar a cronologia dos filmes com dados da SWAPI.",
         challenge:
-          "Como organizar dados externos em uma API previsível, reduzir requisições repetidas e oferecer uma navegação paginada?",
+          "Montar uma busca ou um ranking pode exigir várias páginas da fonte. A escolha do prazo de cache afeta tanto o número de chamadas quanto a atualização dos resultados.",
         decisions: [
-          "Cliente HTTPX assíncrono para consumo de dados",
-          "Validação com Pydantic e cache por recurso",
-          "Paginação, busca, rankings e linhas do tempo",
-          "Implementações para Cloud Functions e Cloud Run",
+          "Usar a URL consultada como chave de cache",
+          "Definir a validade de acordo com o tipo de recurso",
+          "Manter o acesso à SWAPI em um cliente assíncrono com HTTPX",
         ],
         implementation:
-          "Python com Flask na Cloud Function e FastAPI no ambiente Cloud Run. Os recursos externos são organizados em serviços e modelos.",
+          "O cliente procura a URL no cache antes da chamada HTTP. Ao buscar os dados na SWAPI, guarda a resposta em memória. Cada instância da aplicação mantém sua própria cópia.",
         proof:
-          "O repositório inclui testes com Pytest, configuração Ruff, documentação de arquitetura e instruções de deploy.",
-        note: "A demonstração de frontend no repositório é básica e depende da API. Consulte o README para executar e verificar os ambientes; disponibilidade de cloud pode mudar.",
+          "Em test_cache_service.py, os testes cobrem a leitura de uma entrada válida, a expiração e a execução com o cache desativado.",
+        note: "O README traz as instruções para executar a API e os testes localmente.",
       },
       en: {
         summary:
-          "A REST platform for exploring characters, films, planets, and starships. A backend project with search, rankings, and timelines.",
+          "A REST service for searching characters, ranking starships and exploring film timelines with data from SWAPI.",
         challenge:
-          "How do you organize external data into a predictable API, reduce repeated requests, and provide paginated navigation?",
+          "Building a search result or ranking can take several pages from the upstream API. The cache lifetime affects both the number of requests and how quickly a change becomes visible.",
         decisions: [
-          "Asynchronous HTTPX client for external data",
-          "Pydantic validation and per-resource caching",
-          "Pagination, search, rankings, and timelines",
-          "Cloud Functions and Cloud Run implementations",
+          "Use the upstream URL as the cache key",
+          "Set the lifetime by resource type",
+          "Keep SWAPI access in an asynchronous HTTPX client",
         ],
         implementation:
-          "Python with Flask in Cloud Functions and FastAPI in Cloud Run. External resources are organized into services and models.",
+          "The client checks the cache before making an HTTP request. After a fetch, it stores the response in memory. Each application instance maintains its own copy.",
         proof:
-          "The repository includes Pytest tests, Ruff configuration, architecture documentation, and deployment instructions.",
-        note: "The basic frontend in the repository depends on the API. See the README to run and verify environments; cloud availability may change.",
+          "In test_cache_service.py, the tests cover reading a valid entry, expiration and operation with caching disabled.",
+        note: "The README explains how to run the API and the tests locally.",
       },
     },
     auxilium: {
       title: "Auxilium",
+      category: "Mobile / Web",
       number: "003",
       repo: "https://github.com/viniciuslks7/Aulas-de-React",
+      demo: "https://viniciuslks7.github.io/auxilium-demo/",
       tags: ["ETEC 2022", "MigrateDev 2023–2025", "React Native / Expo"],
       pt: {
         summary:
-          "Projeto de doações que nasceu na ETEC no hackathon de 2022 e seguiu como iniciativa em equipe. O repositório público registra um protótipo histórico de interface.",
+          "Projeto de doações criado em equipe na ETEC em 2022 e desenvolvido depois pela equipe da MigrateDev.",
         challenge:
-          "Como usar tecnologia para aproximar pessoas, organizar doações e apoiar iniciativas de impacto social?",
+          "Quem oferece uma doação e quem pede ajuda precisam fornecer informações diferentes. A equipe organizou o cadastro a partir dessa escolha inicial.",
         decisions: [
-          "Modelagem do banco de dados",
-          "Arquitetura da aplicação",
-          "Navegação e formulários do protótipo",
-          "Backend e integrações descritos como etapas futuras",
+          "Separar os percursos por perfil",
+          "Dividir o cadastro em etapas",
+          "Validar os campos antes de encaminhar os dados à tela seguinte",
         ],
         implementation:
-          "Atuei como cofundador e responsável técnico do MigrateDev entre maio de 2023 e janeiro de 2025, participando da arquitetura e implementação.",
+          "De maio de 2023 a janeiro de 2025, atuei como cofundador e responsável técnico na MigrateDev. Minha contribuição incluiu a arquitetura da aplicação e a modelagem dos dados.",
         proof:
-          "O Auxilium conquistou o 2º lugar no 5º Hackathon Acadêmico – Robótica Paula Souza em 2022, com a equipe Starshooting. O artigo público da Oracle Academy identifica o projeto, a equipe e minha participação.",
-        note: "O código público Aulas-de-React documenta interface, navegação e validação de formulários. Backend, autenticação, matching, chat e pagamentos aparecem como TODO; não apresento o protótipo como serviço em produção.",
+          "O repositório Aulas-de-React preserva as telas do protótipo em Expo. A Oracle Academy registra o 2º lugar da equipe Starshooting com o Auxilium no hackathon de robótica de 2022.",
+        note: "A demo web é uma versão de portfólio em HTML, CSS e JavaScript. Usa itens fictícios e mantém os favoritos em memória até a página ser recarregada.",
       },
       en: {
         summary:
-          "A donations project that originated at ETEC’s 2022 hackathon and continued as a team initiative. The public repository records a historical interface prototype.",
+          "A team donation project started at ETEC in 2022 and later developed as a MigrateDev initiative.",
         challenge:
-          "How can technology bring people together, organize donations, and support social-impact initiatives?",
+          "People offering donations and people requesting help need to supply different information. The team used that initial choice to structure registration.",
         decisions: [
-          "Database modeling",
-          "Application architecture",
-          "Interface & navigation features",
-          "Backend and integrations described as future steps",
+          "Provide a separate path for each role",
+          "Split registration into steps",
+          "Validate each step before passing its data to the next screen",
         ],
         implementation:
-          "I was a cofounder and technical lead at MigrateDev from May 2023 to January 2025, working on architecture and implementation.",
+          "From May 2023 to January 2025, I worked as a cofounder and technical lead at MigrateDev. My contribution included application architecture and data modeling.",
         proof:
-          "Auxilium placed 2nd in the 2022 5th Academic Hackathon – Robotics Paula Souza with team Starshooting. The public Oracle Academy article identifies the project, the team, and my participation.",
-        note: "The public Aulas-de-React source documents interfaces, navigation, and form validation. Backend, authentication, matching, chat, and payments are TODO items; the prototype is not presented as a production service.",
+          "The Aulas-de-React repository preserves the Expo prototype screens. Oracle Academy records team Starshooting’s second place with Auxilium at the 2022 robotics hackathon.",
+        note: "The web demo is a separate HTML, CSS and JavaScript portfolio version. It uses fictional listings and keeps favorites in memory until the page reloads.",
+      },
+    },
+    analytics: {
+      title: "Analytics Dashboard",
+      category: "Analytics",
+      number: "004",
+      tags: ["React", "TypeScript", "ECharts", "FastAPI", "PostgreSQL"],
+      repo: "https://github.com/viniciuslks7/Analytics-Dashboard",
+      pt: {
+        summary: "Painel para restaurantes acompanharem vendas e entregas. A API em FastAPI recebe os filtros e o frontend em React apresenta os resultados por bairro.",
+        challenge: "Um bairro com poucos pedidos pode ter um tempo de entrega atípico. Ao combinar vários bairros, a média precisa refletir quantos pedidos cada um representa.",
+        decisions: ["Consultar a média e a quantidade de vendas juntas", "Ponderar o tempo de cada bairro pela quantidade de pedidos", "Abrir o detalhamento somente para bairros individuais"],
+        implementation: "O componente soma os tempos médios multiplicados pelos respectivos volumes e divide pelo total de pedidos do grupo. O ECharts exibe o resultado ao lado dos bairros individuais.",
+        proof: "Em DeliveryMetricsChart.tsx, acompanhe o cálculo de totalTime e totalQtd até a barra “Outros” e a identificação do grupo no detalhe do gráfico.",
+        note: "O README descreve como executar o painel, a API e o PostgreSQL localmente.",
+      },
+      en: {
+        summary: "A restaurant dashboard for tracking sales and deliveries. The FastAPI service receives the filters, and the React frontend displays the results by neighborhood.",
+        challenge: "An area with few orders can have an unusual delivery time. When several neighborhoods are combined, the average needs to reflect how many orders each one represents.",
+        decisions: ["Request both average time and sales count", "Weight each area’s delivery time by its order count", "Enable drill-down for individual neighborhoods only"],
+        implementation: "The component multiplies each mean by the corresponding volume, sums those values and divides by the group’s total orders. ECharts plots the result alongside the individual neighborhoods.",
+        proof: "In DeliveryMetricsChart.tsx, follow totalTime and totalQtd into the “Outros” bar and the tooltip identifying it as a grouped result.",
+        note: "The README explains how to run the dashboard, API and PostgreSQL locally.",
       },
     },
   };
@@ -553,16 +595,29 @@
       (node) => (node.placeholder = translate(node.dataset.i18nPlaceholder)),
     );
     $("#language").textContent = language === "en" ? "PT" : "EN";
+    $("#language").lang = language === "en" ? "pt-BR" : "en";
     $("#language").setAttribute(
       "aria-label",
       t("Switch to English", "Mudar para português"),
     );
-    $("#menu-toggle").setAttribute("aria-label", t("Abrir menu", "Open menu"));
+    $$("[data-badge-en]").forEach((node) => {
+      node.textContent = language === "en" ? node.dataset.badgeEn : node.dataset.badgePt;
+    });
+    updateMenuLabel();
+    $$(".badge-art-link[data-badge-open], [data-badge-slot]").forEach((link) => {
+      const id = link.dataset.badgeSlot || link.dataset.badgeOpen;
+      const badge = badgeData.find((item) => item.id === id);
+      if (badge)
+        link.setAttribute(
+          "aria-label",
+          `${badge.title}: ${t("abrir detalhes", "open details")}`,
+        );
+    });
     document.title = t(
-      "Vinicius Oliveira — Desenvolvedor de Software",
-      "Vinicius Oliveira — Software Developer",
+      "Vinicius Oliveira — Desenvolvedor de software",
+      "Vinicius Oliveira — Software developer",
     );
-    $(".portrait-frame img").alt = t(
+    $(".portrait-print img").alt = t(
       "Retrato de Vinicius Oliveira",
       "Portrait of Vinicius Oliveira",
     );
@@ -644,24 +699,35 @@
       prefersReduced.matches || storage.get("vo-motion") === "off";
     updateMotion();
   });
+  function updateMenuLabel() {
+    $("#menu-toggle").setAttribute(
+      "aria-label",
+      $("#mobile-nav").hidden
+        ? t("Abrir menu", "Open menu")
+        : t("Fechar menu", "Close menu"),
+    );
+  }
   function closeMobile() {
     $("#mobile-nav").hidden = true;
     $("#menu-toggle").setAttribute("aria-expanded", "false");
+    updateMenuLabel();
   }
   $("#menu-toggle").addEventListener("click", () => {
     const isOpen = !$("#mobile-nav").hidden;
     $("#mobile-nav").hidden = isOpen;
     $("#menu-toggle").setAttribute("aria-expanded", String(!isOpen));
+    updateMenuLabel();
   });
   $$("#mobile-nav a").forEach((a) => a.addEventListener("click", closeMobile));
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    if (event.key !== "Escape" || event.isComposing) return;
+    const dialog = event.target.closest("dialog[open]");
+    if (dialog) {
+      event.preventDefault();
+      dialog.close();
+    } else if (!$("#mobile-nav").hidden) {
       closeMobile();
-      const open = $("dialog[open]");
-      if (open) {
-        event.preventDefault();
-        open.close();
-      }
+      $("#menu-toggle").focus();
     }
   });
   document.addEventListener("click", (event) => {
@@ -674,6 +740,7 @@
   });
   function updateProjectCount() {
     const count = $$(".project-card").filter((n) => !n.hidden).length;
+    $("#project-grid").dataset.visibleCount = String(count);
     $("#project-count").textContent =
       `0${count} ${t(count === 1 ? "PROJETO" : "PROJETOS", count === 1 ? "PROJECT" : "PROJECTS")}`;
   }
@@ -693,7 +760,8 @@
     }),
   );
   function openDialog(dialog) {
-    dialogOrigin = document.activeElement;
+    if ($("#mobile-nav").contains(document.activeElement))
+      $("#menu-toggle").focus();
     closeMobile();
     if (!dialog.open) dialog.showModal();
     document.body.style.overflow = "hidden";
@@ -707,7 +775,7 @@
     dialog.addEventListener("keydown", (event) => {
       if (event.key !== "Tab") return;
       const focusable = $$(
-        "button:not(:disabled),a[href],input,select,textarea,[tabindex]:not([tabindex='-1'])",
+        ":is(button,a[href],input,select,textarea,[tabindex]):not(:disabled,[tabindex='-1'])",
         dialog,
       ).filter((node) => node.getClientRects().length > 0);
       const first = focusable[0];
@@ -722,11 +790,12 @@
       }
     });
     dialog.addEventListener("close", () => {
+      if (dialog.id === "project-dialog" && !dialog.open)
+        activeProject = undefined;
+      if ($("dialog[open]")) return;
       document.body.style.overflow = "";
       document.body.classList.remove("dialog-open");
       syncDragonMotion();
-      activeProject = undefined;
-      if (dialogOrigin instanceof HTMLElement) dialogOrigin.focus();
     });
     dialog.addEventListener("click", (event) => {
       if (event.target === dialog) {
@@ -748,7 +817,7 @@
     const project = projectData[id];
     const data = project[language];
     $("#project-dialog-content").innerHTML =
-      `<p class="chapter-kicker">CASE_${project.number} / ${id === "auxilium" ? t("APP · PROTÓTIPO", "APP · PROTOTYPE") : "BACKEND"}</p><h2 id="project-dialog-title">${project.title}</h2><p class="dossier-subtitle">${data.summary}</p><ul class="tags">${project.tags.map((tag) => `<li>${tag}</li>`).join("")}</ul><div class="dossier-grid"><div><h3>${t("01 / O DESAFIO", "01 / THE CHALLENGE")}</h3><p>${data.challenge}</p></div><div><h3>${t("02 / AS DECISÕES", "02 / THE DECISIONS")}</h3><ul>${data.decisions.map((item) => `<li>${item}</li>`).join("")}</ul></div><div><h3>${t("03 / A IMPLEMENTAÇÃO", "03 / THE IMPLEMENTATION")}</h3><p>${data.implementation}</p></div><div><h3>${t("04 / PARA CONFERIR", "04 / THE EVIDENCE")}</h3><p>${data.proof}</p></div></div><p class="dossier-footnote">${data.note}</p><div class="dialog-actions">${project.demo ? `<a class="button button-primary" href="${project.demo}" target="_blank" rel="noopener noreferrer">${t("Experimentar a demo", "Try the demo")} ↗︎</a>` : ""}${project.repo ? `<a class="button button-light" href="${project.repo}" target="_blank" rel="noopener noreferrer">${t("Explorar no GitHub", "Explore on GitHub")} ↗︎</a>` : `<a class="button button-primary" href="mailto:vinicius.oliveiratwt@gmail.com">${t("Conversar sobre o projeto", "Talk about the project")} ↗︎</a>`}</div>`;
+      `<p class="chapter-kicker">CASE_${project.number} / ${project.category}</p><h2 id="project-dialog-title">${project.title}</h2><p class="dossier-subtitle">${data.summary}</p><ul class="tags">${project.tags.map((tag) => `<li>${tag}</li>`).join("")}</ul><div class="dossier-grid"><div><h3>${t("01 / O DESAFIO", "01 / THE CHALLENGE")}</h3><p>${data.challenge}</p></div><div><h3>${t("02 / AS DECISÕES", "02 / THE DECISIONS")}</h3><ul>${data.decisions.map((item) => `<li>${item}</li>`).join("")}</ul></div><div><h3>${t("03 / A IMPLEMENTAÇÃO", "03 / THE IMPLEMENTATION")}</h3><p>${data.implementation}</p></div><div><h3>${t("04 / PARA CONFERIR", "04 / THE EVIDENCE")}</h3><p>${data.proof}</p></div></div><p class="dossier-footnote">${data.note}</p><div class="dialog-actions">${project.demo ? `<a class="button button-primary" href="${project.demo}" target="_blank" rel="noopener noreferrer">${t("Experimentar a demo", "Try the demo")} ↗︎</a>` : ""}${project.repo ? `<a class="button button-light" href="${project.repo}" target="_blank" rel="noopener noreferrer">${t("Explorar no GitHub", "Explore on GitHub")} ↗︎</a>` : `<a class="button button-primary" href="mailto:vinicius.oliveiratwt@gmail.com">${t("Conversar sobre o projeto", "Talk about the project")} ↗︎</a>`}</div>`;
   }
   $$("[data-project-open]").forEach((button) =>
     button.addEventListener("click", () => {
@@ -760,13 +829,23 @@
   $$("[data-open]").forEach((button) =>
     button.addEventListener("click", () => {
       if (button.dataset.open === "quick") openDialog($("#quick-dialog"));
+      else if (button.dataset.open === "appearance") openDialog($("#appearance-dialog"));
       else openCommands();
     }),
   );
-  $("#copy-email").addEventListener("click", async () => {
+  let copyFeedbackTimer;
+  $("#copy-email").addEventListener("click", async ({ currentTarget: button }) => {
     try {
       if (!navigator.clipboard) throw new Error("Clipboard unavailable");
       await navigator.clipboard.writeText("vinicius.oliveiratwt@gmail.com");
+      button.classList.add("copied");
+      const mark = button.querySelector("[aria-hidden]");
+      mark.textContent = "✓";
+      clearTimeout(copyFeedbackTimer);
+      copyFeedbackTimer = setTimeout(() => {
+        button.classList.remove("copied");
+        mark.textContent = "▣";
+      }, 2500);
       showToast(t("E-mail copiado!", "Email copied!"));
     } catch {
       showToast(
@@ -961,6 +1040,8 @@
         hash: "#credentials",
       },
       { label: t("Contato", "Contact"), hint: "05", hash: "#contact" },
+      { label: t("Voo do dragão e badges", "Dragon flight and badges"), hint: "✷", hash: "#dragon" },
+      { label: t("Aparência, temas e cores", "Appearance, themes and colors"), hint: "◐", action: "appearance-open" },
       {
         label: t("Visão rápida para recrutadores", "Recruiter quick view"),
         hint: "↗︎",
@@ -981,7 +1062,8 @@
     ];
   }
   function renderCommands() {
-    const query = $("#command-search").value.trim().toLocaleLowerCase();
+    const search = $("#command-search");
+    const query = search.value.trim().toLocaleLowerCase();
     filteredCommands = commandItems().filter((item) =>
       item.label
         .toLocaleLowerCase()
@@ -993,19 +1075,36 @@
       commandIndex,
       Math.max(0, filteredCommands.length - 1),
     );
-    $("#command-results").innerHTML = filteredCommands.length
-      ? filteredCommands
-          .map(
-            (item, index) =>
-              `<button class="command-result ${index === commandIndex ? "selected" : ""}" data-command="${index}"><span>${item.label}</span><small>${item.hint} ↗︎</small></button>`,
-          )
-          .join("")
-      : `<p class="command-hint">${t("Nenhum destino encontrado.", "No destinations found.")}</p>`;
+    const options = filteredCommands
+      .map(
+        (item, index) =>
+          `<button type="button" role="option" id="command-option-${index}" class="command-result" data-command="${index}" tabindex="-1"><span>${item.label}</span><small aria-hidden="true">${item.hint} ↗︎</small></button>`,
+      )
+      .join("");
+    $("#command-results").innerHTML =
+      `<div id="command-options" role="listbox" aria-label="${t("Destinos e ações", "Destinations and actions")}" ${options ? "" : "hidden"}>${options}</div>` +
+      (options
+        ? ""
+        : `<p role="status" class="command-hint">${t("Nenhum destino encontrado.", "No destinations found.")}</p>`);
+    search.setAttribute("aria-expanded", String(Boolean(options)));
+    selectCommand(commandIndex);
     $$("[data-command]").forEach((button) =>
       button.addEventListener("click", () =>
         executeCommand(Number(button.dataset.command)),
       ),
     );
+  }
+  function selectCommand(index) {
+    commandIndex = index;
+    const search = $("#command-search");
+    const options = $$("#command-options [role='option']");
+    options.forEach((option, i) => {
+      option.setAttribute("aria-selected", String(i === index));
+      option.classList.toggle("selected", i === index);
+    });
+    if (options[index])
+      search.setAttribute("aria-activedescendant", options[index].id);
+    else search.removeAttribute("aria-activedescendant");
   }
   function openCommands() {
     commandIndex = 0;
@@ -1020,7 +1119,13 @@
     $("#command-dialog").close();
     if (item.hash) {
       location.hash = item.hash;
-      $(item.hash).scrollIntoView({
+      const section = $(item.hash);
+      const heading = $("h1,h2", section);
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+      }
+      section.scrollIntoView({
         behavior: motionDisabled ? "instant" : "smooth",
         block: "start",
       });
@@ -1035,17 +1140,18 @@
     commandIndex = 0;
     renderCommands();
   });
-  $("#command-dialog").addEventListener("keydown", (event) => {
+  $("#command-search").addEventListener("keydown", (event) => {
+    if (event.isComposing) return;
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
-      commandIndex =
-        (commandIndex +
-          (event.key === "ArrowDown" ? 1 : -1) +
-          filteredCommands.length) %
-        Math.max(1, filteredCommands.length);
-      renderCommands();
+      if (!filteredCommands.length) return;
+      const step = event.key === "ArrowDown" ? 1 : -1;
+      selectCommand(
+        (commandIndex + step + filteredCommands.length) % filteredCommands.length,
+      );
+      $("#command-option-" + commandIndex).scrollIntoView({ block: "nearest" });
     }
-    if (event.key === "Enter" && event.target === $("#command-search")) {
+    if (event.key === "Enter") {
       event.preventDefault();
       executeCommand(commandIndex);
     }
@@ -1091,11 +1197,11 @@
       file: "domain / rules",
       pt: {
         title: "As regras que não negociam",
-        body: "O domínio representa dinheiro em unidades inteiras e exige lançamentos balanceados. Não conhece HTTP, SQL ou o navegador. As regras têm uma fonte de verdade.",
+        body: "O domínio representa valores em centavos e exige que a soma dos débitos seja igual à dos créditos. A API e a demo no navegador aplicam essa mesma regra.",
       },
       en: {
         title: "Rules that do not compromise",
-        body: "The domain represents money in integer minor units and requires balanced entries. It knows nothing about HTTP, SQL, or the browser. The rules have one source of truth.",
+        body: "The domain stores amounts in integer cents and requires total debits to equal total credits. The API and the browser demo both apply this rule.",
       },
       code: '// Simplified, illustrative example\nconst amountCents = 4000;\nconst entries = [\n  { side: "DEBIT", amountCents },\n  { side: "CREDIT", amountCents }\n];\n// debit - credit === 0',
     },
@@ -1186,350 +1292,10 @@
 
   // A single coordinated, native Web Animations timeline articulates the paper dragon.
   // Banner anchors never move; only the paper creature and non-interactive decoration do.
-  const badgeData = [
-    {
-      id: "aws-serverless",
-      image: "aws-serverless.png",
-      title: "AWS Knowledge: Serverless - Training Badge",
-      url: "https://www.credly.com/badges/db3f3724-9e29-435f-8859-d6d189e6cbdd",
-      issuer: "Amazon Web Services / Credly",
-      type: "learning",
-      pt: "Conceitos e serviços serverless da AWS, com foco em Lambda e API Gateway. Badge de treinamento com avaliação da trilha de conhecimento.",
-      en: "AWS serverless concepts and services, focusing on Lambda and API Gateway. A training badge with a learning-path assessment.",
-      kindKey: "singleLearningBadge",
-      category: "cloud",
-      issued: "2024-03-30",
-      criteriaPt: "Conclusão da trilha Serverless Knowledge Badge Readiness.",
-      criteriaEn:
-        "Completion of the Serverless Knowledge Badge Readiness learning path.",
-      skills: [
-        "AWS",
-        "AWS Cloud",
-        "AWS Lambda",
-        "Amazon API Gateway",
-        "Amazon Web Services (AWS)",
-        "Serverless Computing",
-      ],
-    },
-    {
-      id: "aws-cloud-quest",
-      image: "aws-cloud-quest.png",
-      title: "AWS Cloud Quest: Cloud Practitioner - Training Badge",
-      url: "https://www.credly.com/badges/921fdafd-06c5-4fa2-a63d-587eeabc2642",
-      issuer: "Amazon Web Services / Credly",
-      type: "learning",
-      pt: "Experiência prática construindo soluções introdutórias com serviços AWS de computação, redes, dados e segurança. É um badge de treinamento, não a certificação AWS Certified Cloud Practitioner por exame.",
-      en: "Hands-on introductory solution building with AWS compute, networking, data, and security services. This is a training badge, not the AWS Certified Cloud Practitioner examination certification.",
-      kindKey: "singleLearningBadge",
-      category: "cloud",
-      issued: "2023-09-01",
-      criteriaPt:
-        "Conclusão das tarefas práticas da função Cloud Practitioner no AWS Cloud Quest.",
-      criteriaEn:
-        "Completion of the Cloud Practitioner role’s practical assignments in AWS Cloud Quest.",
-      skills: [
-        "AWS",
-        "AWS Cloud",
-        "AWS Cloud Computing",
-        "AWS Cloud Foundations",
-        "Amazon Web Services (AWS)",
-        "Cloud Platform",
-      ],
-    },
-    {
-      id: "aws-cloud-essentials",
-      image: "aws-cloud-essentials.png",
-      title: "AWS Knowledge: Cloud Essentials - Training Badge",
-      url: "https://www.credly.com/badges/4106ffb6-2ac8-4dce-97a3-5369fa3981fd",
-      issuer: "Amazon Web Services / Credly",
-      type: "learning",
-      pt: "Fundamentos de cloud AWS: computação, armazenamento, redes, bancos de dados, segurança, arquitetura e modelos de preço e suporte.",
-      en: "AWS cloud fundamentals: compute, storage, networking, databases, security, architecture, and pricing and support models.",
-      kindKey: "singleLearningBadge",
-      category: "cloud",
-      issued: "2023-09-04",
-      criteriaPt: "Aprovação na avaliação Cloud Essentials Knowledge Badge.",
-      criteriaEn: "Passing the Cloud Essentials Knowledge Badge assessment.",
-      skills: [
-        "AWS",
-        "AWS Cloud",
-        "AWS Compute",
-        "AWS Databases",
-        "AWS Networking",
-        "AWS Security",
-        "AWS storage",
-        "Amazon Web Services (AWS)",
-      ],
-    },
-    {
-      id: "aws-braket",
-      image: "aws-braket.png",
-      title: "AWS Knowledge: Amazon Braket - Training Badge",
-      url: "https://www.credly.com/badges/c05f92e0-4dbe-48a8-a2b7-670df772e703",
-      issuer: "Amazon Web Services / Credly",
-      type: "learning",
-      pt: "Conhecimento introdutório de computação quântica com foco no Amazon Braket. Badge de treinamento, com verificação de conhecimento ao concluir a trilha.",
-      en: "Introductory quantum-computing knowledge with a focus on Amazon Braket. A training badge with a learning-path knowledge check.",
-      kindKey: "singleLearningBadge",
-      category: "cloud",
-      issued: "2025-01-22",
-      criteriaPt:
-        "Conclusão e aprovação na avaliação final da trilha de aprendizado.",
-      criteriaEn:
-        "Completion of the learning path and passing its final knowledge assessment.",
-      skills: [
-        "AWS",
-        "AWS Cloud",
-        "Amazon Braket",
-        "Amazon Web Services (AWS)",
-        "Quantum Computing",
-      ],
-    },
-    {
-      id: "oracle-foundations",
-      image: "oracle-foundations.png",
-      title: "OCI 2023 Foundations Associate",
-      url: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F85043432294C78FD1BE13EE826D50FB57D2B6F8434C5FEBDA0BA0E70744B530",
-      issuer: "Oracle / CertView",
-      type: "issuer",
-      pt: "Credencial Foundations Associate, edição 2023. Arte original compartilhada no perfil público. A página oficial da Oracle é o local para conferir o registro e seu status atual.",
-      en: "A Foundations Associate credential, 2023 edition. Original artwork shared on the public profile. Oracle’s official page is the place to review the record and its current status.",
-      kindKey: "singleIssuerCredential",
-      category: "history",
-      criteriaPt:
-        "Credencial histórica da edição 2023. Consulte o emissor para a situação do registro.",
-      criteriaEn:
-        "Historical 2023-edition credential. Check the issuer for the record’s status.",
-      statusPt: "Validade atual não confirmada",
-      statusEn: "Current validity not confirmed",
-      skills: ["Oracle Cloud", "Foundations"],
-    },
-    {
-      id: "oracle-ai-foundations",
-      image: "oracle-ai-foundations.png",
-      title: "OCI 2023 AI Foundations Associate",
-      url: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F1F8769652CBB65BCD646A65BB55F48E8F7041370A430B2AD03A43B36FEBB6AD",
-      issuer: "Oracle / CertView",
-      type: "issuer",
-      pt: "Credencial histórica AI Foundations Associate, edição 2023. O aviso do emissor informa inatividade desde 15 de janeiro de 2026. Não é apresentada como uma credencial atualmente válida.",
-      en: "Historical AI Foundations Associate credential, 2023 edition. The issuer’s notice reports inactivity since January 15, 2026. It is not presented as a currently valid credential.",
-      kindKey: "singleIssuerCredential",
-      category: "history",
-      criteriaPt:
-        "Credencial histórica da edição 2023. Consulte o emissor para a situação do registro.",
-      criteriaEn:
-        "Historical 2023-edition credential. Check the issuer for the record’s status.",
-      issued: "2024-01-15",
-      inactive: "2026-01-15",
-      skills: ["Oracle Cloud", "Foundations"],
-    },
-    {
-      id: "oracle-data-management",
-      image: "oracle-data-management.png",
-      title: "Oracle Cloud Data Management 2023 Foundations Associate",
-      url: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=2964B215E6919B906F493A29741D4E9C5D2D161A24352BC4995B9259EA760472",
-      issuer: "Oracle / CertView",
-      type: "issuer",
-      pt: "Credencial de fundamentos em Cloud Data Management, edição 2023. Imagem original e link oficial permitem conferir o título sem confundir cursos com certificações por exame.",
-      en: "A Cloud Data Management foundations credential, 2023 edition. Original artwork and the official record let you inspect the title while keeping courses distinct from examination credentials.",
-      kindKey: "singleIssuerCredential",
-      category: "history",
-      criteriaPt:
-        "Credencial histórica da edição 2023. Consulte o emissor para a situação do registro.",
-      criteriaEn:
-        "Historical 2023-edition credential. Check the issuer for the record’s status.",
-      statusPt: "Validade atual não confirmada",
-      statusEn: "Current validity not confirmed",
-      skills: ["Oracle Cloud", "Foundations"],
-    },
-    {
-      id: "cisco-network-defense",
-      image: "cisco-network-defense.png",
-      title: "Network Defense",
-      url: "https://www.credly.com/badges/d9a5a5e4-e0e9-43bb-9ac9-63b091f1b527",
-      issuer: "Cisco / Credly",
-      type: "student",
-      category: "security",
-      issued: "2026-09-04",
-      pt: "Proteção de redes, controles de acesso, firewalls, segurança em cloud e análise de alertas. Formação de nível estudante do Cisco Networking Academy.",
-      en: "Network protection, access control, firewalls, cloud security, and alert analysis. A Cisco Networking Academy student-level course credential.",
-      kindKey: "studentCredential",
-      criteriaPt:
-        "Conclusão do curso e aprovação na avaliação final do Cisco Networking Academy.",
-      criteriaEn:
-        "Course completion and passing the Cisco Networking Academy final assessment.",
-      skills: [
-        "Access Controls",
-        "Application Security",
-        "Cloud Security",
-        "Defense-in-Depth",
-        "End Device Logs",
-        "Evaluating Alerts",
-        "Firewalls",
-        "Hashing",
-        "Integrity And Authenticity",
-        "Network Hardening",
-        "Network Logs",
-        "Physical Security",
-        "Public Key Cryptography",
-        "Security Policies - Regulations - Standards",
-        "System And Network Defense",
-      ],
-    },
-    {
-      id: "cisco-endpoint-security",
-      image: "cisco-endpoint-security.png",
-      title: "Endpoint Security",
-      url: "https://www.credly.com/badges/0793859e-4dbb-4af1-98cf-6b48c6507e4b",
-      issuer: "Cisco / Credly",
-      type: "student",
-      category: "security",
-      issued: "2026-08-14",
-      pt: "Segurança de endpoints e sistemas operacionais, ameaças comuns e medidas de proteção em Windows, Linux e redes.",
-      en: "Endpoint and operating-system security, common threats, and protection measures for Windows, Linux, and networks.",
-      kindKey: "studentCredential",
-      criteriaPt:
-        "Conclusão do curso e aprovação na avaliação final do Cisco Networking Academy.",
-      criteriaEn:
-        "Course completion and passing the Cisco Networking Academy final assessment.",
-      skills: [
-        "Antimalware Protection",
-        "Application Security",
-        "Common Cyber Threats",
-        "Defending Systems And Devices",
-        "Host-based Intrusion Prevention",
-        "IP/TCP/UDP Vulnerabilities",
-        "Linux Basics",
-        "Mitigating Common Network Attacks",
-        "Network Security Infrastructure",
-        "Securing WLANs",
-        "System And Endpoint Protection",
-        "Windows Security",
-        "Wireless And Mobile Device Attacks",
-      ],
-    },
-    {
-      id: "cisco-devices-config",
-      image: "cisco-devices-config.png",
-      title: "Networking Devices and Initial Configuration",
-      url: "https://www.credly.com/badges/12da6274-ee79-4353-aaab-4efb01fd1644",
-      issuer: "Cisco / Credly",
-      type: "student",
-      category: "security",
-      issued: "2026-04-27",
-      pt: "Configuração inicial de dispositivos Cisco, endereçamento IPv4, protocolos e conectividade. Inclui prática de redes no Packet Tracer.",
-      en: "Initial Cisco device configuration, IPv4 addressing, protocols, and connectivity, with practical network exercises in Packet Tracer.",
-      kindKey: "studentCredential",
-      criteriaPt:
-        "Conclusão do curso e aprovação na avaliação final do Cisco Networking Academy.",
-      criteriaEn:
-        "Course completion and passing the Cisco Networking Academy final assessment.",
-      skills: [
-        "ARP",
-        "Binary Systems",
-        "Cisco Devices",
-        "Cisco IOS",
-        "DHCP",
-        "DNS",
-        "Ethernet Operates",
-        "Hierarchical Network Design",
-        "IPv4 Subnetting",
-        "Network Layer Protocols",
-        "Transport Layer Protocols",
-        "Virtualization and Cloud Services",
-      ],
-    },
-    {
-      id: "cisco-networking-basics",
-      image: "cisco-networking-basics.png",
-      title: "Networking Basics",
-      url: "https://www.credly.com/badges/05dd8fba-799b-45c3-8dfd-a22c2349b2b7",
-      issuer: "Cisco / Credly",
-      type: "student",
-      category: "security",
-      issued: "2026-03-30",
-      pt: "Fundamentos de redes, dispositivos, transmissão de dados, endereços IP, protocolos e acesso sem fio.",
-      en: "Network fundamentals, devices, data transmission, IP addressing, protocols, and wireless access.",
-      kindKey: "studentCredential",
-      criteriaPt:
-        "Conclusão do curso e aprovação na avaliação final do Cisco Networking Academy.",
-      criteriaEn:
-        "Course completion and passing the Cisco Networking Academy final assessment.",
-      skills: [
-        "Application Layer Services",
-        "IPv4 Addresses",
-        "NetWork Types",
-        "Network Media",
-        "Protocols Standards",
-        "Wireless Access",
-      ],
-    },
-    {
-      id: "cisco-learnathon-2026",
-      image: "cisco-learnathon-2026.png",
-      title: "Cisco Networking Academy Learn-A-Thon 2026",
-      url: "https://www.credly.com/badges/f404418f-09d0-47e6-901c-e385462eb614",
-      issuer: "Cisco / Credly",
-      type: "participation",
-      category: "security",
-      issued: "2026-03-29",
-      pt: "Participação no Learn-A-Thon do Cisco Networking Academy, com atividades introdutórias de tecnologia. É um reconhecimento de participação.",
-      en: "Participation in the Cisco Networking Academy Learn-A-Thon and introductory technology activities. This is a participation recognition.",
-      kindKey: "participationCredential",
-      criteriaPt:
-        "Participação em um curso introdutório durante o evento Learn-A-Thon.",
-      criteriaEn:
-        "Participation in an introductory technology course during the Learn-A-Thon event.",
-      skills: ["Self Motivated"],
-    },
-    {
-      id: "cisco-cybersecurity",
-      image: "cisco-cybersecurity.png",
-      title: "Introduction to Cybersecurity",
-      url: "https://www.credly.com/badges/d1c76def-0ef3-4488-b68f-20777a60a2ba",
-      issuer: "Cisco / Credly",
-      type: "student",
-      category: "security",
-      issued: "2026-03-25",
-      pt: "Introdução a ameaças, vulnerabilidades, privacidade e práticas de proteção. Formação introdutória do Cisco Networking Academy.",
-      en: "An introduction to threats, vulnerabilities, privacy, and protective practices through Cisco Networking Academy.",
-      kindKey: "studentCredential",
-      criteriaPt:
-        "Conclusão do curso e aprovação na avaliação final do Cisco Networking Academy.",
-      criteriaEn:
-        "Course completion and passing the Cisco Networking Academy final assessment.",
-      skills: [
-        "Cyber Best Practices",
-        "Cybersecurity",
-        "Network Vulnerabilities",
-        "Privacy And Data Confidentiality",
-        "Threat Detection",
-      ],
-    },
-    {
-      id: "microsoft-mie-expert",
-      image: "microsoft-mie-expert.png",
-      title: "Microsoft Innovative Educator Expert 2025-2026",
-      url: "https://www.credly.com/badges/324ea9a7-d58e-4c96-b3c8-6c54e4eb2e94",
-      issuer: "Microsoft Elevate / Credly",
-      type: "recognition",
-      category: "education",
-      issued: "2025-10-09",
-      pt: "Reconhecimento como Microsoft Innovative Educator Expert na edição 2025–2026. Relaciona tecnologia educacional, ferramentas Microsoft e IA na educação.",
-      en: "Recognition as a Microsoft Innovative Educator Expert in the 2025–2026 edition, connecting education technology, Microsoft tools, and AI in education.",
-      kindKey: "professionalRecognition",
-      criteriaPt:
-        "Seleção para a comunidade MIE Expert após trilhas de aprendizado e inscrição com evidências educacionais.",
-      criteriaEn:
-        "Selection for the MIE Expert community after learning paths and an application with educational evidence.",
-      skills: [
-        "AI in Education",
-        "Education Technology",
-        "Global Learning And Teaching",
-        "microsoft tools",
-      ],
-    },
-  ];
+  const badgeData = JSON.parse($("#badge-catalog").textContent);
+  const badgeMarkup = (value) => String(value).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+  );
   const dragon = {
     travel: null,
     animations: [],
@@ -1539,15 +1305,13 @@
     generation: 0,
     progress: 0,
     played: false,
-    delivered: false,
-    selected: "cisco-network-defense",
+    selected: $("#dragon-mission").value,
     duration: 14800,
     metrics: null,
     visible: false,
     cycle: 0,
     readPaused: false,
     variant: 0,
-    keepDock: false,
     launch: null,
     landed: false,
     lastDelivered: null,
@@ -1558,32 +1322,37 @@
     return !motionDisabled || $("#dragon-full-motion").checked;
   }
   function dragonMetrics() {
-    const width = $("#dragon-stage").clientWidth;
-    const mobile = width <= 600;
-    const scale = mobile ? 0.46 : width < 850 ? 0.65 : 0.8;
-    $("#dragon-stage").style.setProperty(
-      "--ground-y",
-      (mobile ? 42 : 44) + 304 * (1050 / 1240) * scale + 5 + "px",
-    );
-    return {
-      width,
-      scale,
-      startX: -1050 * scale + 25,
-      exitX: width + 45,
-      endX: mobile
-        ? Math.min(18, width - 1050 * scale - 18)
-        : Math.max(0, width - 1050 * scale - (width < 850 ? 160 : 205) - 24),
-      y: mobile ? 52 : 55,
-    };
+    const stage = $("#dragon-stage");
+    const bounds = stage.getBoundingClientRect();
+    const dock = $("#dragon-delivery").getBoundingClientRect();
+    const stacked = matchMedia("(max-width: 700px)").matches;
+    const flightWidth = stacked ? bounds.width : dock.left - bounds.left;
+    const scale = Math.min(0.82, Math.max(0.22, (flightWidth - 15) / 1050));
+    const y = stacked ? 40 : 54;
+    const endX = flightWidth - 1050 * scale - 6;
+    const destination = dragonSlot().querySelector("[data-slot-art]").getBoundingClientRect();
+    const targetX = destination.left + destination.width / 2 - bounds.left;
+    const targetY = destination.top + destination.height / 2 - bounds.top;
+    // Fly along the cabinet on a wide page; descend over the correct column
+    // on a stacked page. The cargo then covers the final distance to its pocket.
+    const releaseX = stacked
+      ? Math.max(-0.27 * flightWidth, Math.min(endX + 15, targetX - 590 * scale))
+      : endX - 30 + 40 * (targetX - flightWidth) / Math.max(1, dock.width);
+    const dockTop = dock.top - bounds.top;
+    const releaseY = stacked
+      ? Math.max(y + 22, Math.min(dockTop - 185 * scale - 60 + (targetY - dockTop) * 0.1, 108))
+      : Math.max(y - 18, Math.min(144, targetY - 110 * scale - 16));
+    return { width: stage.clientWidth, scale, y, endX, releaseX, releaseY,
+      startX: -1000 * scale, exitX: stage.clientWidth + 50 };
   }
-  const caravanTransform = (x, y, m) =>
-    `translate(${x}px,${y}px) scale(${m.scale})`;
+  const caravanTransform = (x, y, m, bank = 0) =>
+    `translate(${x}px,${y}px) scale(${m.scale}) translate(525px,135px) rotate(${bank}deg) translate(-525px,-135px)`;
   function dragonBadge() {
     return (
       badgeData.find((badge) => badge.id === dragon.selected) || badgeData[0]
     );
   }
-  function renderDragonMission({ preserveDelivery = false } = {}) {
+  function renderDragonMission() {
     const selected = dragonBadge();
     $("#dragon-mission").value = selected.id;
     const index = badgeData.indexOf(selected);
@@ -1602,34 +1371,56 @@
         const ratio = 1050 / 1240;
         const left = 1050 - x * ratio - 54;
         const top = y * ratio + 46;
-        return `<div class="cargo-hinge" data-cargo-segment="${[0, 1, 3, 5][i]}" style="left:${left}px;top:${top}px"><span class="cargo-anchor" aria-hidden="true"></span><span class="banner-rope" aria-hidden="true"></span><a class="dragon-badge-banner" data-badge-open="${badge.id}" href="${badge.url}" target="_blank" rel="noopener noreferrer" aria-label="${badge.title}: ${t("abrir detalhes", "open details")}"><img src="${asset(`assets/badges/${badge.image}`)}" alt="" width="75" height="75"/><strong>${badge.title.replace(" - Training Badge", "")}</strong><span>${badge.issuer.split(" /")[0]}</span></a></div>`;
+        return `<div class="cargo-hinge" data-cargo-segment="${[0, 1, 3, 5][i]}" style="left:${left}px;top:${top}px"><span class="cargo-anchor" aria-hidden="true"></span><span class="banner-rope" aria-hidden="true"></span><a class="dragon-badge-banner" data-badge-open="${badge.id}" href="${badgeMarkup(badge.url)}" target="_blank" rel="noopener noreferrer" aria-label="${badgeMarkup(badge.title)}: ${t("abrir detalhes", "open details")}"><span class="mail-packet"><i class="envelope-shell" aria-hidden="true"><i class="envelope-fold"></i></i><img src="${asset(`assets/badges/${badge.image}`)}" alt="" width="50" height="50"/></span><span class="sr-only">${badgeMarkup(badge.title)}</span></a></div>`;
       })
       .join("");
-    if (!preserveDelivery) renderDragonDelivery(false);
+    const previous = $("[data-slot-destination]");
+    if (previous) {
+      previous.removeAttribute("data-slot-destination");
+      clearFolderPose(previous);
+    }
+    const slot = dragonSlot();
+    slot.setAttribute("data-slot-destination", "");
+    // Scroll only the collection itself. Page position and keyboard focus stay with the reader.
+    const grid = $("#dragon-delivery-content");
+    const bounds = grid.getBoundingClientRect();
+    const target = slot.getBoundingClientRect();
+    if (target.bottom > bounds.bottom) grid.scrollTop += target.bottom - bounds.bottom;
+    else if (target.top < bounds.top) grid.scrollTop -= bounds.top - target.top;
     updateDragonStatus();
   }
-  function renderDragonDelivery(delivered) {
-    const badge = dragonBadge();
-    const title = badge.title.replace(" - Training Badge", "");
-    const historical =
-      badge.category === "history"
-        ? badge.inactive
-          ? t(
-              "Registro histórico · inativo desde janeiro de 2026",
-              "Historical record · inactive since January 2026",
-            )
-          : t(
-              "Registro histórico · validade atual não confirmada",
-              "Historical record · current validity unconfirmed",
-            )
-        : "";
-    if (delivered) dragon.lastDelivered = badge.id;
-    $("#dragon-delivery-content").innerHTML = delivered
-      ? `<div class="delivered-paper"><img src="${asset(`assets/badges/${badge.image}`)}" alt="${badge.title}" width="120" height="120"/><div><span class="credential-type">${translate(badge.kindKey)}</span><h3>${title}</h3>${historical ? `<p class="delivery-history">${historical}</p>` : ""}<button class="text-button" data-delivered-badge="${badge.id}" aria-label="${t("Abrir detalhes", "Open details")}: ${badge.title}">${t("Abrir detalhes", "Open details")} ↗︎</button></div></div>`
-      : `<div class="delivery-outline" aria-hidden="true"><span>✷</span></div><p>${t("A próxima credencial chega aqui.", "The next credential arrives here.")}</p>`;
-    dragon.delivered = delivered;
-    const button = $("[data-delivered-badge]");
-    if (button) button.addEventListener("click", () => openBadge(badge.id));
+  function dragonSlot() {
+    return document.querySelector(`[data-badge-slot="${dragon.selected}"]`);
+  }
+  function markDragonDelivery() {
+    dragonSlot().dataset.deliveredBadge = dragon.selected;
+    dragon.lastDelivered = dragon.selected;
+    dragon.landed = true;
+    $("#dragon-stage").dataset.landedCredential = dragon.selected;
+  }
+  function flightPhase(progress) {
+    if (progress >= receivedAt) return "filed";
+    return progress >= releaseAt ? "released" : "approaching";
+  }
+  function dragonStatusText() {
+    if (!dragonCanMove() && dragon.state === "delivered")
+      return t("Badge entregue sem movimento, conforme sua preferência.", "Badge delivered without motion, following your preference.");
+    if (dragon.readPaused)
+      return t("Voo pausado enquanto você consulta a coleção.", "Flight paused while you read the collection.");
+    if (dragon.state === "delivered")
+      return t("Badge na pasta. Abra a ficha para consultar os detalhes.", "Badge filed. Open its record for details.");
+    if (dragon.state !== "walking")
+      return t("Escolha uma badge. O guardião cuida do caminho.", "Choose a badge. The guardian takes care of the journey.");
+
+    const phase = flightPhase(dragon.progress);
+    let caption = t("O guardião se aproxima com o envelope.", "The guardian approaches with the envelope.");
+    if (phase === "released")
+      caption = t("Envelope solto, a caminho da pasta.", "Envelope released and heading for its folder.");
+    else if (phase === "filed")
+      caption = t("Badge na pasta. O guardião se afasta.", "Badge filed. The guardian flies on.");
+    return dragon.userPaused || !dragonCanMove()
+      ? t("Voo pausado. ", "Flight paused. ") + caption
+      : caption;
   }
   function updateDragonStatus() {
     const moving =
@@ -1655,41 +1446,7 @@
             : t("Iniciar ▷", "Play ▷");
     $("#dragon-start").innerHTML =
       `<span>${t("Voar & entregar", "Fly & deliver")}</span> →`;
-    const key =
-      !dragonCanMove() && dragon.state === "delivered"
-        ? t(
-            "Badge entregue sem movimento, conforme sua preferência.",
-            "Badge delivered without motion, following your preference.",
-          )
-        : dragon.readPaused
-          ? t(
-              "Pausado enquanto você lê a credencial entregue.",
-              "Paused while you read the delivered credential.",
-            )
-          : dragon.userPaused
-            ? t(
-                "Voo pausado. Você pode explorar ou ajustar o percurso.",
-                "Flight paused. Explore or adjust the route.",
-              )
-            : dragon.state === "walking"
-              ? dragon.progress > 0.78
-                ? t(
-                    "O guardião volta às margens para buscar outra credencial…",
-                    "The guardian returns to the margins for another credential…",
-                  )
-                : t(
-                    "Voando em ondas, com as credenciais presas às dobras.",
-                    "Flying in waves, with credentials attached to the paper folds.",
-                  )
-              : dragon.state === "delivered"
-                ? t(
-                    "Entrega concluída. Abra os detalhes da credencial.",
-                    "Delivery complete. Open the credential details.",
-                  )
-                : t(
-                    "Escolha uma badge. O guardião cuida do caminho.",
-                    "Choose a badge. The guardian takes care of the journey.",
-                  );
+    const key = dragonStatusText();
     const scene = $(".dragon-scene");
     scene.dataset.dragonState = dragon.state;
     scene.dataset.dragonCycle = String(dragon.cycle);
@@ -1711,6 +1468,8 @@
     dragon.animations = [];
     dragon.travel = null;
     dragon.launch = null;
+    const target = $("[data-slot-destination]");
+    if (target) clearFolderPose(target);
     $("#dragon-flight-layer").replaceChildren();
   }
   function applyRestPose() {
@@ -1728,6 +1487,9 @@
   function resetDragon() {
     cancelDragonMotion();
     dragon.state = "ready";
+    dragon.lastDelivered = null;
+    delete $("#dragon-stage").dataset.landedCredential;
+    $$("[data-delivered-badge]").forEach((slot) => slot.removeAttribute("data-delivered-badge"));
     dragon.userPaused = false;
     dragon.progress = 0;
     $("#dragon-scrub").value = "0";
@@ -1750,16 +1512,51 @@
     [919, 100],
     [990, 94],
   ];
-  const waveCycle = 2300;
+  const waveCycle = 3000;
   function dragonWave(x, time) {
-    const phase =
-      2 * Math.PI * (time / waveCycle - (x - 230) / 760) +
-      dragon.variant * 0.62;
+    const length = 875, tau = Math.PI * 2;
+    const position = (x - 230) / length;
+    const phase = tau * (time / waveCycle - position) + dragon.variant * 0.6;
+    // A quiet head leads the turn. Amplitude increases down the spine; the second
+    // harmonic sharpens the crest without a kink where one joint meets the next.
+    const amplitude = 12 + 22 * position;
+    const wave = Math.sin(phase) + 0.16 * Math.sin(2 * phase + 0.7);
+    const derivative = Math.cos(phase) + 0.32 * Math.cos(2 * phase + 0.7);
     return {
-      y: 26 * Math.sin(phase),
-      angle:
-        (Math.atan(((-26 * 2 * Math.PI) / 760) * Math.cos(phase)) * 180) /
-        Math.PI,
+      y: amplitude * wave,
+      angle: Math.atan((22 * wave - tau * amplitude * derivative) / length) * 180 / Math.PI,
+    };
+  }
+
+  function dragonRoute(m) {
+    const { releaseX: dockX, releaseY: dockY } = m;
+    const distance = dockX - m.startX;
+    const lift = Math.min(42, 62 * m.scale);
+    // The keys describe the guardian's centre and pitch. Cubic Hermite
+    // interpolation shares the velocity on both sides of every key.
+    const keys = [
+      [0, m.startX, m.y + lift, -5],
+      [0.22, m.startX + distance * 0.55, m.y - lift * 0.92, -6],
+      [0.38, dockX - distance * 0.22, m.y - lift, 2],
+      [0.51, dockX - distance * 0.025, dockY - 8, 8],
+      [0.57, dockX, dockY, 4],
+      [0.67, dockX - 14 * m.scale, dockY - lift * 0.50, -6],
+      [0.78, dockX + distance * 0.14, dockY - lift * 1.12, -8],
+      [1, m.exitX, m.y - lift, -2],
+    ];
+    return (progress) => {
+      const i = keys.findIndex(([time], index) => index > 0 && progress <= time);
+      const a = keys[i - 1], b = keys[i], before = keys[Math.max(0, i - 2)];
+      const after = keys[Math.min(keys.length - 1, i + 1)];
+      const span = b[0] - a[0], t = (progress - a[0]) / span;
+      const t2 = t * t, t3 = t2 * t;
+      const value = (axis) => {
+        const v0 = (b[axis] - before[axis]) * span / (b[0] - before[0]);
+        const v1 = (after[axis] - a[axis]) * span / (after[0] - a[0]);
+        return (2*t3 - 3*t2 + 1)*a[axis] + (t3 - 2*t2 + t)*v0
+          + (3*t2 - 2*t3)*b[axis] + (t3 - t2)*v1;
+      };
+      return { x: value(1), y: value(2), bank: value(3) };
     };
   }
   function waveFrames(sample) {
@@ -1788,109 +1585,155 @@
     dragon.raf = 0;
     if (!dragon.travel) return;
     const time = dragon.travel.currentTime || 0;
+    const previous = dragon.progress;
     dragon.progress = Math.min(1, Math.max(0, time / dragon.duration));
     const percent = Math.round(dragon.progress * 100);
-    $("#dragon-scrub").value = String(percent);
-    $("#dragon-progress").value = percent + "%";
+    if (percent !== Math.round(previous * 100)) {
+      $("#dragon-scrub").value = String(percent);
+      $("#dragon-progress").value = percent + "%";
+    }
     updateDragonRibbon(time);
     applyDragonDelivery();
-    updateDragonStatus();
+    if (flightPhase(previous) !== flightPhase(dragon.progress)) updateDragonStatus();
     if (dragon.state === "walking" && dragon.travel.playState === "running")
       dragon.raf = requestAnimationFrame(dragonTick);
   }
+  const releaseAt = 0.55, receivedAt = 0.71;
+  const unit = (n) => Math.min(1, Math.max(0, n));
+  function smooth(n) {
+    const t = unit(n);
+    return t * t * (3 - 2 * t);
+  }
+  function clearFolderPose(slot) {
+    for (const property of ["--flap-angle", "--pocket-dip", "--ink-impact"]) {
+      slot.style.removeProperty(property);
+    }
+    delete slot.dataset.folderPhase;
+  }
+  function poseFolder(slot, progress) {
+    const reception = unit((progress - receivedAt) / 0.11);
+    const open = smooth((progress - 0.43) / 0.18) * (1 - smooth(reception));
+    const tap = Math.sin(reception * Math.PI * 2) * (1 - reception) ** 3;
+    const phase = progress < 0.43 ? "closed" : progress < receivedAt ? "open" : reception < 1 ? "settling" : "filed";
+    if (slot.dataset.folderPhase === phase && (phase === "closed" || phase === "filed")) return;
+    slot.dataset.folderPhase = phase;
+    slot.style.setProperty("--flap-angle", (open * -72 + tap * 10).toFixed(2) + "deg");
+    slot.style.setProperty("--pocket-dip", (tap * 5).toFixed(2) + "px");
+    slot.style.setProperty("--ink-impact", Math.sin(Math.PI * unit(reception / 0.5)).toFixed(3));
+  }
   function launchDragonCredential() {
-    const source = $(".cargo-hinge .dragon-badge-banner"),
-      stage = $("#dragon-stage").getBoundingClientRect();
-    if (!source) return;
+    const source = $(".cargo-hinge .mail-packet");
+    const layer = $("#dragon-flight-layer");
+    const stage = layer.getBoundingClientRect();
+    // Seeking straight into a handoff should find the same release position as playback.
+    const time = dragon.travel.currentTime;
+    const jumped = Math.abs(dragon.progress - releaseAt) > 0.003;
+    if (jumped) dragon.animations.forEach((a) => { a.currentTime = releaseAt * dragon.duration; });
     const rect = source.getBoundingClientRect();
-    const target = (
-      $("#dragon-delivery-content img") || $(".delivery-outline")
-    ).getBoundingClientRect();
-    const width = dragon.metrics.width <= 600 ? 88 : 100;
+    const vehicle = new DOMMatrix(getComputedStyle($("#dragon-caravan")).transform);
+    const hinge = new DOMMatrix(getComputedStyle(source.closest(".cargo-hinge")).transform);
+    const matrix = vehicle.multiply(hinge);
+    if (jumped) dragon.animations.forEach((a) => { a.currentTime = time; });
+
+    const width = source.offsetWidth * Math.hypot(matrix.a, matrix.b);
+    const height = source.offsetHeight * Math.hypot(matrix.c, matrix.d);
     const card = source.cloneNode(true);
-    card.removeAttribute("href");
-    card.removeAttribute("data-badge-open");
+    card.classList.add("dragon-flight-card");
     card.setAttribute("aria-hidden", "true");
-    card.tabIndex = -1;
-    card.className = "dragon-badge-banner dragon-flight-card";
-    card.style.cssText =
-      "position:absolute;left:0;top:0;width:108px;height:108px;overflow:hidden;transform-origin:0 0;";
-    $("#dragon-flight-layer").replaceChildren(card);
-    const targetX = target.left - stage.left + (target.width - width) / 2;
+    card.style.width = width + "px";
+    card.style.height = height + "px";
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "courier-streaks");
+    svg.setAttribute("aria-hidden", "true");
+    const trail = document.createElementNS(svg.namespaceURI, "path");
+    svg.append(trail);
+    layer.replaceChildren(svg, card);
     dragon.launch = {
-      card,
-      x: rect.left - stage.left,
-      y: rect.top - stage.top,
-      scale: rect.width / 108,
-      targetX,
-      targetY: target.top - stage.top,
-      targetScale: width / 108,
+      card, trail, width, height,
+      x: rect.left + rect.width / 2 - stage.left,
+      y: rect.top + rect.height / 2 - stage.top,
+      angle: Math.atan2(matrix.b, matrix.a) * 180 / Math.PI,
+      target: $("[data-slot-art]", dragonSlot()),
     };
     $("#dragon-stage").dataset.launchOrigin = JSON.stringify({
-      x: rect.left - stage.left,
-      y: rect.top - stage.top,
-      width: rect.width,
+      x: rect.left - stage.left, y: rect.top - stage.top, width: rect.width,
     });
-    source.style.visibility = "hidden";
+    $(".cargo-hinge").style.visibility = "hidden";
     $("#dragon-stage").dataset.launchCredential = dragon.selected;
   }
+  function courierPoint(f, targetX, targetY, progress) {
+    const u = (1 - unit(progress)) ** 2.45, t = 1 - u;
+    const dx = targetX - f.x, dy = targetY - f.y;
+    const lift = Math.min(90, Math.max(32, Math.hypot(dx, dy) * 0.26));
+    const crest = Math.max(12, Math.min(f.y, targetY) - lift);
+    // The bridle imparts forward momentum, even when the pocket is behind
+    // the guardian. The letter banks around its destination and drops in.
+    const lead = Math.min(100, Math.max(34, Math.abs(dx) * 0.38));
+    const overshoot = Math.min(30, Math.abs(dx) * 0.1 + 10);
+    const x = u**3*f.x + 3*u*u*t*(f.x + lead) + 3*u*t*t*(targetX + overshoot) + t**3*targetX;
+    const y = u**3*f.y + 3*u*u*t*crest + 3*u*t*t*(targetY - lift) + t**3*targetY;
+    return { x, y, t };
+  }
+  function drawCourier(f, q) {
+    const stage = $("#dragon-flight-layer").getBoundingClientRect();
+    const target = f.target.getBoundingClientRect();
+    const tx = target.left + target.width / 2 - stage.left;
+    const ty = target.top + target.height / 2 - stage.top;
+    const { x, y, t } = courierPoint(f, tx, ty, q);
+    const width = f.width + (target.width - f.width) * t;
+    const height = f.height + (target.height - f.height) * t;
+    const turn = Math.sin(Math.PI * t) * (22 - 46 * t);
+    const rotation = f.angle * (1 - t) + turn;
+    f.card.style.transform = `translate(${x - f.width / 2}px,${y - f.height / 2}px) rotate(${rotation}deg) scale(${width / f.width},${height / f.height})`;
+    f.card.style.setProperty("--envelope-ink", String(1 - smooth((q - 0.63) / 0.33)));
+    f.card.dataset.flightProgress = q.toFixed(3);
+
+    // Three tapered strokes trace the letter's recent path, including when
+    // the reader scrubs backwards. They have no independent animation clock.
+    const marks = [-1, 0, 1].map((line) => {
+      const end = Math.max(0, q - 0.027 - Math.abs(line) * 0.022);
+      const start = Math.max(0, end - 0.13 + Math.abs(line) * 0.034);
+      const samples = Array.from({ length: 7 }, (_, i) => {
+        const p = courierPoint(f, tx, ty, start + (end - start) * i / 6);
+        return [p.x, p.y + line * (2 + i * 0.6)];
+      });
+      const trace = samples.map(([px, py]) => `${px.toFixed(1)},${py.toFixed(1)}`);
+      const edge = samples.reverse().map(([px, py], i) => `${px.toFixed(1)},${(py + 1.65 * (1 - i / 6)).toFixed(1)}`);
+      return "M" + [...trace, ...edge].join(" L") + "Z";
+    });
+    f.trail.setAttribute("d", marks.join(" "));
+    f.trail.style.opacity = String(0.75 * smooth(q / 0.12) * (1 - smooth((q - 0.68) / 0.25)));
+    return target;
+  }
   function applyDragonDelivery() {
-    const q = Math.max(0, Math.min(1, (dragon.progress - 0.55) / 0.16));
-    if (dragon.progress < 0.71 && dragon.landed) {
-      dragon.landed = false;
+    const q = unit((dragon.progress - releaseAt) / (receivedAt - releaseAt));
+    if (dragonCanMove()) poseFolder(dragonSlot(), dragon.progress);
+    if (dragon.progress < receivedAt && dragon.landed) dragon.landed = false;
+    if (dragon.progress < releaseAt) {
+      if (dragon.launch) $("#dragon-flight-layer").replaceChildren();
+      dragon.launch = null;
       $(".cargo-hinge").style.visibility = "";
-    }
-    if (dragon.progress < 0.55) {
-      if (dragon.landed) {
-        dragon.landed = false;
-        $(".cargo-hinge").style.visibility = "";
-      }
-      if (dragon.launch) {
-        $("#dragon-flight-layer").replaceChildren();
-        dragon.launch = null;
-        $(".cargo-hinge .dragon-badge-banner").style.visibility = "";
-      }
       return;
     }
-    if (!dragon.launch && !dragon.landed) launchDragonCredential();
-    if (dragon.launch) {
-      const f = dragon.launch,
-        arc = (dragon.metrics.width <= 600 ? 105 : 115) * Math.sin(Math.PI * q);
-      const x = f.x + (f.targetX - f.x) * q,
-        y = f.y + (f.targetY - f.y) * q - arc;
-      const scale = f.scale + (f.targetScale - f.scale) * q;
-      f.card.style.transform = `translate(${x}px,${y}px) rotate(${18 * Math.sin(Math.PI * q)}deg) scale(${scale})`;
-      f.card.dataset.flightProgress = q.toFixed(3);
-      if (q >= 1) {
-        renderDragonDelivery(true);
-        const landedImage = $(
-            "#dragon-delivery-content img",
-          ).getBoundingClientRect(),
-          stage = $("#dragon-stage").getBoundingClientRect();
-        $("#dragon-stage").dataset.landingContinuity = JSON.stringify({
-          dx: landedImage.left - stage.left - f.targetX,
-          dy: landedImage.top - stage.top - f.targetY,
-          dw: landedImage.width - 108 * f.targetScale,
-        });
-        dragon.lastDelivered = dragon.selected;
-        dragon.landed = true;
-        $("#dragon-stage").dataset.landedCredential = dragon.selected;
-        $(".cargo-hinge").style.visibility = "hidden";
-        $("#dragon-flight-layer").replaceChildren();
-        dragon.launch = null;
-        if (
-          $("#dragon-delivery").matches(":hover") ||
-          $("#dragon-delivery").contains(document.activeElement)
-        ) {
-          dragon.readPaused = true;
-          syncDragonMotion();
-        }
-      }
-    }
+    if (dragon.landed) return;
+    if (!dragon.launch) launchDragonCredential();
+    const f = dragon.launch;
+    const target = drawCourier(f, q);
+    if (q < 1) return;
+
+    const landed = f.card.getBoundingClientRect();
+    $("#dragon-stage").dataset.landingContinuity = JSON.stringify({
+      dx: landed.left - target.left, dy: landed.top - target.top,
+      dw: landed.width - target.width, dh: landed.height - target.height,
+    });
+    markDragonDelivery();
+    $("#dragon-flight-layer").replaceChildren();
+    dragon.launch = null;
   }
   function finishDragon(token, { manual = false } = {}) {
     if (token !== dragon.generation) return;
     const loop = $("#dragon-loop").checked && dragonCanMove() && !manual;
+    if (!dragon.landed) markDragonDelivery();
     cancelDragonMotion();
     if (loop) {
       dragon.selected =
@@ -1905,7 +1748,7 @@
     dragon.progress = 1;
     dragon.userPaused = manual;
     applyRestPose();
-    renderDragonDelivery(true);
+    markDragonDelivery();
     $(".cargo-hinge").style.visibility = "hidden";
     $("#dragon-scrub").value = "100";
     $("#dragon-progress").value = "100%";
@@ -1922,6 +1765,8 @@
     dragon.state = "walking";
     dragon.userPaused = paused;
     dragon.progress = 0;
+    $("#dragon-scrub").value = "0";
+    $("#dragon-progress").value = "0%";
     dragon.metrics = dragonMetrics();
     if (!continuation) dragon.cycle++;
     dragon.variant = (dragon.cycle - 1) % 3;
@@ -1931,12 +1776,13 @@
       ($("#dragon-delivery").matches(":hover") &&
         preserveDelivery &&
         Boolean($("[data-delivered-badge]")));
-    renderDragonMission({ preserveDelivery });
+    renderDragonMission();
     if (!dragonCanMove() || !Element.prototype.animate) {
       dragon.state = "delivered";
       dragon.progress = 1;
       applyRestPose();
-      renderDragonDelivery(true);
+      markDragonDelivery();
+      $(".cargo-hinge").style.visibility = "hidden";
       $("#dragon-scrub").value = "100";
       $("#dragon-progress").value = "100%";
       updateDragonStatus();
@@ -1945,36 +1791,14 @@
     const m = dragon.metrics,
       start = document.timeline.currentTime,
       token = dragon.generation;
-    const distance = m.endX - m.startX;
-    const lift = [0, -9, 5][dragon.variant];
+    const route = dragonRoute(m);
+    const routeFrames = Array.from({ length: 151 }, (_, i) => {
+      const offset = i / 150, pose = route(offset);
+      return { offset, transform: caravanTransform(pose.x, pose.y, m, pose.bank) };
+    });
     dragon.travel = addDragonAnimation(
-      $("#dragon-caravan"),
-      [
-        { transform: caravanTransform(m.startX, m.y, m), offset: 0 },
-        {
-          transform: caravanTransform(
-            m.startX + distance * 0.3,
-            m.y - 12 + lift,
-            m,
-          ),
-          offset: 0.2,
-        },
-        {
-          transform: caravanTransform(m.endX, m.y - 5 + lift, m),
-          offset: 0.52,
-        },
-        {
-          transform: caravanTransform(m.endX, m.y - 5 + lift, m),
-          offset: 0.74,
-        },
-        {
-          transform: caravanTransform(m.exitX, m.y - 17 - lift, m),
-          offset: 0.96,
-        },
-        { transform: caravanTransform(m.exitX, m.y - 17 - lift, m), offset: 1 },
-      ],
-      { duration: dragon.duration, easing: "linear" },
-      start,
+      $("#dragon-caravan"), routeFrames,
+      { duration: dragon.duration, easing: "linear" }, start,
     );
     const options = {
       duration: waveCycle,
@@ -1994,14 +1818,18 @@
     );
     $$(".cargo-hinge").forEach((hinge) => {
       const x = dragonAnchors[Number(hinge.dataset.cargoSegment)][0];
-      addDragonAnimation(
-        hinge,
-        waveFrames(
-          (time) => `translateY(${dragonWave(x, time).y * (1050 / 1240)}px)`,
-        ),
-        options,
-        start,
-      );
+      const frames = Array.from({ length: 241 }, (_, i) => {
+        const offset = i / 240, time = offset * dragon.duration;
+        const body = dragonWave(x, time);
+        // Gravity keeps the mail beneath its joint. Delayed banking and a
+        // damped kick after the release make the remaining envelopes swing.
+        const bank = route(Math.max(0, offset - 0.014)).bank;
+        const elapsed = Math.max(0, time - dragon.duration * 0.55) / 1000;
+        const recoil = 9 * Math.exp(-1.6 * elapsed) * Math.sin(5.9 * elapsed);
+        const swing = -0.78 * bank - 0.40 * dragonWave(x, time - 180).angle + recoil;
+        return { offset, transform: `translateY(${body.y * 1050 / 1240}px) rotate(${swing}deg)` };
+      });
+      addDragonAnimation(hinge, frames, { duration: dragon.duration, easing: "linear" }, start);
     });
     $$(".dragon-limb").forEach((limb) => {
       const fore = limb.dataset.leg.includes("fore"),
@@ -2233,10 +2061,6 @@
       startDragonJourney();
     } else syncDragonMotion();
   });
-  $("#dragon-mission").innerHTML = [...badgeData]
-    .sort((a, b) => (b.issued || "").localeCompare(a.issued || ""))
-    .map((badge) => `<option value="${badge.id}">${badge.title}</option>`)
-    .join("");
   renderDragonMission();
   applyRestPose();
   let dragonWidth = $("#dragon-stage").clientWidth;
@@ -2278,7 +2102,7 @@
   });
   const dock = $("#dragon-delivery");
   dock.addEventListener("mouseenter", () => {
-    dragon.readPaused = Boolean($("[data-delivered-badge]"));
+    dragon.readPaused = true;
     syncDragonMotion();
   });
   dock.addEventListener("mouseleave", () => {
@@ -2301,29 +2125,39 @@
     const badge = badgeData.find((item) => item.id === id);
     if (!badge) return;
     const status = badge.inactive
-      ? t("Inativa desde 15/01/2026", "Inactive since 15/01/2026")
+      ? (badge.inactiveSince ? t(`Inativa desde ${badge.inactiveSince}`, `Inactive since ${badge.inactiveSince}`) : t("Inativa", "Inactive"))
       : badge.statusPt
         ? t(badge.statusPt, badge.statusEn)
         : t(
             "Registro público verificado no emissor",
             "Public issuer record verified",
           );
+
     $("#badge-dialog-content").innerHTML =
-      `<p class="chapter-kicker">${badge.issuer}</p><div class="badge-dossier"><img src="${asset(`assets/badges/${badge.image}`)}" alt="${badge.title}" width="240" height="240"/><div><span class="credential-type">${translate(badge.kindKey)}</span><h2 id="badge-dialog-title">${badge.title}</h2><p>${badge[language]}</p><dl class="badge-record-facts"><div><dt>${t("EMISSÃO", "ISSUED")}</dt><dd>${badge.issued || "2023"}</dd></div><div><dt>${t("STATUS", "STATUS")}</dt><dd>${status}</dd></div></dl><h3 class="badge-detail-kicker">${t("CRITÉRIO DO EMISSOR", "ISSUER CRITERION")}</h3><p>${t(badge.criteriaPt, badge.criteriaEn)}</p><h3 class="badge-detail-kicker">${t("TEMAS DA CREDENCIAL", "CREDENTIAL TOPICS")}</h3><ul class="tags">${(badge.skills || []).map((skill) => `<li>${skill}</li>`).join("")}</ul><div class="dialog-actions"><a class="button button-primary" href="${badge.url}" target="_blank" rel="noopener noreferrer">${translate(badge.type === "issuer" ? "verifyOracle" : "verifyCredly")} ↗︎</a></div><p class="badge-dossier-note">${t("Arte original. Consulte o emissor para todos os detalhes e a situação atual.", "Original artwork. Check the issuer for full details and current status.")}</p></div></div>`;
+      `<p class="chapter-kicker">${badgeMarkup(badge.issuer)}</p><div class="badge-dossier"><img src="${asset(`assets/badges/${badge.image}`)}" alt="${badgeMarkup(badge.title)}" width="240" height="240"/><div><span class="credential-type">${badgeMarkup(t(...badge.typeLabel))}</span><h2 id="badge-dialog-title">${badgeMarkup(badge.title)}</h2><p>${badgeMarkup(badge[language])}</p><dl class="badge-record-facts"><div><dt>${t("EMISSÃO", "ISSUED")}</dt><dd>${badgeMarkup(badge.issued || t("Data não confirmada", "Date unconfirmed"))}</dd></div><div><dt>${t("STATUS", "STATUS")}</dt><dd>${badgeMarkup(status)}</dd></div></dl><h3 class="badge-detail-kicker">${t("CRITÉRIO DO EMISSOR", "ISSUER CRITERION")}</h3><p>${badgeMarkup(t(badge.criteriaPt, badge.criteriaEn))}</p><h3 class="badge-detail-kicker">${t("TEMAS DA CREDENCIAL", "CREDENTIAL TOPICS")}</h3><ul class="tags">${(badge.skills || []).map((skill) => `<li>${badgeMarkup(skill)}</li>`).join("")}</ul><div class="dialog-actions"><a class="button button-primary" href="${badgeMarkup(badge.url)}" target="_blank" rel="noopener noreferrer">${t("Verificar badge", "Verify badge")} ↗︎</a><button type="button" class="button button-light" data-deliver-badge="${badge.id}">${t("Trazer esta badge", "Deliver this badge")}</button></div><p class="badge-dossier-note">${t("Arte original. Consulte o emissor para todos os detalhes e a situação atual.", "Original artwork. Check the issuer for full details and current status.")}</p></div></div>`;
   }
+  $("#badge-dialog").addEventListener("click", (event) => {
+    const action = event.target.closest("[data-deliver-badge]");
+    if (!action) return;
+    closeDialog($("#badge-dialog"));
+    dragon.selected = action.dataset.deliverBadge;
+    $("#dragon-start").focus({ preventScroll: true });
+    $("#dragon-stage").scrollIntoView({ block: "start", behavior: "instant" });
+    startDragonJourney();
+  });
   function openBadge(id) {
     activeBadge = id;
     renderBadge(id);
     $(".dragon-scene").classList.add("badge-selected");
     openDialog($("#badge-dialog"));
   }
-  $$(".badge-art-link").forEach((link) => {
+  $$(".badge-art-link, [data-badge-slot]").forEach((link) => {
     const src = $("img", link).getAttribute("src");
     const badge = badgeData.find(
-      (item) => item.id === link.dataset.badgeOpen || src.endsWith(item.image),
+      (item) => item.id === (link.dataset.badgeSlot || link.dataset.badgeOpen) || src.endsWith(item.image),
     );
     if (!badge) return;
-    link.dataset.badgeOpen = badge.id;
+    if (!link.dataset.badgeSlot) link.dataset.badgeOpen = badge.id;
     link.removeAttribute("aria-hidden");
     link.removeAttribute("tabindex");
     link.addEventListener("click", (event) => {
@@ -2378,11 +2212,9 @@
           (card.hidden =
             category !== "all" && card.dataset.credentialCategory !== category),
       );
-      $$("[data-credential-group]").forEach(
-        (group) =>
-          (group.hidden =
-            category !== "all" && group.dataset.credentialGroup !== category),
-      );
+      $$(".badge-history-group").forEach((group) => {
+        group.hidden = !$(".badge-card:not([hidden])", group);
+      });
       updateCredentialCount();
     }),
   );
@@ -2394,6 +2226,7 @@
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
     const kind = $("#formation-type").value;
+    const terms = search.split(/\s+/).filter(Boolean);
     let matched = 0;
     let shown = 0;
     $$(".formation-record").forEach((record) => {
@@ -2402,7 +2235,7 @@
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
       const matches =
-        (!search || text.includes(search)) &&
+        terms.every((term) => text.includes(term)) &&
         (kind === "all" || record.dataset.recordKind === kind);
       if (matches) matched++;
       const visible =
@@ -2538,34 +2371,39 @@
   });
 
   // Reader controls change pages without scroll hijacking; Back/Forward still use real anchors.
-  const chapterIds = [
-    "home",
-    "story",
-    "projects",
-    "github",
-    "skills",
-    "credentials",
-    "contact",
-  ];
-  let currentChapter = 0;
-  function updateChapterDock() {
-    const position = window.scrollY + window.innerHeight * 0.35;
-    let index = 0;
-    chapterIds.forEach((id, i) => {
-      if ($("#" + id).offsetTop <= position) index = i;
-    });
+  const chapters = $$("main > section[id]");
+  const chapterLinks = $$(".desktop-nav a[href^='#'], #mobile-nav a[href^='#']");
+  let currentChapter = -1;
+  function setChapter(index) {
+    if (index === currentChapter) return;
     currentChapter = index;
-    $("#chapter-position").textContent = `0${index + 1} / 07`;
+    $("#chapter-position").textContent =
+      `${String(index + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}`;
     $("#chapter-prev").disabled = index === 0;
-    $("#chapter-next").disabled = index === chapterIds.length - 1;
+    $("#chapter-next").disabled = index === chapters.length - 1;
+    chapterLinks.forEach((link) => {
+      const active = link.hash === "#" + chapters[index].id;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function updateChapterDock() {
+    const position = window.innerHeight * 0.35;
+    const index = chapters.findLastIndex(
+      (chapter) => chapter.getBoundingClientRect().top <= position,
+    );
+    const atBottom =
+      window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    setChapter(atBottom ? chapters.length - 1 : Math.max(0, index));
   }
   function turnPanel(direction) {
     const index = Math.max(
       0,
-      Math.min(chapterIds.length - 1, currentChapter + direction),
+      Math.min(chapters.length - 1, currentChapter + direction),
     );
-    const target = $("#" + chapterIds[index]);
-    location.hash = "#" + chapterIds[index];
+    const target = chapters[index];
+    location.hash = "#" + target.id;
     target.scrollIntoView({
       behavior: motionDisabled ? "instant" : "smooth",
       block: "start",
@@ -2575,16 +2413,13 @@
       void target.offsetWidth;
       target.classList.add("page-turning");
     }
-    currentChapter = index;
-    $("#chapter-position").textContent = `0${index + 1} / 07`;
-    $("#chapter-prev").disabled = index === 0;
-    $("#chapter-next").disabled = index === chapterIds.length - 1;
+    setChapter(index);
   }
   $("#chapter-prev").addEventListener("click", () => turnPanel(-1));
   $("#chapter-next").addEventListener("click", () => turnPanel(1));
-  chapterIds.forEach((id) =>
-    $("#" + id).addEventListener("animationend", () =>
-      $("#" + id).classList.remove("page-turning"),
+  chapters.forEach((chapter) =>
+    chapter.addEventListener("animationend", () =>
+      chapter.classList.remove("page-turning"),
     ),
   );
 
@@ -2647,19 +2482,5 @@
       if (!motionDisabled) node.classList.add("pending");
       observer.observe(node);
     });
-    const chapterObserver = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting)
-            $$(".desktop-nav a").forEach((link) =>
-              link.classList.toggle(
-                "active",
-                link.hash === `#${entry.target.id}`,
-              ),
-            );
-        }),
-      { rootMargin: "-20% 0px -60% 0px" },
-    );
-    $$("main>section[id]").forEach((node) => chapterObserver.observe(node));
   }
 })();

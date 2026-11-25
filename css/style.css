@@ -6702,6 +6702,10 @@ summary:focus-visible {
   height: 100%;
   display: block;
 }
+.dragon-art-viewport[data-view="whole"] {
+  height: auto;
+  aspect-ratio: 1240 / 340;
+}
 .dragon-inspect-dialog .dragon-inspect-note {
   font-family: var(--mono);
   font-size: 10px;

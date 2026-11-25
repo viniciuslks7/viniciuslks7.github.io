@@ -2,7 +2,11 @@ import { chromium, devices } from "playwright";
 import assert from "node:assert/strict";
 import { resolve, basename } from "node:path";
 import { pathToFileURL } from "node:url";
-import { writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+const previewURL = pathToFileURL(
+  resolve("../vinicius-portfolio-interactive-preview.html"),
+).href;
+await mkdir("test-results", { recursive: true });
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
@@ -31,22 +35,50 @@ try {
   const requests = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("request", (r) => requests.push(r.url()));
-  await page.goto(
-    pathToFileURL(resolve("../vinicius-portfolio-interactive-preview.html"))
-      .href,
-  );
+  await page.goto(previewURL);
+  const badgeTotal = await page.locator("#badge-catalog").evaluate((node) => JSON.parse(node.textContent).length);
   await page.evaluate(() => document.fonts.ready);
   assert.equal(errors.length, 0, JSON.stringify(errors));
   assert(await page.locator("#hero-title").isVisible());
   assert.equal(await page.locator("html").getAttribute("lang"), "pt-BR");
   pass("Actual standalone file loads without JavaScript errors");
+  for (const locale of ["pt-BR", "en"]) {
+    if (locale === "en") await page.locator("#language").click();
+    const cvLink = page.locator(".intro-actions .cv-download:visible");
+    assert.equal(await cvLink.count(), 1);
+    assert.equal(await cvLink.getAttribute("hreflang"), locale);
+    const [download] = await Promise.all([
+      page.waitForEvent("download"),
+      cvLink.click(),
+    ]);
+    const filename = `vinicius-oliveira-${locale.toLowerCase()}.pdf`;
+    assert.equal(download.suggestedFilename(), filename);
+    const actual = await readFile(await download.path());
+    assert.equal(actual.subarray(0, 5).toString(), "%PDF-");
+    assert.deepEqual(actual, await readFile(resolve("assets", "cv", filename)));
+  }
+  await page.locator("#language").click();
+  pass("The offline preview downloads the correct résumé PDF in each language");
+  await page.locator("#appearance-open").click();
+  await page.getByRole("radio", { name: "Noturno" }).check();
+  assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+  await page.getByRole("radio", { name: "Papel" }).check();
+  await page.locator(".appearance-done").click();
+  pass("Theme selector works in the standalone file");
+  assert.equal(await page.locator(".project-card:visible").count(), 4);
+  await page.locator('[data-filter="data"]').click();
+  assert.equal(await page.locator(".project-card:visible").getAttribute("data-project"), "analytics");
+  await page.locator('[data-project-open="analytics"]').click();
+  assert.equal(await page.locator("#project-dialog-title").innerText(), "Analytics Dashboard");
+  await page.keyboard.press("Escape");
   await page.locator('[data-filter="backend"]').click();
   assert.equal(await page.locator(".project-card:visible").count(), 2);
   await page.locator('[data-project-open="keel"]').click();
   assert(await page.locator("#project-dialog").isVisible());
   await page.keyboard.press("Escape");
   pass("Project filtering and case-study dialog work offline");
-  await page.locator('[data-badge-open="aws-cloud-quest"]').first().click();
+  await page.locator("#badge-history > summary").click();
+  await page.locator('#badge-history [data-badge-open="aws-cloud-quest"]').click();
   assert(await page.locator("#badge-dialog").isVisible());
   await page.locator("#badge-dialog img").evaluate((img) => img.decode());
   assert(
@@ -59,12 +91,16 @@ try {
       "data:image/png",
     ),
   );
-  await page.keyboard.press("Escape");
-  pass("Badge banners open dossiers with embedded original artwork");
+  await page.getByRole("button", { name: "Trazer esta badge" }).click();
+  assert(await page.locator("#badge-dialog").isHidden());
+  assert.equal(await page.evaluate(() => document.activeElement.id), "dragon-start");
+  assert.equal(await page.locator("#dragon-mission").inputValue(), "aws-cloud-quest");
+  assert(await page.locator('[data-delivered-badge="aws-cloud-quest"]').isVisible());
+  pass("The dossier can deliver its badge without motion and focus the flight controls");
   await page.locator('[data-architecture="2"]').click();
   assert(
     (await page.locator("#architecture-description").innerText()).includes(
-      "inteiras",
+      "centavos",
     ),
   );
   await page.locator("#trace-request").click();
@@ -74,10 +110,11 @@ try {
   pass("Architecture inspection and request trace work offline");
   await page.locator("#language").click();
   assert.equal(await page.locator("html").getAttribute("lang"), "en");
-  await page.locator('[data-badge-open="oracle-foundations"]').click();
+  await page.locator('[data-badge-slot="oracle-foundations"]').click();
   assert((await page.locator("#badge-dialog").innerText()).includes("2023"));
-  await page.keyboard.press("Escape");
-  pass("English and Oracle badge details work in the file preview");
+  await page.getByRole("button", { name: "Deliver this badge" }).click();
+  assert.equal(await page.locator("#dragon-mission").inputValue(), "oracle-foundations");
+  pass("English and Oracle badge details and delivery work in the file preview");
   await page.keyboard.press("Control+k");
   await page.locator("#command-search").fill("GitHub");
   await page.locator("#command-search").press("Enter");
@@ -112,12 +149,21 @@ try {
     "mailto:vinicius.oliveiratwt@gmail.com",
   );
   assert.equal(errors.length, 0, JSON.stringify(errors));
-  assert(
-    requests.every((url) => url.startsWith("file:") || url.startsWith("data:")),
-    JSON.stringify(requests),
+  const externalRequests = requests.filter(
+    (url) => url !== previewURL && !url.startsWith("data:"),
   );
+  assert.deepEqual(externalRequests, []);
   pass("Email destination is correct and all runtime assets are embedded");
-  assert.equal(await page.locator(".formation-record").count(), 58);
+  assert.equal(await page.locator(".formation-record").count(), 59);
+  assert.equal(await page.locator("[data-badge-slot]:visible").count(), badgeTotal);
+  assert(
+    await page.locator("[data-badge-slot] img").evaluateAll((images) =>
+      images.every((image) => image.src.startsWith("data:image/png")),
+    ),
+  );
+  assert(
+    (await page.locator("#claude-101 img").getAttribute("src")).startsWith("data:image/png"),
+  );
   await page.locator("#formation-search").fill("Cisco");
   assert((await page.locator(".formation-record:visible").count()) > 0);
   await page.locator("#formation-search").fill("");
@@ -202,10 +248,7 @@ try {
   const flight = await flightContext.newPage(),
     flightErrors = [];
   flight.on("pageerror", (e) => flightErrors.push(e.message));
-  await flight.goto(
-    pathToFileURL(resolve("../vinicius-portfolio-interactive-preview.html"))
-      .href,
-  );
+  await flight.goto(previewURL);
   await flight.waitForTimeout(500);
   assert.equal(await flight.locator("#dragon-progress").innerText(), "0%");
   assert.equal(
@@ -450,7 +493,7 @@ try {
   pass(
     "Hovering the stable dock pauses flight for reading and leaving resumes it",
   );
-  await flight.locator("[data-delivered-badge]").focus();
+  await flight.locator(`[data-delivered-badge="${secondBadge}"]`).focus();
   await flight.waitForFunction(() =>
     document
       .getAnimations()
@@ -594,10 +637,7 @@ try {
     reducedMotion: "no-preference",
   });
   const mobile = await mobileContext.newPage();
-  await mobile.goto(
-    pathToFileURL(resolve("../vinicius-portfolio-interactive-preview.html"))
-      .href,
-  );
+  await mobile.goto(previewURL);
   await mobile.locator("#dragon-stage").scrollIntoViewIfNeeded();
   await mobile.waitForFunction(
     () =>
@@ -654,6 +694,57 @@ try {
     "Actual mobile file autostarts visible flight, survives height changes, and lands a long-title credential without overflow",
   );
   await mobileContext.close();
+  for (const width of [1280, 390]) {
+    const collection = await browser.newPage({ viewport: { width, height: 900 } });
+    await collection.goto(previewURL);
+    await collection.evaluate(() => document.fonts.ready);
+    const landings = await collection.evaluate(() => {
+      const select = document.querySelector("#dragon-mission");
+      const slider = document.querySelector("#dragon-scrub");
+      const slots = [...document.querySelectorAll("[data-badge-slot]")];
+      const seek = (value) => {
+        slider.value = value;
+        slider.dispatchEvent(new Event("input", { bubbles: true }));
+      };
+      return slots.map((slot) => {
+        select.value = slot.dataset.badgeSlot;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        seek(55);
+        const launchedEnvelope = !!document.querySelector(".dragon-flight-card .envelope-fold");
+        seek(64);
+        const flare = document.querySelector(".courier-streaks path").getAttribute("d");
+        const flapAngle = parseFloat(slot.style.getPropertyValue("--flap-angle"));
+        seek(70);
+        const art = slot.querySelector("[data-slot-art]").getBoundingClientRect();
+        const airborne = document.querySelector(".dragon-flight-card").getBoundingClientRect();
+        seek(73);
+        const landed = JSON.parse(document.querySelector("#dragon-stage").dataset.landingContinuity);
+        const impact = Number(slot.style.getPropertyValue("--ink-impact"));
+        const reacting = [...document.querySelectorAll("[data-folder-phase=settling]")];
+        const soleRecipient = reacting.length === 1 && reacting[0] === slot;
+        seek(85);
+        return {
+          badge: slot.dataset.badgeSlot,
+          delivered: slot.dataset.deliveredBadge,
+          envelopeFiled: launchedEnvelope && flare.includes("Z") && flapAngle < -60 &&
+            impact > 0.5 && soleRecipient && slot.dataset.folderPhase === "filed" &&
+            parseFloat(slot.style.getPropertyValue("--flap-angle")) === 0,
+          // The frame before the mount must converge on the same real artwork.
+          approachError: Math.hypot(airborne.x - art.x, airborne.y - art.y),
+          landingError: Math.max(...Object.values(landed).map(Math.abs)),
+        };
+      });
+    });
+    assert.equal(landings.length, badgeTotal);
+    for (const landing of landings) {
+      assert.equal(landing.delivered, landing.badge);
+      assert(landing.envelopeFiled, JSON.stringify({ width, ...landing }));
+      assert(landing.approachError < 5 && landing.landingError < 1, JSON.stringify({ width, ...landing }));
+    }
+    assert.equal(await collection.locator("[data-delivered-badge]").count(), badgeTotal);
+    await collection.close();
+    pass(`All ${badgeTotal} badges land on their own artwork and stay in their slots at ${width}px`);
+  }
   report.status = "passed";
   console.log(`${report.checks.length} standalone checks passed.`);
 } catch (e) {

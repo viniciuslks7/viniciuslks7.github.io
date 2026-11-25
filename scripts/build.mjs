@@ -1,14 +1,18 @@
 import { mkdir, rm, cp, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { readBadgePage } from "./badge-page.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
+const html = await readBadgePage(new URL("../", import.meta.url), { sync: true });
 const out = `${root}dist`;
 await rm(out, { recursive: true, force: true });
 await mkdir(`${out}/assets`, { recursive: true });
-for (const path of ["index.html", "css", "js"])
+await writeFile(`${out}/index.html`, html);
+for (const path of ["css", "js"])
   await cp(`${root}${path}`, `${out}/${path}`, { recursive: true });
 // Only approved, public-facing assets ship. Historic documents and project media remain in git history.
 for (const path of [
   "profile.jpg",
+  "ink-valley.webp",
   "city.svg",
   "auxilium-illustration.svg",
   "favicon.svg",
@@ -16,6 +20,8 @@ for (const path of [
   "social-cover.png",
   "fonts",
   "badges",
+  "cv/vinicius-oliveira-pt-br.pdf",
+  "cv/vinicius-oliveira-en.pdf",
   "formation-records.json",
 ])
   await cp(`${root}assets/${path}`, `${out}/assets/${path}`, {

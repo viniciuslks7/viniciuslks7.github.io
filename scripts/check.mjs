@@ -1,6 +1,7 @@
 import { readFile, stat } from "node:fs/promises";
 import assert from "node:assert/strict";
-const html = await readFile("index.html", "utf8");
+import { readBadgePage } from "./badge-page.mjs";
+const html = await readBadgePage(new URL("../", import.meta.url));
 const css = await readFile("css/style.css", "utf8");
 const js = await readFile("js/main.js", "utf8");
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);

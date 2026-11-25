@@ -1,7 +1,8 @@
+import { badgeOrder } from "./badge-page.mjs";
 import { chromium, devices } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import { spawn } from "node:child_process";
-import { mkdir, writeFile, stat } from "node:fs/promises";
+import { mkdir, readFile, writeFile, stat } from "node:fs/promises";
 import assert from "node:assert/strict";
 const port = Number(process.env.TEST_PORT) || 4181;
 const base = `http://127.0.0.1:${port}`;
@@ -97,16 +98,24 @@ try {
     if (r.url().startsWith(base) && r.status() >= 400)
       badResponses.push({ url: r.url(), status: r.status() });
   });
+  const catalog = JSON.parse(await readFile("assets/badges/catalog.json", "utf8"));
+  const orderedBadges = badgeOrder(catalog);
+  const latestBadge = orderedBadges[0];
+  const earlierBadges = orderedBadges.slice(1);
+  const historyCount = (category) => earlierBadges.filter((badge) => badge.category === category).length;
   await page.goto(base);
   await page.evaluate(() => document.fonts.ready);
   assert.equal(await page.locator("html").getAttribute("lang"), "pt-BR");
+  assert.equal(await page.locator("#command-open").getAttribute("aria-label"), "Abrir navegação rápida");
+  assert.equal(await page.locator("#quick-dialog [data-close]").getAttribute("aria-label"), "Fechar");
+  assert.equal(await page.locator("#command-search").getAttribute("placeholder"), "Buscar um capítulo ou ação…");
   assert.equal(errors.length, 0, JSON.stringify(errors));
   pass("PT-BR is the default language");
   await checkNoOverflow(page, "Desktop 1440");
   await audit(page, "Desktop PT");
   await screenshot(page, "desktop-home");
   await page
-    .getByRole("button", { name: "Visão rápida", exact: true })
+    .getByRole("button", { name: "Resumo profissional", exact: true })
     .first()
     .click();
   assert(await page.locator("#quick-dialog").isVisible());
@@ -145,11 +154,22 @@ try {
   pass("Backend filter and accessible project count");
   await page.locator('[data-filter="fullstack"]').click();
   assert.equal(await page.locator(".project-card:visible").count(), 1);
-  pass("Full-stack filter");
+  await page.locator('[data-filter="data"]').click();
+  assert.equal(await page.locator(".project-card:visible").getAttribute("data-project"), "analytics");
+  pass("Mobile and data project filters");
   await page.locator('[data-filter="all"]').click();
-  assert.equal(await page.locator(".project-card:visible").count(), 3);
+  assert.equal(await page.locator(".project-card:visible").count(), 4);
   pass("Filters reset correctly after repeated use");
-  for (const id of ["keel", "starwars", "auxilium"]) {
+  const projectEvidence = {
+    keel: "https://viniciuslks7.github.io/Keel/",
+    starwars: "https://github.com/viniciuslks7/API-Starwars/blob/main/tests/unit/test_cache_service.py",
+    auxilium: "https://viniciuslks7.github.io/auxilium-demo/",
+    analytics: "https://github.com/viniciuslks7/Analytics-Dashboard/blob/main/frontend/src/components/Charts/DeliveryMetricsChart.tsx",
+  };
+  for (const [project, url] of Object.entries(projectEvidence)) {
+    assert.equal(await page.locator(`[data-project="${project}"] .project-proof`).getAttribute("href"), url);
+  }
+  for (const id of ["keel", "starwars", "auxilium", "analytics"]) {
     await page.locator(`[data-project-open="${id}"]`).click();
     assert(await page.locator("#project-dialog").isVisible());
     assert((await page.locator("#project-dialog").innerText()).length > 500);
@@ -194,20 +214,44 @@ try {
   pass("Interrupted request recovers on endpoint change");
   await page.locator("#language").click();
   assert.equal(await page.locator("html").getAttribute("lang"), "en");
+  assert.equal(await page.locator(".course-spotlight").getAttribute("id"), latestBadge.id);
+  assert.equal(await page.locator(".course-spotlight time").getAttribute("datetime"), latestBadge.issued);
+  assert.equal((await page.locator(".course-spotlight .course-description p").textContent()).trim(), latestBadge.en);
   assert.equal(
-    await page.locator("#hero-title").innerText(),
-    "CODE WITH\nPURPOSE.",
+    (await page.locator("#home .intro-role").textContent()).trim(),
+    "Software developer",
   );
-  assert(
-    (await page.locator("#credentials-grid").innerText())
-      .toLowerCase()
-      .includes("training badge"),
-  );
+  const historySummary = page.locator("#badge-history > summary");
+  await historySummary.click();
+  const firstArchivedBadge = page.locator(".badge-card").filter({
+    has: page.locator(`[data-badge-open="${earlierBadges[0].id}"]`),
+  });
+  assert.equal(await firstArchivedBadge.locator("p[data-badge-en]").innerText(), earlierBadges[0].en);
+  await historySummary.click();
   pass("English translation updates content and credentials accurately");
   await audit(page, "Desktop EN");
   await page.reload();
   assert.equal(await page.locator("html").getAttribute("lang"), "en");
   pass("Language choice persists after reload");
+  await page.locator("#appearance-open").click();
+  await page.getByRole("radio", { name: "Night" }).check();
+  await page.getByRole("radio", { name: "Custom" }).check();
+  await page.locator("#custom-accent").fill("#ffffaa");
+  await audit(page, "Appearance controls in night theme");
+  await page.locator(".appearance-done").click();
+  await page.reload();
+  assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+  await audit(page, "Night theme with a custom accent");
+  await page.locator("#appearance-open").click();
+  assert(await page.getByRole("radio", { name: "Custom" }).isChecked());
+  assert.equal(await page.locator("#custom-accent").inputValue(), "#ffffaa");
+  await page.getByRole("radio", { name: "Red", exact: true }).check();
+  await page.getByRole("radio", { name: "System" }).check();
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.waitForFunction(() => document.documentElement.dataset.theme === "light");
+  await page.keyboard.press("Escape");
+  assert(await page.locator("#appearance-open").evaluate(button => button === document.activeElement));
+  pass("Appearance persists, follows the system and restores keyboard focus");
   await page.locator("#language").click();
   await page.keyboard.press("Control+k");
   assert(await page.locator("#command-dialog").isVisible());
@@ -216,6 +260,22 @@ try {
   await page.locator("#command-search").press("Enter");
   assert(!(await page.locator("#command-dialog").isVisible()));
   assert.equal(new URL(page.url()).hash, "#projects");
+  assert.equal(await page.evaluate(() => document.activeElement.id), "projects-title");
+  await page.locator("#command-open").click();
+  await page.locator("#command-search").press("ArrowDown");
+  assert.equal(
+    await page.locator("#command-search").getAttribute("aria-activedescendant"),
+    await page.locator('#command-options [aria-selected="true"]').getAttribute("id"),
+  );
+  await page.locator("#command-search").fill("recrutadores");
+  await page.locator("#command-search").press("Enter");
+  await page.waitForFunction(() =>
+    document.querySelector("#quick-dialog").open &&
+    document.activeElement.closest("#quick-dialog") &&
+    document.body.classList.contains("dialog-open"),
+  );
+  await page.keyboard.press("Escape");
+  assert.equal(await page.evaluate(() => document.activeElement.id), "command-open");
   pass("Keyboard command palette searches and navigates");
   await page.keyboard.press("Control+k");
   await page.locator("#command-search").fill("inexistente");
@@ -363,7 +423,7 @@ try {
     (await page.locator("#github").innerText()).includes("Analytics-Dashboard"),
   );
   assert.equal(await page.locator(".work-details details[open]").count(), 1);
-  for (const id of ["keel", "starwars", "auxilium"]) {
+  for (const id of ["keel", "starwars", "auxilium", "analytics"]) {
     const detail = page.locator(`[data-project="${id}"] .inline-case`);
     await detail.locator("summary").click();
     assert(await detail.evaluate((node) => node.open));
@@ -411,6 +471,7 @@ try {
     "Architecture explorer supports all layers, keyboard movement, tracing, repeated and interrupted flows",
   );
   await page.locator("#credentials").scrollIntoViewIfNeeded();
+  await page.locator("#badge-history > summary").click();
   for (const image of await page.locator(".badge-card img").all()) {
     await image.scrollIntoViewIfNeeded();
     await image.evaluate(async (img) => {
@@ -422,8 +483,19 @@ try {
     });
     assert((await image.evaluate((img) => img.naturalWidth)) > 0);
   }
-  assert.equal(await page.locator(".badge-card").count(), 14);
-  pass("All fourteen authentic badge images load and retain issuer links");
+  assert.equal(await page.locator(".badge-card").count(), earlierBadges.length);
+  pass("Archived badge images load");
+  const expectedSlots = Object.fromEntries(catalog.map((badge) => [badge.id, badge.url]));
+  const dockSlots = page.locator("#dragon-delivery [data-badge-slot]");
+  assert.equal(await dockSlots.count(), catalog.length);
+  assert.deepEqual(await dockSlots.evaluateAll((links) =>
+    Object.fromEntries(links.map((link) => [link.dataset.badgeSlot, link.href])),
+  ), expectedSlots);
+  await page.locator('[data-badge-slot="claude-101"]').press("Enter");
+  assert.equal(await page.locator("#badge-dialog-title").textContent(), "Claude 101");
+  assert.equal(await page.locator("#badge-dialog .dialog-actions a").getAttribute("href"), expectedSlots["claude-101"]);
+  await page.keyboard.press("Escape");
+  pass("All permanent badge positions keep their issuer links and open the corresponding dossier");
   await page.locator('[data-badge-open="aws-cloud-quest"]').first().click();
   assert(await page.locator("#badge-dialog").isVisible());
   assert(
@@ -436,29 +508,29 @@ try {
   await page.keyboard.press("Escape");
   assert(await page.locator("#badge-dialog").isHidden());
   await page
-    .locator('.oracle-badge-grid [data-badge-open="oracle-foundations"]')
+    .locator('#badge-history [data-badge-open="oracle-foundations"]')
     .click();
   assert((await page.locator("#badge-dialog").innerText()).includes("2023"));
   await page.locator("#badge-dialog [data-close]").click();
   pass(
     "AWS/Oracle badge dossiers, proper training/exam distinction, and keyboard dismissal",
   );
-  assert.equal(await page.locator(".cisco-badge-grid .badge-card").count(), 6);
+  assert.equal(await page.locator(".badge-card[data-credential-category='security']").count(), historyCount("security"));
   assert.equal(
-    await page.locator(".education-badge-grid .badge-card").count(),
-    1,
+    await page.locator(".badge-card[data-credential-category='education']").count(),
+    historyCount("education"),
   );
   await page.locator('[data-credential-filter="security"]').click();
-  assert.equal(await page.locator(".badge-card:visible").count(), 6);
+  assert.equal(await page.locator(".badge-card:visible").count(), historyCount("security"));
   await page.locator('[data-credential-filter="education"]').click();
-  assert.equal(await page.locator(".badge-card:visible").count(), 1);
+  assert.equal(await page.locator(".badge-card:visible").count(), historyCount("education"));
   await page.locator('[data-credential-filter="history"]').click();
-  assert.equal(await page.locator(".badge-card:visible").count(), 3);
+  assert.equal(await page.locator(".badge-card:visible").count(), historyCount("history"));
   assert(
-    (await page.locator(".badge-inactive").innerText()).includes("15 JAN 2026"),
+    (await page.locator(".badge-inactive").innerText()).includes("2026-01-15"),
   );
   await page.locator('[data-credential-filter="all"]').click();
-  assert.equal(await page.locator(".badge-card:visible").count(), 14);
+  assert.equal(await page.locator(".badge-card:visible").count(), earlierBadges.length);
   pass(
     "Expanded issuer-verified Cisco/Microsoft catalog, group filters, and explicit historical inactivity",
   );
@@ -476,7 +548,7 @@ try {
   await page.keyboard.press("Escape");
   await page.locator('[data-badge-open="microsoft-mie-expert"]').last().click();
   assert(
-    (await page.locator("#badge-dialog").innerText()).includes(
+    (await page.locator("#badge-dialog").innerText()).toUpperCase().includes(
       "RECONHECIMENTO PROFISSIONAL",
     ),
   );
@@ -484,10 +556,10 @@ try {
   pass(
     "Credential dossiers include issuer date, criterion, topics, and accurate recognition type",
   );
-  assert.equal(await page.locator(".formation-record").count(), 58);
+  assert.equal(await page.locator(".formation-record").count(), 59);
   assert.equal(await page.locator(".formation-record:visible").count(), 12);
   await page.locator("#formation-more").click();
-  assert.equal(await page.locator(".formation-record:visible").count(), 58);
+  assert.equal(await page.locator(".formation-record:visible").count(), 59);
   await page.locator(".formation-record").first().locator("summary").click();
   assert(
     await page
@@ -497,6 +569,30 @@ try {
   );
   await page.locator("#formation-search").fill("AWS");
   assert((await page.locator(".formation-record:visible").count()) > 5);
+  await page.locator("#formation-search").fill("Claude 101");
+  assert.equal(await page.locator(".formation-record:visible").count(), 1);
+  await page.locator("#formation-search").fill("Anthropic Academy");
+  assert.equal(await page.locator(".formation-record:visible summary span").textContent(), "Claude 101");
+  const claudeRecord = page.locator(".formation-record:visible");
+  await claudeRecord.locator("summary").click();
+  assert.equal(
+    (await claudeRecord.locator("dd").first().textContent()).trim(),
+    "Claude Academy (Anthropic)",
+  );
+  assert.equal(
+    await claudeRecord.locator("time").getAttribute("datetime"), "2026-10-28",
+  );
+  const verificationURL =
+    "https://academy.claude.com/verify/47a9e4b717bec962966d016edd85991c";
+  assert.equal(
+    await claudeRecord.getByRole("link", { name: "Verificar badge" }).getAttribute("href"),
+    verificationURL,
+  );
+  assert.equal(
+    await page.locator("#claude-101 .badge-verify").getAttribute("href"),
+    verificationURL,
+  );
+  await page.locator("#claude-101 img").evaluate((image) => image.decode());
   await page.locator("#formation-search").fill("xyz-not-found");
   assert(await page.locator("#formation-empty").isVisible());
   await page.locator("#formation-search").fill("");
@@ -506,7 +602,7 @@ try {
   await page.locator("#formation-more").click();
   assert.equal(await page.locator(".formation-record:visible").count(), 12);
   pass(
-    "All 58 sanitized formation records support progressive disclosure, search, type filters, and empty states",
+    "All 59 learning records support progressive disclosure, search, type filters, and empty states",
   );
   assert.equal(await page.locator('a[href*="drive.google.com"]').count(), 0);
   assert.equal(
@@ -537,6 +633,19 @@ try {
   pass(
     "Dragon greeting works; reduced motion keeps the articulated creature and banner targets static",
   );
+  const displayedBefore = await dockSlots.evaluateAll((links) => links.map((link) => link.dataset.badgeSlot));
+  const originalMission = await page.locator("#dragon-mission").inputValue();
+  for (const id of ["claude-101", "aws-braket"]) {
+    await page.locator("#dragon-mission").selectOption(id);
+    await page.locator("#dragon-start").press("Enter");
+    assert.equal(await page.locator(`[data-badge-slot="${id}"]`).getAttribute("data-delivered-badge"), id);
+  }
+  assert(await page.locator('[data-delivered-badge="claude-101"]').isVisible());
+  await page.locator("#dragon-reset").press("Enter");
+  assert.equal(await page.locator("[data-delivered-badge]").count(), 0);
+  assert.deepEqual(await dockSlots.evaluateAll((links) => links.map((link) => link.dataset.badgeSlot)), displayedBefore);
+  await page.locator("#dragon-mission").selectOption(originalMission);
+  pass("Reduced-motion deliveries mark each badge in place and a reset retains all catalog positions");
   const svgNodes = await page.locator(".paper-dragon *").count();
   assert(
     svgNodes < 300 && svgNodes > 200,
@@ -765,10 +874,10 @@ try {
 
   await page.locator("#home").scrollIntoViewIfNeeded();
   await screenshot(page, "desktop-full", true);
-  assert.equal(await page.locator(".aws-badge-grid .badge-verify").count(), 4);
+  assert.equal(await page.locator(".badge-card[data-credential-category='cloud'] .badge-verify").count(), historyCount("cloud"));
   assert.equal(
-    await page.locator(".oracle-badge-grid .badge-verify").count(),
-    3,
+    await page.locator(".badge-card[data-credential-category='history'] .badge-verify").count(),
+    historyCount("history"),
   );
   pass("All four Credly and three Oracle issuer links are present");
   assert.equal(errors.length, 0, JSON.stringify(errors));
@@ -802,6 +911,11 @@ try {
   const touch = await touchContext.newPage();
   await touch.goto(base);
   await touch.locator("#menu-toggle").tap();
+  await touch.locator("#mobile-nav [data-open=quick]").focus();
+  await touch.keyboard.press("Escape");
+  assert.equal(await touch.evaluate(() => document.activeElement.id), "menu-toggle");
+  assert.equal(await touch.locator("#menu-toggle").getAttribute("aria-expanded"), "false");
+  await touch.locator("#menu-toggle").tap();
   assert.equal(
     await touch.locator("#menu-toggle").getAttribute("aria-expanded"),
     "true",
@@ -816,20 +930,24 @@ try {
   assert(await touch.locator("#project-dialog").isVisible());
   await touch.locator("#project-dialog [data-close]").tap();
   pass("Emulated touch project filter and dossier controls");
-  const client = await touchContext.newCDPSession(touch);
+  // A mobile browser consumes the first tap during a fling to stop scrolling.
+  // Exercise the swipe independently of the subsequent button interactions.
+  const swipe = await touchContext.newPage();
+  await swipe.goto(base);
+  const client = await touchContext.newCDPSession(swipe);
+  const beforeSwipe = await swipe.evaluate(() => scrollY);
   await client.send("Input.dispatchTouchEvent", {
-    type: "touchStart",
-    touchPoints: [{ x: 190, y: 660 }],
+    type: "touchStart", touchPoints: [{ x: 190, y: 660 }],
   });
   await client.send("Input.dispatchTouchEvent", {
-    type: "touchMove",
-    touchPoints: [{ x: 190, y: 300 }],
+    type: "touchMove", touchPoints: [{ x: 190, y: 300 }],
   });
   await client.send("Input.dispatchTouchEvent", {
-    type: "touchEnd",
-    touchPoints: [],
+    type: "touchEnd", touchPoints: [],
   });
-  await checkNoOverflow(touch, "After emulated touch swipe");
+  await swipe.waitForFunction((previous) => scrollY > previous + 40, beforeSwipe);
+  await checkNoOverflow(swipe, "After emulated touch swipe");
+  await swipe.close();
   pass(
     "Emulated vertical touch gesture does not introduce horizontal overflow",
   );
@@ -876,7 +994,10 @@ try {
   await touch.locator("#bonus-dialog [data-close]").tap();
   pass("Emulated touch dragon, stable badge banner, and hidden margin panels");
   await touch.locator("#credentials").scrollIntoViewIfNeeded();
-  await touch.locator("#dragon-full-motion").check();
+  const touchFlightConsent = touch.locator("#dragon-full-motion");
+  assert.equal(await touchFlightConsent.isChecked(), false);
+  await touchFlightConsent.tap();
+  assert(await touchFlightConsent.isChecked());
   const touchStart = await touch
     .locator("#dragon-caravan")
     .evaluate((el) => el.getBoundingClientRect().x);
@@ -887,7 +1008,8 @@ try {
     touchStart,
   );
   await touch.locator("#dragon-toggle").tap();
-  await touch.locator("#dragon-full-motion").uncheck();
+  await touchFlightConsent.tap();
+  assert.equal(await touchFlightConsent.isChecked(), false);
   assert.equal(
     await touch.evaluate(
       () =>
@@ -1155,16 +1277,21 @@ try {
     "Changing missions fetches and delivers a different verified credential",
   );
   await motionPage.locator("#dragon-start").click();
-  await motionPage.locator("#dragon-reset").click();
-  assert(
-    Number(
-      (await motionPage.locator("#dragon-progress").innerText()).replace(
-        "%",
-        "",
-      ),
-    ) < 3,
-  );
-  assert((await motionPage.locator("[data-delivered-badge]").count()) === 0);
+  const restart = motionPage.locator("#dragon-reset");
+  // Read after the click handler resets the route, before its next animation frame.
+  await restart.evaluate((button) => {
+    button.addEventListener("click", () => {
+      window.__flightAtRestart = {
+        progress: document.querySelector("#dragon-progress").value,
+        route: document.querySelector("#dragon-scrub").value,
+        deliveries: document.querySelectorAll("[data-delivered-badge]").length,
+      };
+    }, { once: true });
+  });
+  await restart.click();
+  assert.deepEqual(await motionPage.evaluate(() => window.__flightAtRestart), {
+    progress: "0%", route: "0", deliveries: 0,
+  });
   await motionPage.locator("#dragon-start").click();
   await motionPage.locator("#motion").click();
   assert.equal(
@@ -1196,7 +1323,9 @@ try {
   const noJS = await noJSContext.newPage();
   await noJS.goto(base);
   assert(await noJS.locator("#hero-title").isVisible());
-  assert.equal(await noJS.locator(".aws-badge-grid .badge-verify").count(), 4);
+  assert.equal(await noJS.locator(".badge-card[data-credential-category='cloud'] .badge-verify").count(), historyCount("cloud"));
+  assert.equal(await noJS.locator("[data-badge-slot]:visible").count(), catalog.length);
+  assert.equal(await noJS.locator('[data-badge-slot="claude-101"]').getAttribute("href"), expectedSlots["claude-101"]);
   assert.equal(
     await noJS.locator(".email-row>a").getAttribute("href"),
     "mailto:vinicius.oliveiratwt@gmail.com",

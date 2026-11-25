@@ -1,0 +1,306 @@
+@media screen {
+  .project-toolbar {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  .project-toolbar .filter-group {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .project-toolbar .filter {
+    min-height: 44px;
+    padding-inline: 16px;
+    font-size: 13px;
+  }
+
+  .project-toolbar .small-label {
+    font-size: 10px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    align-items: stretch;
+    gap: clamp(14px, 2vw, 26px);
+  }
+
+  .projects-grid .project-card {
+    display: flex;
+    flex-direction: column;
+    grid-column: auto;
+    min-width: 0;
+    border-width: 1px;
+  }
+
+  .projects-grid .project-card[hidden] {
+    display: none;
+  }
+
+  .projects-grid .project-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .projects-grid .project-card .project-art {
+    height: clamp(180px, 18vw, 258px);
+    min-height: 0;
+    flex: none;
+    border: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .keel-art .ledger-art {
+    width: min(58%, 205px);
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    padding: 7px 18px;
+    border-width: 1px;
+    box-shadow: 5px 6px var(--ink);
+  }
+
+  .ledger-art .ledger-name {
+    font-family: Georgia, serif;
+    font-size: clamp(31px, 3vw, 45px);
+    font-style: italic;
+    letter-spacing: -.08em;
+  }
+
+  .starwars-art .starwars-title {
+    top: 50%;
+    left: 8%;
+    transform: translateY(-48%);
+    font-size: clamp(46px, 5.4vw, 82px);
+  }
+
+  .starwars-art .planet {
+    width: clamp(88px, 10vw, 154px);
+    height: auto;
+    aspect-ratio: 1;
+    top: 46%;
+    right: 8%;
+    transform: translateY(-50%);
+  }
+
+  .analytics-art {
+    display: grid;
+    place-items: center;
+    background: #e3dfd3;
+    background-image: repeating-linear-gradient(90deg, transparent 0 21px, #c8c3b7 21px 22px);
+  }
+
+  .analytics-sheet {
+    width: min(72%, 265px);
+    border: 1px solid #24221f;
+    padding: 10px 22px 18px;
+    background: #faf7ed;
+    color: #24221f;
+    box-shadow: 5px 5px #24221f;
+    transform: rotate(-4deg);
+  }
+
+  .analytics-sheet > span {
+    font: italic 700 30px/1.25 Georgia, serif;
+    letter-spacing: -.04em;
+  }
+
+  .analytics-bars {
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
+    border-left: 1px solid;
+    padding-block: 4px;
+  }
+
+  .analytics-bars i { height: 9px; background: #484944; }
+  .analytics-bars i:nth-child(1) { width: 81%; background: #ad3f2d; }
+  .analytics-bars i:nth-child(2) { width: 63%; }
+  .analytics-bars i:nth-child(3) { width: 50%; }
+  .analytics-bars i:nth-child(4) { width: 32%; }
+
+  .projects-grid .project-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: clamp(18px, 2vw, 28px);
+  }
+
+  .project-copy .project-topline {
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 11px;
+    font-size: 10px;
+    line-height: 1.55;
+    letter-spacing: .04em;
+  }
+
+  .project-copy h3 {
+    font-size: clamp(32px, 3.3vw, 50px);
+    line-height: 1.05;
+  }
+
+  .project-copy > p {
+    min-height: 0;
+    margin: 14px 0 16px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .project-copy .tags {
+    gap: 5px;
+    margin-bottom: 18px;
+  }
+
+  .project-copy .tags li {
+    padding: 3px 7px;
+    font-size: 10px;
+  }
+
+  .project-copy .inline-case {
+    margin-top: auto;
+  }
+
+  .project-copy .inline-case summary {
+    font-size: 13px;
+    gap: 12px;
+    padding-block: 5px;
+  }
+
+  .project-copy .inline-case p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .project-copy .project-actions {
+    flex-wrap: wrap;
+    margin-top: 9px;
+    padding-top: 0;
+    border: 0;
+    gap: 0 12px;
+  }
+
+  .project-actions .text-button {
+    min-height: 44px;
+    gap: 5px;
+    font-size: 13px;
+    text-underline-offset: .25em;
+  }
+
+  .project-actions .project-proof {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  .project-actions [data-project-open] {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .project-actions .text-button:is(:hover, :focus-visible),
+  .project-more .text-button:is(:hover, :focus-visible),
+  .repo-links a:is(:hover, :focus-visible) {
+    text-decoration: underline;
+  }
+
+  .project-more, .github-footer {
+    justify-content: flex-end;
+  }
+
+  .project-more .text-button, .github-footer .text-button {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .github-heading > div > p:not(.chapter-kicker),
+  .repository-row p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .repository-row {
+    gap: 12px 32px;
+    background: transparent;
+    padding: 22px 0;
+  }
+
+  .repository-row > div:first-child, .repo-links {
+    padding-left: 0;
+  }
+
+  .repo-title {
+    display: inline;
+    overflow-wrap: anywhere;
+    font-size: clamp(24px, 3vw, 38px);
+  }
+
+  .repo-title span {
+    color: var(--red);
+    font-size: .65em;
+  }
+
+  .repo-stack {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .repo-links a {
+    min-height: 44px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (min-width: 620px) and (max-width: 959px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  }
+
+  .projects-grid .project-card .project-art {
+    height: 100%;
+    border: 0;
+    border-right: 1px solid var(--ink);
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-grid[data-visible-count="1"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .projects-grid[data-visible-count="1"] .project-card:not([hidden]) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  }
+
+  .projects-grid[data-visible-count="1"] .project-card .project-art {
+    height: 100%;
+    border: 0;
+    border-right: 1px solid var(--ink);
+  }
+}
+
+@media screen and (max-width: 619px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .projects-grid .project-card .project-art {
+    height: clamp(170px, 60vw, 265px);
+  }
+
+  .project-more, .github-footer {
+    align-items: flex-start;
+  }
+}

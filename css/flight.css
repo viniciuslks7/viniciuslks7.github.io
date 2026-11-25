@@ -1,0 +1,116 @@
+/* The same folded envelope hangs from the harness and travels to the archive.
+   The seal's box is the physical landing target throughout the transfer. */
+.dragon-stage .cargo-hinge {
+  transform-origin: 54px -46px;
+}
+.cargo-hinge .dragon-badge-banner {
+  display: grid;
+  width: 108px;
+  height: 76px;
+  min-height: 76px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.cargo-hinge .dragon-badge-banner::after {
+  content: none;
+}
+.cargo-hinge .banner-rope {
+  width: 88px;
+  height: 54px;
+  left: 10px;
+  top: -46px;
+  background: none;
+  border: 0;
+}
+.cargo-hinge .banner-rope::before,
+.cargo-hinge .banner-rope::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 2.2px;
+  height: 67px;
+  border: 0;
+  border-radius: 0;
+  background: var(--ink);
+  transform-origin: 50% 0;
+  transform: rotate(39deg);
+}
+.cargo-hinge .banner-rope::after { transform: rotate(-39deg); }
+.cargo-anchor::before {
+  content: "";
+  position: absolute;
+  inset: -3.5px;
+  border: 1.6px solid var(--ink);
+  border-radius: 50%;
+  background: var(--red);
+}
+.mail-packet {
+  position: relative;
+  display: block;
+  width: 43px;
+  height: 43px;
+  isolation: isolate;
+}
+.mail-packet .envelope-shell {
+  position: absolute;
+  z-index: -1;
+  inset: -29% -74%;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 2px 1px 3px 1px;
+  background:
+    linear-gradient(143deg, transparent 44%, var(--ink) 45% 46%, transparent 47%) 0 100% / 55% 66% no-repeat,
+    linear-gradient(-143deg, transparent 44%, var(--ink) 45% 46%, transparent 47%) 100% 100% / 55% 66% no-repeat,
+    var(--paper-light);
+  box-shadow: 2.5px 3px 0 var(--ink);
+  opacity: var(--envelope-ink, 1);
+}
+.envelope-fold,
+.envelope-fold::before {
+  position: absolute;
+  inset: 0 0 22%;
+  background: var(--ink);
+  clip-path: polygon(0 0, 100% 0, 53% 97%, 49% 100%);
+}
+.envelope-fold::before {
+  content: "";
+  inset: -2px 0 3px;
+  background: var(--paper);
+}
+.cargo-hinge .mail-packet img,
+.dragon-flight-layer .mail-packet img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  object-fit: contain;
+  transform: none;
+}
+.dragon-flight-layer .dragon-flight-card {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: block;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transform-origin: center;
+  pointer-events: none;
+}
+.courier-streaks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: var(--ink);
+  pointer-events: none;
+}

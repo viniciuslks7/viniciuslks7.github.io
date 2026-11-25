@@ -1,18 +1,25 @@
 import http from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { resolve, extname, sep } from "node:path";
+import { fileURLToPath } from "node:url";
+import { readBadgePage } from "./badge-page.mjs";
+const project = new URL("../", import.meta.url);
+const sourceIndex = fileURLToPath(new URL("index.html", project));
 const root = resolve(process.env.SERVE_ROOT || "dist");
 const types = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".js": "application/javascript; charset=utf-8",
   ".svg": "image/svg+xml",
+  ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".webp": "image/webp",
   ".ttf": "font/ttf",
   ".woff2": "font/woff2",
   ".json": "application/json",
   ".txt": "text/plain",
   ".xml": "application/xml",
+  ".pdf": "application/pdf",
 };
 const server = http.createServer(async (req, res) => {
   try {
@@ -26,7 +33,7 @@ const server = http.createServer(async (req, res) => {
     }
     let target = path;
     if ((await stat(path)).isDirectory()) target = resolve(path, "index.html");
-    const content = await readFile(target);
+    const content = target === sourceIndex ? await readBadgePage(project) : await readFile(target);
     res.writeHead(200, {
       "Content-Type": types[extname(target)] || "application/octet-stream",
       "Cache-Control": "no-store",
@@ -38,5 +45,5 @@ const server = http.createServer(async (req, res) => {
   }
 });
 server.listen(Number(process.env.PORT) || 4173, "0.0.0.0", () =>
-  console.log("Preview: http://localhost:4173"),
+  console.log(`Preview: http://localhost:${server.address().port}`),
 );

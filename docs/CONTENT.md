@@ -5,13 +5,20 @@
 - Keel: https://github.com/viniciuslks7/Keel
 - Keel interactive demo: https://viniciuslks7.github.io/Keel/
 - Star Wars API: https://github.com/viniciuslks7/API-Starwars
-- Auxilium: professional experience supplied by the owner. Team project at MigrateDev, May 2023–January 2025. Its project narrative is separate from the verified 2022 STARSHOTING hackathon award. No verified active public project repository or demo is presented.
+- Auxilium began at the 2022 robotics hackathon with team Starshooting. The owner worked on it at MigrateDev from May 2023 to January 2025. The [mobile prototype](https://github.com/viniciuslks7/Aulas-de-React) uses React Native and Expo. A [separate browser demo](https://viniciuslks7.github.io/auxilium-demo/) lets visitors explore fictional listings and favorites using HTML, CSS and JavaScript. [Demo source](https://github.com/viniciuslks7/auxilium-demo)
+- The Star Wars API card links directly to the [cache unit tests](https://github.com/viniciuslks7/API-Starwars/blob/main/tests/unit/test_cache_service.py). The Analytics Dashboard case follows the neighborhood query and weighted aggregation in the [delivery chart component](https://github.com/viniciuslks7/Analytics-Dashboard/blob/main/frontend/src/components/Charts/DeliveryMetricsChart.tsx).
 
 Project implementation descriptions follow public READMEs. This portfolio’s local sandbox is illustrative; it does not call project backends. Keel’s linked demo is the actual domain and application code compiled for the browser with in-memory storage.
 
 ## Career and education
 
 Owner-supplied current résumé: Ciplafe Móveis, junior software development, July 2026–present; SESI Fernandópolis, backend/IT internship, June 2024–June 2026; independent development since January 2023; Technology degree in Internet Systems at FATEC, July 2023–July 2026. The degree is not described as a Bachelor’s degree.
+
+On November 25, 2026, Vinicius confirmed his work on Protheus database migrations and data refreshes, and on Ciplafe’s workstation update console for Claude, Node.js, Python, and MCP health checks. The property management pilot records describe ongoing operational validation. The Protheus update pilot records describe a real package rehearsal with simulated patch installation and service operations. The first live maintenance window was still pending at the time of review.
+
+Vinicius also confirmed Python scripting for servers, support for physical servers and Linux environments, administrative automation, programming instruction, AI in teaching, and harness engineering for AI at SESI.
+
+The reception system replaced the front desk’s paper log and spreadsheets for visitors and fleet movements. The owner’s technical report identifies a modular Node.js application, a local SQLite system of record, and a one-way SQL Server reporting mirror. The public project description covers continuity at the front desk, audit history, and Excel reporting.
 
 ## Learning badges
 
@@ -22,7 +29,7 @@ Public issuer URLs originally linked in the owner’s public GitHub profile READ
 - AWS Knowledge: Cloud Essentials: https://www.credly.com/badges/4106ffb6-2ac8-4dce-97a3-5369fa3981fd/public_url
 - AWS Knowledge: Amazon Braket: https://www.credly.com/badges/c05f92e0-4dbe-48a8-a2b7-670df772e703/public_url
 
-Cloud Quest and AWS Knowledge are learning badges. They are **not** represented as an AWS Certified Cloud Practitioner examination credential. Current issuer validity was not independently asserted.
+Cloud Quest and AWS Knowledge are learning badges. On November 25, 2026, Vinicius confirmed that he also earned AWS Certified Cloud Practitioner by examination. The site and résumés list the exam credential separately from the Cloud Quest badge. The badge URL belongs to the learning path.
 
 ## Oracle issuer records
 
@@ -36,7 +43,7 @@ These records are identified by their 2023 edition. The site directs visitors to
 
 The owner’s already-public certificate collection is linked at [private originals are not linked]
 
-Completion evidence reviewed for AWS Lambda Foundations, Amazon API Gateway for Serverless Applications, Foundations of Prompt Engineering, Cisco Introduction to Cybersecurity, and Spec-Driven Development. The site groups them as completed courses, not professional exam certifications. MIE Expert was later confirmed directly on the public Credly record and is included as a 2025–2026 professional recognition. Unsupported AWS examination claims remain omitted.
+Completion evidence reviewed for AWS Lambda Foundations, Amazon API Gateway for Serverless Applications, Foundations of Prompt Engineering, Cisco Introduction to Cybersecurity, and Spec-Driven Development. The site groups them as completed courses. MIE Expert was later confirmed directly on the public Credly record and is included as a 2025–2026 professional recognition.
 
 ## Privacy and contact
 
@@ -55,7 +62,9 @@ Eleven public Credly records were inspected on their actual issuer-rendered page
 
 The three Oracle artworks represent historical 2023-edition achievements. The OCI AI record was earned January 15, 2024; an issuer notice reports inactivity from January 15, 2026. Its expired historical status is stated explicitly. Current validity of the other Oracle records is not confirmed.
 
-The 58-entry formation catalog is a whitelist of reviewed titles, dates/periods, durations, types, and issuers. It omits raw source URLs, identity-document numbers, verification notes, and private scan links. Badge and formation-record counts are kept separate because some achievements overlap. The Especialista Scrum certificate explicitly states course participation from March 10 to October 7, 2025, 12 hours, and issuance on October 7; this is represented as training rather than an exam-based professional certification.
+The 59-entry formation catalog records titles, types and issuers, with dates and durations when available. Badge and formation-record counts are kept separate because some achievements overlap. The Especialista Scrum certificate records 12 hours of course participation from March 10 to October 7, 2025, and issuance on October 7.
+
+The original badge PDF supplied by Vinicius identifies the recipient as Vinicius Oliveira and records the Claude 101 completion badge from Claude Academy (Anthropic), issued on October 28, 2026. The featured image comes from that document. [Verify the badge with Claude Academy](https://academy.claude.com/verify/47a9e4b717bec962966d016edd85991c) · [Read the official course syllabus](https://anthropic.skilljar.com/claude-101)
 
 Blanket Drive-folder links were removed after identity numbers were found in some already-public scans. The site does not amplify those files or alter Drive sharing.
 

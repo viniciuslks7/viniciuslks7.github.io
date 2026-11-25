@@ -5,7 +5,7 @@
   "description": "A dependency-free, accessible manga-inspired backend developer portfolio",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check js/main.js && node scripts/check.mjs",
+    "check": "node --check js/main.js && node --check js/appearance.js && node scripts/check.mjs && node --test scripts/badge-page.test.mjs",
     "preview": "node scripts/serve.mjs",
     "test": "node scripts/test.mjs",
     "test:security": "node --test scripts/gitguardian-gate.test.mjs",

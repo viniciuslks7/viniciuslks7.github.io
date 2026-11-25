@@ -1,5 +1,30 @@
 [
   {
+    "id": "claude-101",
+    "image": "claude-101.png",
+    "title": "Claude 101",
+    "url": "https://academy.claude.com/verify/47a9e4b717bec962966d016edd85991c",
+    "issuer": "Claude Academy (Anthropic)",
+    "type": "completion",
+    "category": "education",
+    "issued": "2026-10-28",
+    "pt": "No Claude 101, estudei como escrever instruções para o Claude, organizar contexto em projetos e criar artefatos.",
+    "en": "In Claude 101, I studied how to write instructions for Claude, organize context in projects and create artifacts.",
+    "kindKey": "claudeCompletion",
+    "verifyKey": "verifyBadge",
+    "criteriaPt": "Conclusão do curso Claude 101 da Claude Academy.",
+    "criteriaEn": "Completion of Claude Academy’s Claude 101 course.",
+    "skills": [
+      "Claude",
+      "Prompting",
+      "Projects",
+      "Artifacts"
+    ],
+    "slot": 1,
+    "shortTitle": "Claude 101",
+    "courseUrl": "https://anthropic.skilljar.com/claude-101"
+  },
+  {
     "id": "aws-serverless",
     "image": "aws-serverless.png",
     "title": "AWS Knowledge: Serverless - Training Badge",
@@ -20,7 +45,9 @@
       "Amazon API Gateway",
       "Amazon Web Services (AWS)",
       "Serverless Computing"
-    ]
+    ],
+    "slot": 9,
+    "shortTitle": "Serverless"
   },
   {
     "id": "aws-cloud-quest",
@@ -43,7 +70,9 @@
       "AWS Cloud Foundations",
       "Amazon Web Services (AWS)",
       "Cloud Platform"
-    ]
+    ],
+    "slot": 10,
+    "shortTitle": "Cloud Quest"
   },
   {
     "id": "aws-cloud-essentials",
@@ -68,7 +97,9 @@
       "AWS Security",
       "AWS storage",
       "Amazon Web Services (AWS)"
-    ]
+    ],
+    "slot": 11,
+    "shortTitle": "AWS Cloud"
   },
   {
     "id": "aws-braket",
@@ -90,7 +121,9 @@
       "Amazon Braket",
       "Amazon Web Services (AWS)",
       "Quantum Computing"
-    ]
+    ],
+    "slot": 12,
+    "shortTitle": "Amazon Braket"
   },
   {
     "id": "oracle-foundations",
@@ -110,7 +143,9 @@
     "skills": [
       "Oracle Cloud",
       "Foundations"
-    ]
+    ],
+    "slot": 13,
+    "shortTitle": "OCI 2023"
   },
   {
     "id": "oracle-ai-foundations",
@@ -130,7 +165,10 @@
     "skills": [
       "Oracle Cloud",
       "Foundations"
-    ]
+    ],
+    "slot": 14,
+    "shortTitle": "OCI AI",
+    "inactiveSince": "2026-01-15"
   },
   {
     "id": "oracle-data-management",
@@ -150,7 +188,9 @@
     "skills": [
       "Oracle Cloud",
       "Foundations"
-    ]
+    ],
+    "slot": 15,
+    "shortTitle": "Oracle Data"
   },
   {
     "id": "cisco-network-defense",
@@ -182,7 +222,9 @@
       "Public Key Cryptography",
       "Security Policies - Regulations - Standards",
       "System And Network Defense"
-    ]
+    ],
+    "slot": 3,
+    "shortTitle": "Network Defense"
   },
   {
     "id": "cisco-endpoint-security",
@@ -212,7 +254,9 @@
       "System And Endpoint Protection",
       "Windows Security",
       "Wireless And Mobile Device Attacks"
-    ]
+    ],
+    "slot": 4,
+    "shortTitle": "Endpoint Security"
   },
   {
     "id": "cisco-devices-config",
@@ -241,7 +285,9 @@
       "Network Layer Protocols",
       "Transport Layer Protocols",
       "Virtualization and Cloud Services"
-    ]
+    ],
+    "slot": 5,
+    "shortTitle": "Devices"
   },
   {
     "id": "cisco-networking-basics",
@@ -264,7 +310,9 @@
       "Network Media",
       "Protocols Standards",
       "Wireless Access"
-    ]
+    ],
+    "slot": 6,
+    "shortTitle": "Net Basics"
   },
   {
     "id": "cisco-learnathon-2026",
@@ -282,7 +330,9 @@
     "criteriaEn": "Participation in an introductory technology course during the Learn-A-Thon event.",
     "skills": [
       "Self Motivated"
-    ]
+    ],
+    "slot": 7,
+    "shortTitle": "Learn-A-Thon"
   },
   {
     "id": "cisco-cybersecurity",
@@ -304,7 +354,9 @@
       "Network Vulnerabilities",
       "Privacy And Data Confidentiality",
       "Threat Detection"
-    ]
+    ],
+    "slot": 8,
+    "shortTitle": "Cisco Cyber"
   },
   {
     "id": "microsoft-mie-expert",
@@ -325,6 +377,8 @@
       "Education Technology",
       "Global Learning And Teaching",
       "microsoft tools"
-    ]
+    ],
+    "slot": 2,
+    "shortTitle": "MIE Expert"
   }
 ]
